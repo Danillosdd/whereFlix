@@ -103,7 +103,7 @@ public class DisciplinaController {
             disciplinaRepository.deleteById(id);
             return "redirect:/disciplinas";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "Não é possível excluir a disciplina, pois ela está vinculada a um ou mais alunos.");
+            model.addAttribute("errorMessage", "Não é possível excluir a disciplina, pois ela está vinculada a um ou mais filmes.");
             model.addAttribute("disciplinas", disciplinaRepository.findAll());
             return "disciplinas";
         }

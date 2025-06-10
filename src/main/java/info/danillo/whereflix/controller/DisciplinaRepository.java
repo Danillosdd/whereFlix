@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Integer> {
 
-    @Query(value = "SELECT COUNT(*) > 0 FROM aluno_disciplinas WHERE disciplinas_id = :disciplinaId", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) > 0 FROM filme_disciplinas WHERE disciplinas_id = :disciplinaId", nativeQuery = true)
     boolean existsByDisciplinaId(@Param("disciplinaId") Integer disciplinaId);
 
     List<Disciplina> findAllByOrderByNomeAsc();

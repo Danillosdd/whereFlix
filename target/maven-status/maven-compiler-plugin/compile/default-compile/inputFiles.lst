@@ -9,4 +9,6 @@
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/FilmeRepository.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/TelefoneAluno.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/TelefoneAlunoRepository.java
+/home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/TelefoneFilme.java
+/home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/TelefoneFilmeRepository.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/WhereflixApplication.java
