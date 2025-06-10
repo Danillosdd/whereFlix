@@ -3,51 +3,139 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Desenvolvimento Web 2025: Telefones do Filme</title>
+    <title>Filmlane - Lista de Filmes</title>
 
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon" type="image/png">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
-        rel="stylesheet">
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Antigo -->
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Main CSS File -->
-    <link href="/assets/css/main.css" rel="stylesheet">
+    <!-- custom css link -->
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
-<body class="index-page">
+<body id="top">
 
-    <!-- Menu Horizontal -->
-    <header id="header" class="header d-flex align-items-center sticky-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+    <!-- Cabeçalho -->
+    <header class="header" data-header>
+        <div class="container">
 
-            <a href="/" class="logo d-flex align-items-center me-auto">
-                <img src="/assets/img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
-                <h1 class="sitename">UEG - Desenvolvimento Web</h1>
+            <div class="overlay" data-overlay></div>
+
+            <a href="./index.html" class="logo">
+                <img src="/assets/img/logo.svg" alt="Filmlane logo">
             </a>
 
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="/">Início</a></li>
-                    <li><a href="/filmes">Lista de Filmes</a></li>
-                    <li><a href="/disciplinas">Lista de Disciplinas</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+            <div class="header-actions">
 
-            <a class="btn-getstarted" href="/filmes/cadastrar">Cadastrar Filme</a>
+                <button class="search-btn">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+
+                <div class="lang-wrapper">
+                    <label for="language">
+                        <ion-icon name="globe-outline"></ion-icon>
+                    </label>
+
+                    <select name="language" id="language">
+                        <option value="en">EN</option>
+                        <option value="au">AU</option>
+                        <option value="ar">AR</option>
+                        <option value="tu">TU</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary">Sign in</button>
+
+            </div>
+
+            <button class="menu-open-btn" data-menu-open-btn>
+                <ion-icon name="reorder-two"></ion-icon>
+            </button>
+
+            <nav class="navbar" data-navbar>
+
+                <div class="navbar-top">
+
+                    <a href="./index.html" class="logo">
+                        <img src="/assets/img/logo.svg" alt="Filmlane logo">
+                    </a>
+
+                    <button class="menu-close-btn" data-menu-close-btn>
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+
+                </div>
+
+                <ul class="navbar-list">
+
+                    <li>
+                        <a href="./index.html" class="navbar-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link">Movie</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link">Tv Show</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link">Web Series</a>
+                    </li>
+
+                    <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
+
+                    <li><a href="/filmes/cadastrar" class="navbar-link">Cadastrar Filme</a></li>
+
+                </ul>
+
+                <ul class="navbar-social-list">
+
+                    <li>
+                        <a href="#" class="navbar-social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-social-link">
+                            <ion-icon name="logo-pinterest"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-social-link">
+                            <ion-icon name="logo-youtube"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
 
         </div>
     </header>
@@ -160,72 +248,132 @@
     </main>
 
     <!-- Rodapé -->
-    <footer id="footer" class="footer position-relative light-background">
-        <div class="container footer-top">
-            <div class="row gy-4">
-                <!-- Informações de Contato -->
-                <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="/" class="logo d-flex align-items-center">
-                        <span class="sitename">UEG</span>
+    <footer class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+
+                <div class="footer-brand-wrapper">
+
+                    <a href="./index.html" class="logo">
+                        <img src="/assets/img/logo.svg" alt="Filmlane logo">
                     </a>
-                    <div class="footer-contact pt-3">
-                        <p>Avenida Central, 123</p>
-                        <p>Anápolis, GO 75000-000</p>
-                        <p class="mt-3"><strong>Telefone:</strong> <span>+55 62 99999-9999</span></p>
-                        <p><strong>Email:</strong> <span>contato@ueg.br</span></p>
-                    </div>
-                    <div class="social-links d-flex mt-4">
-                        <a href="#"><i class="bi bi-twitter"></i></a>
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
 
-                <!-- Links Úteis -->
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Links Úteis</h4>
-                    <ul>
-                        <li><a href="/">Início</a></li>
-                        <li><a href="/filmes">Lista de Filmes</a></li>
-                        <li><a href="/filmes/cadastrar">Cadastrar Filme</a></li>
+                    <ul class="footer-list">
+
+                        <li>
+                            <a href="./index.html" class="footer-link">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Movie</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">TV Show</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Web Series</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Pricing</a>
+                        </li>
+
                     </ul>
+
                 </div>
 
-                <!-- Newsletter -->
-                <div class="col-lg-4 col-md-12 footer-newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Inscreva-se para receber novidades sobre o curso!</p>
-                    <form action="#" method="post">
-                        <div class="newsletter-form">
-                            <input type="email" name="email" placeholder="Digite seu e-mail" required>
-                            <input type="submit" value="Inscrever-se">
-                        </div>
-                    </form>
+                <div class="divider"></div>
+
+                <div class="quicklink-wrapper">
+
+                    <ul class="quicklink-list">
+
+                        <li>
+                            <a href="#" class="quicklink-link">Faq</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Help center</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Terms of use</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Privacy</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="social-list">
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-pinterest"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-linkedin"></ion-icon>
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </div>
+
             </div>
         </div>
 
-        <!-- Direitos Autorais -->
-        <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span>
-                <strong class="px-1 sitename">
-                    <a href="https://danillo.info" target="_blank">DANILLO.INFO</a>
-                </strong>
-                <span>Todos os Direitos Reservados</span>
-            </p>
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+                </p>
+
+                <img src="/assets/img/footer-bottom-img.png" alt="Online banking companies logo"
+                    class="footer-bottom-img">
+
+            </div>
         </div>
+
     </footer>
 
-    <!-- Scripts -->
+    <!-- GO TO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+        <ion-icon name="chevron-up"></ion-icon>
+    </a>
+
+    <!-- custom js link -->
+    <script src="/assets/js/script.js"></script>
+
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Antigo -->
+    <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#novoTelefone').mask('(00) 00000-0000'); // Máscara para telefone no formato brasileiro
-        });
-    </script>
+
+
 </body>
 
 </html>
