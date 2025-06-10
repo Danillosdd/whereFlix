@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Desenvolvimento Web 2025: Telefones do Aluno</title>
+    <title>UEG - Desenvolvimento Web 2025: Telefones do Filme</title>
 
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" type="image/png">
@@ -41,13 +41,13 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="/">Início</a></li>
-                    <li><a href="/alunos">Lista de Alunos</a></li>
+                    <li><a href="/filmes">Lista de Filmes</a></li>
                     <li><a href="/disciplinas">Lista de Disciplinas</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="/alunos/cadastrar">Cadastrar Aluno</a>
+            <a class="btn-getstarted" href="/filmes/cadastrar">Cadastrar Filme</a>
 
         </div>
     </header>
@@ -66,14 +66,14 @@
                         </div>
 
                         <!-- Formulário para Gerenciar Telefones -->
-                        <form action="/alunos/atualizar/telefone" method="post" class="needs-validation" novalidate>
-                            <!-- Campo Oculto para o ID do Aluno -->
-                            <input type="hidden" name="id" th:value="${aluno.id}">
+                        <form action="/filmes/atualizar/telefone" method="post" class="needs-validation" novalidate>
+                            <!-- Campo Oculto para o ID do Filme -->
+                            <input type="hidden" name="id" th:value="${filme.id}">
 
                             <!-- Campo Nome -->
                             <div class="mb-3">
-                                <label for="nome" class="form-label">Nome do Aluno:</label>
-                                <input type="text" id="nome" name="nome" class="form-control" th:value="${aluno.nome}"
+                                <label for="nome" class="form-label">Nome do Filme:</label>
+                                <input type="text" id="nome" name="nome" class="form-control" th:value="${filme.nome}"
                                     disabled>
                             </div>
 
@@ -90,12 +90,12 @@
                                     </thead>
                                     <tbody>
                                         <!-- Verifica se há telefones -->
-                                        <tr th:if="${aluno.telefones == null or #lists.isEmpty(aluno.telefones)}">
+                                        <tr th:if="${filme.telefones == null or #lists.isEmpty(filme.telefones)}">
                                             <td colspan="3" class="text-center">Nenhum telefone cadastrado.</td>
                                         </tr>
 
                                         <!-- Telefones Existentes -->
-                                        <tr th:each="telefone : ${aluno.telefones}">
+                                        <tr th:each="telefone : ${filme.telefones}">
                                             <td th:text="${telefone.numero}"></td>
                                             <td>
                                                 <span
@@ -103,8 +103,8 @@
                                             </td>
                                             <td>
                                                 <!-- Botão para Excluir Telefone -->
-                                                <form action="/alunos/excluir/telefone" method="post" class="d-inline">
-                                                    <input type="hidden" name="id" th:value="${aluno.id}">
+                                                <form action="/filmes/excluir/telefone" method="post" class="d-inline">
+                                                    <input type="hidden" name="id" th:value="${filme.id}">
                                                     <input type="hidden" name="idTelefone" th:value="${telefone.id}">
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="bi bi-trash"></i> Excluir
@@ -150,7 +150,7 @@
 
                     <!-- Botões -->
                     <div class="text-center mt-4">
-                        <a class="btn btn-secondary me-2" th:href="@{/alunos}">Voltar</a>
+                        <a class="btn btn-secondary me-2" th:href="@{/filmes}">Voltar</a>
                     </div>
                     </form>
                 </div>
@@ -187,8 +187,8 @@
                     <h4>Links Úteis</h4>
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="/alunos">Lista de Alunos</a></li>
-                        <li><a href="/alunos/cadastrar">Cadastrar Aluno</a></li>
+                        <li><a href="/filmes">Lista de Filmes</a></li>
+                        <li><a href="/filmes/cadastrar">Cadastrar Filme</a></li>
                     </ul>
                 </div>
 

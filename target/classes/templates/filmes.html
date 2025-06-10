@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Desenvolvimento Web 2025: Lista de Alunos</title>
+    <title>UEG - Desenvolvimento Web 2025: Lista de Filmes</title>
 
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" type="image/png">
@@ -41,13 +41,13 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="/">Início</a></li>
-                    <li><a href="/alunos" class="active">Lista de Alunos</a></li>
+                    <li><a href="/filmes" class="active">Lista de Filmes</a></li>
                     <li><a href="/disciplinas">Lista de Disciplinas</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="/alunos/cadastrar">Cadastrar Aluno</a>
+            <a class="btn-getstarted" href="/filmes/cadastrar">Cadastrar Filme</a>
 
         </div>
     </header>
@@ -58,10 +58,10 @@
             <div class="container mt-5">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="mb-4 text-center">Lista de Alunos</h1>
+                        <h1 class="mb-4 text-center">Lista de Filmes</h1>
 
-                        <form action="/alunos/busca" method="get" class="d-flex mb-4">
-                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome do Aluno"
+                        <form action="/filmes/busca" method="get" class="d-flex mb-4">
+                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome do Filme"
                                 th:value="${nomePesquisado}" />
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
@@ -77,27 +77,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="aluno : ${alunos}">
-                                        <td th:text="${aluno.matricula}">123</td>
-                                        <td th:text="${aluno.nome}">Fulano de Tal</td>
-                                        <td th:text="${aluno.email}">fulano@ueg.br</td>
+                                    <tr th:each="filme : ${filmes}">
+                                        <td th:text="${filme.matricula}">123</td>
+                                        <td th:text="${filme.nome}">Fulano de Tal</td>
+                                        <td th:text="${filme.email}">fulano@ueg.br</td>
                                         <!-- Botões de Ações -->
                                         <td>
-                                            <!-- Botão para gerenciar telefones do aluno -->
+                                            <!-- Botão para gerenciar telefones do filme -->
                                             <a class="btn btn-info btn-sm me-2"
-                                                th:href="@{'/alunos/atualizar/telefone/' + ${aluno.id}}">
+                                                th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}">
                                                 <i class="bi bi-telephone"></i> Telefones
                                             </a>
 
-                                            <!-- Botão para atualizar informações do aluno -->
+                                            <!-- Botão para atualizar informações do filme -->
                                             <a class="btn btn-warning btn-sm me-2"
-                                                th:href="@{'/alunos/atualizar/' + ${aluno.id}}">
+                                                th:href="@{'/filmes/atualizar/' + ${filme.id}}">
                                                 <i class="bi bi-pencil-square"></i> Atualizar
                                             </a>
 
-                                            <!-- Botão para excluir o aluno -->
+                                            <!-- Botão para excluir o filme -->
                                             <a class="btn btn-danger btn-sm"
-                                                th:href="@{'/alunos/excluir/' + ${aluno.id}}">
+                                                th:href="@{'/filmes/excluir/' + ${filme.id}}">
                                                 <i class="bi bi-trash"></i> Excluir
                                             </a>
                                         </td>
@@ -139,8 +139,8 @@
                     <h4>Links Úteis</h4>
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="/alunos">Lista de Alunos</a></li>
-                        <li><a href="/alunos/cadastrar">Cadastrar Aluno</a></li>
+                        <li><a href="/filmes">Lista de Filmes</a></li>
+                        <li><a href="/filmes/cadastrar">Cadastrar Filme</a></li>
                     </ul>
                 </div>
 

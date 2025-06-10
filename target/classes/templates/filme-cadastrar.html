@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Desenvolvimento Web 2025: Exclusão de Aluno</title>
+    <title>UEG - Desenvolvimento Web 2025: Cadastro de Filme</title>
 
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" type="image/png">
@@ -41,13 +41,13 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="/">Início</a></li>
-                    <li><a href="/alunos">Lista de Alunos</a></li>
+                    <li><a href="/filmes">Lista de Filmes</a></li>
                     <li><a href="/disciplinas">Lista de Disciplinas</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="/alunos/cadastrar">Cadastrar Aluno</a>
+            <a class="btn-getstarted" href="/filmes/cadastrar">Cadastrar Filme</a>
 
         </div>
     </header>
@@ -58,81 +58,56 @@
             <div class="container mt-5">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="mb-4 text-center text-danger">Exclusão de Aluno</h1>
+                        <h1 class="mb-4 text-center">Cadastro de Filme</h1>
 
-                        <!-- Formulário de Exclusão -->
-                        <form id="deleteForm" th:action="@{/alunos/excluir}" method="post">
-                            <!-- Campo Oculto para ID -->
-                            <input type="hidden" name="id" th:value="${aluno.id}">
+                        <!-- Formulário de Cadastro -->
+                        <form th:action="@{/filmes/cadastrar}" method="post" class="needs-validation" novalidate>
+                            <!-- Exibição de Mensagens de Erro -->
+                            <div th:if="${erro}" class="alert alert-danger">
+                                <p th:text="${erro}"></p>
+                            </div>
 
                             <!-- Campo Matrícula -->
                             <div class="form-group mb-3">
                                 <label for="matricula" class="form-label">Matrícula:</label>
-                                <input type="text" id="matricula" name="matricula" class="form-control"
-                                    th:value="${aluno.matricula}" disabled>
+                                <input type="number" id="matricula" name="matricula" class="form-control"
+                                    th:value="${matricula}" placeholder="Digite a matrícula do filme" required />
+                                <div class="invalid-feedback">Por favor, insira a matrícula.</div>
                             </div>
 
                             <!-- Campo Nome -->
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome:</label>
-                                <input type="text" id="nome" name="nome" class="form-control" th:value="${aluno.nome}"
-                                    disabled>
+                                <input type="text" id="nome" name="nome" class="form-control" th:value="${nome}"
+                                    placeholder="Digite o nome completo do filme" required />
+                                <div class="invalid-feedback">Por favor, insira o nome completo.</div>
                             </div>
 
                             <!-- Campo E-mail -->
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">E-mail:</label>
-                                <input type="text" id="email" name="email" class="form-control"
-                                    th:value="${aluno.email}" disabled>
+                                <input type="email" id="email" name="email" class="form-control" th:value="${email}"
+                                    placeholder="Digite o e-mail do filme" required />
+                                <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
                             </div>
 
                             <!-- Campo Disciplinas -->
                             <div class="form-group mb-3">
                                 <label for="disciplinas" class="form-label">Disciplinas:</label>
-                                <table class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Nome</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="disciplina : ${aluno.disciplinas}">
-                                            <td th:text="${disciplina.nome}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <!-- Campo Telefones -->
-                            <div class="form-group mb-3">
-                                <label for="telefones" class="form-label">Telefones:</label>
-                                <table class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Número</th>
-                                            <th scope="col">WhatsApp</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="telefone : ${aluno.telefones}">
-                                            <td th:text="${telefone.numero}"></td>
-                                            <td>
-                                                <span th:if="${telefone.whatsapp}" class="badge bg-success">Sim</span>
-                                                <span th:if="${!telefone.whatsapp}" class="badge bg-danger">Não</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <select id="disciplinas" name="disciplinas" class="form-control select2" multiple
+                                    required>
+                                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}"
+                                        th:text="${disciplina.nome}">
+                                        Disciplina
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione pelo menos uma disciplina.</div>
                             </div>
 
                             <!-- Botões -->
                             <div class="text-center mt-4">
-                                <a class="btn btn-secondary me-2" th:href="@{/alunos}">Voltar</a>
-                                <!-- Botão para abrir a modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteModal">
-                                    Excluir
-                                </button>
+                                <a class="btn btn-secondary me-2" th:href="@{/filmes}">Voltar</a>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
                             </div>
                         </form>
                     </div>
@@ -169,8 +144,8 @@
                     <h4>Links Úteis</h4>
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="/alunos">Lista de Alunos</a></li>
-                        <li><a href="/alunos/cadastrar">Cadastrar Aluno</a></li>
+                        <li><a href="/filmes">Lista de Fimes</a></li>
+                        <li><a href="/filmes/cadastrar">Cadastrar Filme</a></li>
                     </ul>
                 </div>
 
@@ -204,39 +179,38 @@
     <script src="/assets/vendor/aos/aos.js"></script>
     <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.min.js"></script>
 
-    <!-- Main JS File -->
-    <script src="/assets/js/main.js"></script>
-
-    <!-- Modal de Confirmação -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja excluir o aluno <strong th:text="${aluno.nome}"></strong>?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Excluir</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Inicialização do Select2 -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-            const deleteForm = document.getElementById('deleteForm');
-
-            confirmDeleteButton.addEventListener('click', function () {
-                deleteForm.submit(); // Submete o formulário ao confirmar
-            });
+            const selectElement = document.querySelector('.select2');
+            if (selectElement) {
+                $(selectElement).select2({
+                    placeholder: "Selecione as disciplinas",
+                    allowClear: true
+                });
+            }
         });
+    </script>
+
+    <!-- Validação de Formulário -->
+    <script>
+        (function () {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
     </script>
 
 </body>
