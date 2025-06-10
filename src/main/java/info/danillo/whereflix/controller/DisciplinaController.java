@@ -1,4 +1,4 @@
-package br.ueg.desenvolvimento.web.projeto_danillo.controller;
+package info.danillo.whereflix.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

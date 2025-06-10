@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UEG - Desenvolvimento Web 2025: Lista de Alunos</title>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon" type="image/png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+    <!-- Menu Horizontal -->
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                <img src="/assets/img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+                <h1 class="sitename">UEG - Desenvolvimento Web</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/alunos">Lista de Alunos</a></li>
+                    <li><a href="/disciplinas" class="active">Lista de Disciplinas</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <a class="btn-getstarted" href="/alunos/cadastrar">Cadastrar Aluno</a>
+
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main">
+        <section id="hero" class="section light-background">
+            <div class="container mt-5">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="mb-4 text-center">Lista de Disciplinas</h1>
+
+                        <!-- Botão para Cadastrar Nova Disciplina -->
+                        <div class="text-end mb-3">
+                            <a href="/disciplinas/cadastrar" class="btn btn-primary">
+                                <i class="bi bi-plus"></i> Cadastrar Nova Disciplina
+                            </a>
+                        </div>
+
+                        <!-- Tabela de Disciplinas -->
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="disciplina : ${disciplinas}">
+                                    <td th:text="${disciplina.nome}"></td>
+                                    <td>
+                                        <!-- Botão Editar -->
+                                        <a th:href="@{/disciplinas/atualizar/{id}(id=${disciplina.id})}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </a>
+
+                                        <!-- Botão Deletar -->
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#confirmDeleteModal"
+                                            th:attr="data-id=${disciplina.id}, data-nome=${disciplina.nome}">
+                                            <i class="bi bi-trash"></i> Deletar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer id="footer" class="footer position-relative light-background">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <!-- Informações de Contato -->
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <a href="/" class="logo d-flex align-items-center">
+                        <span class="sitename">UEG</span>
+                    </a>
+                    <div class="footer-contact pt-3">
+                        <p>Avenida Central, 123</p>
+                        <p>Anápolis, GO 75000-000</p>
+                        <p class="mt-3"><strong>Telefone:</strong> <span>+55 62 99999-9999</span></p>
+                        <p><strong>Email:</strong> <span>contato@ueg.br</span></p>
+                    </div>
+                    <div class="social-links d-flex mt-4">
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links Úteis -->
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/alunos">Lista de Alunos</a></li>
+                        <li><a href="/alunos/cadastrar">Cadastrar Aluno</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Inscreva-se para receber novidades sobre o curso!</p>
+                    <form action="#" method="post">
+                        <div class="newsletter-form">
+                            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                            <input type="submit" value="Inscrever-se">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direitos Autorais -->
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span>
+                <strong class="px-1 sitename">
+                    <a href="https://danillo.info" target="_blank">DANILLO.INFO</a>
+                </strong>
+                <span>Todos os Direitos Reservados</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir a disciplina <strong id="disciplinaNome"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a id="confirmDeleteButton" href="#" class="btn btn-danger">Excluir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("Script carregado!");
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+            const disciplinaNome = document.getElementById('disciplinaNome');
+
+            confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget; // Botão que acionou a modal
+                const disciplinaId = button.getAttribute('data-id');
+                const disciplinaNomeTexto = button.getAttribute('data-nome');
+
+                // Atualiza o nome da disciplina na modal
+                disciplinaNome.textContent = disciplinaNomeTexto;
+
+                // Atualiza o link do botão de confirmação
+                confirmDeleteButton.href = `/disciplinas/excluir/${disciplinaId}`;
+                console.log(`Excluir disciplina com ID: ${disciplinaId}`);
+            });
+        });
+    </script>
+</body>
+
+</html>

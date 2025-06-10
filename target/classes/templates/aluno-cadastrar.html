@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UEG - Desenvolvimento Web 2025: Cadastro de Aluno</title>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon" type="image/png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+    <!-- Menu Horizontal -->
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                <img src="/assets/img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+                <h1 class="sitename">UEG - Desenvolvimento Web</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/alunos">Lista de Alunos</a></li>
+                    <li><a href="/disciplinas">Lista de Disciplinas</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <a class="btn-getstarted" href="/alunos/cadastrar">Cadastrar Aluno</a>
+
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main">
+        <section id="hero" class="section light-background">
+            <div class="container mt-5">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="mb-4 text-center">Cadastro de Aluno</h1>
+
+                        <!-- Formulário de Cadastro -->
+                        <form th:action="@{/alunos/cadastrar}" method="post" class="needs-validation" novalidate>
+                            <!-- Exibição de Mensagens de Erro -->
+                            <div th:if="${erro}" class="alert alert-danger">
+                                <p th:text="${erro}"></p>
+                            </div>
+
+                            <!-- Campo Matrícula -->
+                            <div class="form-group mb-3">
+                                <label for="matricula" class="form-label">Matrícula:</label>
+                                <input type="number" id="matricula" name="matricula" class="form-control"
+                                    th:value="${matricula}" placeholder="Digite a matrícula do aluno" required />
+                                <div class="invalid-feedback">Por favor, insira a matrícula.</div>
+                            </div>
+
+                            <!-- Campo Nome -->
+                            <div class="form-group mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" id="nome" name="nome" class="form-control" th:value="${nome}"
+                                    placeholder="Digite o nome completo do aluno" required />
+                                <div class="invalid-feedback">Por favor, insira o nome completo.</div>
+                            </div>
+
+                            <!-- Campo E-mail -->
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">E-mail:</label>
+                                <input type="email" id="email" name="email" class="form-control" th:value="${email}"
+                                    placeholder="Digite o e-mail do aluno" required />
+                                <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+                            </div>
+
+                            <!-- Campo Disciplinas -->
+                            <div class="form-group mb-3">
+                                <label for="disciplinas" class="form-label">Disciplinas:</label>
+                                <select id="disciplinas" name="disciplinas" class="form-control select2" multiple
+                                    required>
+                                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}"
+                                        th:text="${disciplina.nome}">
+                                        Disciplina
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione pelo menos uma disciplina.</div>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="text-center mt-4">
+                                <a class="btn btn-secondary me-2" th:href="@{/alunos}">Voltar</a>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer id="footer" class="footer position-relative light-background">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <!-- Informações de Contato -->
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <a href="/" class="logo d-flex align-items-center">
+                        <span class="sitename">UEG</span>
+                    </a>
+                    <div class="footer-contact pt-3">
+                        <p>Avenida Central, 123</p>
+                        <p>Anápolis, GO 75000-000</p>
+                        <p class="mt-3"><strong>Telefone:</strong> <span>+55 62 99999-9999</span></p>
+                        <p><strong>Email:</strong> <span>contato@ueg.br</span></p>
+                    </div>
+                    <div class="social-links d-flex mt-4">
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links Úteis -->
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/alunos">Lista de Alunos</a></li>
+                        <li><a href="/alunos/cadastrar">Cadastrar Aluno</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Inscreva-se para receber novidades sobre o curso!</p>
+                    <form action="#" method="post">
+                        <div class="newsletter-form">
+                            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                            <input type="submit" value="Inscrever-se">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direitos Autorais -->
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span>
+                <strong class="px-1 sitename">
+                    <a href="https://danillo.info" target="_blank">DANILLO.INFO</a>
+                </strong>
+                <span>Todos os Direitos Reservados</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.min.js"></script>
+
+    <!-- Inicialização do Select2 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectElement = document.querySelector('.select2');
+            if (selectElement) {
+                $(selectElement).select2({
+                    placeholder: "Selecione as disciplinas",
+                    allowClear: true
+                });
+            }
+        });
+    </script>
+
+    <!-- Validação de Formulário -->
+    <script>
+        (function () {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

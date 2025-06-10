@@ -1,4 +1,4 @@
-package br.ueg.desenvolvimento.web.projeto_danillo.controller;
+package info.danillo.whereflix.controller;
 
 import java.util.List;
 
