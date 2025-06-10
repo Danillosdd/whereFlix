@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Antigo-->
+    <!-- Antigo -->
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 </head>
 
-<body id="top" class="index-page">
+<body id="top">
 
     <!-- Cabeçalho -->
     <header class="header" data-header>
@@ -146,63 +146,58 @@
     </header>
 
     <!-- Conteúdo Principal -->
-    <main class="main">
-        <!-- Section hero (única section do main) -->
-        <section id="hero" class="section light-background">
-            <div class="container mt-5">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h1 class="mb-4 text-center">Lista de Filmes</h1>
+    <main>
+        <article>
+            <section class="hero">
+                <div class="container">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h1 class="mb-4 text-center">Lista de Filmes</h1>
 
-                        <form action="/filmes/busca" method="get" class="d-flex mb-4">
-                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome do Filme"
-                                th:value="${nomePesquisado}" />
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </form>
+                            <form action="/filmes/busca" method="get" class="d-flex mb-4">
+                                <input type="text" name="nome" class="form-control me-2" placeholder="Nome do Filme"
+                                    th:value="${nomePesquisado}" />
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </form>
 
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover align-middle text-center">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">Matrícula</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">E-mail</th>
-                                        <th scope="col">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="filme : ${filmes}">
-                                        <td th:text="${filme.matricula}">123</td>
-                                        <td th:text="${filme.nome}">Fulano de Tal</td>
-                                        <td th:text="${filme.email}">fulano@ueg.br</td>
-                                        <!-- Botões de Ações -->
-                                        <td>
-                                            <!-- Botão para gerenciar telefones do filme -->
-                                            <a class="btn btn-info btn-sm me-2"
-                                                th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}">
-                                                <i class="bi bi-telephone"></i> Telefones
-                                            </a>
-
-                                            <!-- Botão para atualizar informações do filme -->
-                                            <a class="btn btn-warning btn-sm me-2"
-                                                th:href="@{'/filmes/atualizar/' + ${filme.id}}">
-                                                <i class="bi bi-pencil-square"></i> Atualizar
-                                            </a>
-
-                                            <!-- Botão para excluir o filme -->
-                                            <a class="btn btn-danger btn-sm"
-                                                th:href="@{'/filmes/excluir/' + ${filme.id}}">
-                                                <i class="bi bi-trash"></i> Excluir
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover align-middle text-center">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Matrícula</th>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="filme : ${filmes}">
+                                            <td th:text="${filme.matricula}">123</td>
+                                            <td th:text="${filme.nome}">Fulano de Tal</td>
+                                            <td th:text="${filme.email}">fulano@ueg.br</td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm me-2"
+                                                    th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}">
+                                                    <i class="bi bi-telephone"></i> Telefones
+                                                </a>
+                                                <a class="btn btn-warning btn-sm me-2"
+                                                    th:href="@{'/filmes/atualizar/' + ${filme.id}}">
+                                                    <i class="bi bi-pencil-square"></i> Atualizar
+                                                </a>
+                                                <a class="btn btn-danger btn-sm"
+                                                    th:href="@{'/filmes/excluir/' + ${filme.id}}">
+                                                    <i class="bi bi-trash"></i> Excluir
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </article>
     </main>
 
     <!-- Rodapé -->
@@ -327,16 +322,12 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Antigo-->
+    <!-- Antigo -->
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/vendor/aos/aos.js"></script>
     <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Antigo-->
-    <!-- Main JS File -->
-    <script src="/assets/js/main.js"></script>
 
 </body>
 
