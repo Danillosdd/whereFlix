@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
  * Repositório responsável por realizar operações de acesso a dados para a entidade Aluno.
  * Extende JpaRepository para fornecer métodos padrão de CRUD e permite a definição de consultas personalizadas.
  */
-public interface FilmeRepository extends JpaRepository<Aluno, Integer> {
+public interface FilmeRepository extends JpaRepository<Filme, Integer> {
 
     /**
      * Busca alunos cujo nome contenha o texto fornecido, ignorando maiúsculas e minúsculas.
@@ -20,7 +20,7 @@ public interface FilmeRepository extends JpaRepository<Aluno, Integer> {
      * @return Lista de alunos que correspondem ao critério de busca.
      */
     @Query("SELECT a FROM Aluno a WHERE LOWER(a.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
-    List<Aluno> buscarPorNome(@Param("nome") String nome);
+    List<Filme> buscarPorNome(@Param("nome") String nome);
 
     /**
      * Verifica se existe algum aluno com a matrícula fornecida no banco de dados.
@@ -36,5 +36,5 @@ public interface FilmeRepository extends JpaRepository<Aluno, Integer> {
      * @param matricula Número de matrícula do aluno a ser buscado.
      * @return Objeto Aluno correspondente à matrícula fornecida, ou null se não encontrado.
      */
-    Aluno findByMatricula(Integer matricula);
+    Filme findByMatricula(Integer matricula);
 }

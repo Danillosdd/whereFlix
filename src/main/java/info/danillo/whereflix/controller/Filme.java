@@ -33,7 +33,7 @@ public class Filme {
 
     // Relacionamento One-to-Many com a entidade TelefoneAluno.
     // Um aluno pode ter vários telefones.
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TelefoneAluno> telefones;
 
     // Relacionamento Many-to-Many com a entidade Disciplina.

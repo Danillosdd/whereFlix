@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
- * Aluno. Inclui funcionalidades de CRUD para alunos, telefones e disciplinas.
+ * Filme. Inclui funcionalidades de CRUD para filmes, telefones e disciplinas.
  */
 @Controller
 public class FilmeControler {
 
     @Autowired
-    private AlunoRepository alunoRepository;
+    private FilmeRepository filmeRepository;
 
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
     @Autowired
-    private TelefoneAlunoRepository telefoneAlunoRepository;
+    private TelefoneFilmeRepository telefoneFilmeRepository;
 
     /**
      * Página inicial do sistema.
@@ -38,57 +38,57 @@ public class FilmeControler {
     }
 
     /**
-     * Exibe a lista de todos os alunos cadastrados.
+     * Exibe a lista de todos os filmes cadastrados.
      *
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de listagem de alunos.
+     * @return Nome da página de listagem de filmes.
      */
-    @GetMapping("/alunos")
-    public String getAlunos(Model model) {
-        List<Aluno> alunosBd = alunoRepository.findAll();
-        model.addAttribute("alunos", alunosBd);
-        model.addAttribute("mensagem", "Todos os alunos cadastrados");
-        return "alunos";
+    @GetMapping("/filmes")
+    public String getFilmes(Model model) {
+        List<Filme> filmesBd = filmeRepository.findAll();
+        model.addAttribute("filmes", filmesBd);
+        model.addAttribute("mensagem", "Todos os filmes cadastrados");
+        return "filmes";
     }
 
     /**
-     * Busca alunos pelo nome.
+     * Busca filmes pelo nome.
      *
      * @param nome Nome a ser pesquisado.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de listagem de alunos.
+     * @return Nome da página de listagem de filmes.
      */
-    @GetMapping("/alunos/busca")
+    @GetMapping("/filmes/busca")
     public String getBusca(@RequestParam String nome, Model model) {
-        List<Aluno> alunos = alunoRepository.buscarPorNome(nome);
-        model.addAttribute("alunos", alunos);
+        List<Filme> filmes = filmeRepository.buscarPorNome(nome);
+        model.addAttribute("filmes", filmes);
         model.addAttribute("nomePesquisado", nome);
-        return "alunos";
+        return "filmes";
     }
 
     /**
-     * Exibe o formulário para cadastrar um novo aluno.
+     * Exibe o formulário para cadastrar um novo filme.
      *
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de cadastro de aluno.
+     * @return Nome da página de cadastro de filme.
      */
-    @GetMapping("/alunos/cadastrar")
+    @GetMapping("/filmes/cadastrar")
     public String getCreate(Model model) {
         model.addAttribute("disciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
-        return "aluno-cadastrar";
+        return "filme-cadastrar";
     }
 
     /**
-     * Processa o cadastro de um novo aluno.
+     * Processa o cadastro de um novo filme.
      *
-     * @param matricula Número de matrícula do aluno.
-     * @param nome Nome do aluno.
-     * @param email Email do aluno.
+     * @param matricula Número de matrícula do filme.
+     * @param nome Nome do filme.
+     * @param email Email do filme.
      * @param disciplinas IDs das disciplinas selecionadas.
      * @param model Objeto para adicionar atributos à view.
-     * @return Redireciona para a página de listagem de alunos.
+     * @return Redireciona para a página de listagem de filmes.
      */
-    @PostMapping("/alunos/cadastrar")
+    @PostMapping("/filmes/cadastrar")
     public String postCreate(
             @RequestParam Integer matricula,
             @RequestParam String nome,
@@ -98,77 +98,77 @@ public class FilmeControler {
         // Validações
         if (nome == null || nome.isEmpty() || email == null || email.isEmpty()) {
             model.addAttribute("erro", "Nome e email são obrigatórios.");
-            return "aluno-cadastrar";
+            return "filme-cadastrar";
         }
 
         if (matricula == null || matricula <= 0) {
             model.addAttribute("erro", "Matrícula deve ser um número positivo.");
-            return "aluno-cadastrar";
+            return "filme-cadastrar";
         }
 
-        if (alunoRepository.existsByMatricula(matricula)) {
+        if (filmeRepository.existsByMatricula(matricula)) {
             model.addAttribute("erro", "Matrícula já cadastrada.");
-            return "aluno-cadastrar";
+            return "filme-cadastrar";
         }
 
-        // Criação do aluno
-        Aluno aluno = new Aluno(matricula, nome, email);
+        // Criação do filme
+        Filme filme = new Filme(matricula, nome, email);
         List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
         for (Integer idDisciplina : disciplinas) {
             Disciplina disciplina = disciplinaRepository.findById(idDisciplina)
                     .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + idDisciplina));
             disciplinasSelecionadas.add(disciplina);
         }
-        aluno.setDisciplinas(disciplinasSelecionadas);
-        alunoRepository.save(aluno);
+        filme.setDisciplinas(disciplinasSelecionadas);
+        filmeRepository.save(filme);
 
-        return "redirect:/alunos";
+        return "redirect:/flimes";
     }
 
     /**
-     * Exibe o formulário para atualizar um aluno.
+     * Exibe o formulário para atualizar um filme.
      *
-     * @param id ID do aluno.
+     * @param id ID do filme.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de atualização de aluno.
+     * @return Nome da página de atualização de filme.
      */
-    @GetMapping("/alunos/atualizar/{id}")
+    @GetMapping("/filmes/atualizar/{id}")
     public String getUpdate(@PathVariable Integer id, Model model) {
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
-        model.addAttribute("aluno", aluno);
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+        model.addAttribute("filme", filme);
 
         // Buscar disciplinas ordenadas por nome
         model.addAttribute("todasDisciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
-        return "aluno-atualizar";
+        return "filme-atualizar";
     }
 
     /**
-     * Processa a atualização de um aluno.
+     * Processa a atualização de um filme.
      *
-     * @param id ID do aluno.
-     * @param nome Nome do aluno.
-     * @param matricula Número de matrícula do aluno.
-     * @param email Email do aluno.
+     * @param id ID do filme.
+     * @param nome Nome do filme.
+     * @param matricula Número de matrícula do filme.
+     * @param email Email do filme.
      * @param disciplinas IDs das disciplinas selecionadas.
      * @param model Objeto para adicionar atributos à view.
-     * @return Redireciona para a página de listagem de alunos.
+     * @return Redireciona para a página de listagem de filmes.
      */
-    @PostMapping("/alunos/atualizar")
-    public String updateAluno(
+    @PostMapping("/filmes/atualizar")
+    public String updateFilme(
             @RequestParam int id,
             @RequestParam String nome,
             @RequestParam Integer matricula,
             @RequestParam String email,
             @RequestParam List<Integer> disciplinas,
             Model model) {
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
-        // Atualiza os dados do aluno
-        aluno.setNome(nome);
-        aluno.setMatricula(matricula);
-        aluno.setEmail(email);
+        // Atualiza os dados do filme
+        filme.setNome(nome);
+        filme.setMatricula(matricula);
+        filme.setEmail(email);
 
         List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
         for (Integer idDisciplina : disciplinas) {
@@ -176,63 +176,63 @@ public class FilmeControler {
                     .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + idDisciplina));
             disciplinasSelecionadas.add(disciplina);
         }
-        aluno.setDisciplinas(disciplinasSelecionadas);
-        alunoRepository.save(aluno);
+        filme.setDisciplinas(disciplinasSelecionadas);
+        filmeRepository.save(filme);
 
-        return "redirect:/alunos";
+        return "redirect:/filmes";
     }
 
     /**
-     * Exibe o formulário para excluir um aluno.
+     * Exibe o formulário para excluir um filme.
      *
-     * @param id ID do aluno.
+     * @param id ID do filme.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de exclusão de aluno.
+     * @return Nome da página de exclusão de filme.
      */
-    @GetMapping("/alunos/excluir/{id}")
+    @GetMapping("/filmes/excluir/{id}")
     public String exibirTelaExclusao(@PathVariable Integer id, Model model) {
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
-        model.addAttribute("aluno", aluno);
-        return "aluno-excluir";
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+        model.addAttribute("filme", filme);
+        return "filme-excluir";
     }
 
     /**
-     * Processa a exclusão de um aluno.
+     * Processa a exclusão de um filme.
      *
-     * @param id ID do aluno.
-     * @return Redireciona para a página de listagem de alunos.
+     * @param id ID do filme.
+     * @return Redireciona para a página de listagem de filmes.
      */
-    @PostMapping("alunos/excluir")
-    public String excluirAluno(@RequestParam Integer id) {
-        alunoRepository.deleteById(id);
-        return "redirect:/alunos";
+    @PostMapping("filmes/excluir")
+    public String excluirFilme(@RequestParam Integer id) {
+        filmeRepository.deleteById(id);
+        return "redirect:/filmes";
     }
 
     /**
-     * Exibe o formulário para atualizar os telefones de um aluno.
+     * Exibe o formulário para atualizar os telefones de um filme.
      *
-     * @param id ID do aluno.
+     * @param id ID do filme.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de atualização de telefones.
      */
-    @GetMapping("/alunos/atualizar/telefone/{id}")
+    @GetMapping("/filmes/atualizar/telefone/{id}")
     public String updateTelefone(@PathVariable Integer id, Model model) {
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
-        model.addAttribute("aluno", aluno);
-        return "aluno-telefone";
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+        model.addAttribute("filme", filme);
+        return "filme-telefone";
     }
 
     /**
-     * Processa a adição de um novo telefone para o aluno.
+     * Processa a adição de um novo telefone para o filme.
      *
-     * @param id ID do aluno.
+     * @param id ID do filme.
      * @param novoTelefone Número do telefone.
      * @param whatsapp Indica se o telefone é WhatsApp.
      * @return Redireciona para a página de atualização de telefones.
      */
-    @PostMapping("/alunos/atualizar/telefone")
+    @PostMapping("/filmes/atualizar/telefone")
     public String postUpdateTelefone(
             @RequestParam int id,
             @RequestParam(required = false) String novoTelefone,
@@ -241,50 +241,50 @@ public class FilmeControler {
         // Validação do número de telefone
         if (novoTelefone == null || novoTelefone.trim().isEmpty()) {
             model.addAttribute("erro", "O número de telefone não pode estar vazio.");
-            Aluno aluno = alunoRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
-            model.addAttribute("aluno", aluno); // Adiciona o objeto aluno ao modelo
-            return "aluno-telefone";
+            Filme filme = filmeRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+            model.addAttribute("filme", filme); // Adiciona o objeto filme ao modelo
+            return "filme-telefone";
         }
 
         String telefoneSomenteNumeros = novoTelefone.replaceAll("[^0-9]", "");
         boolean isWhatsapp = Boolean.parseBoolean(whatsapp);
 
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
-        TelefoneAluno telefone = new TelefoneAluno();
+        TelefoneFilme telefone = new TelefoneFilme();
         telefone.setNumero(telefoneSomenteNumeros);
         telefone.setWhatsapp(isWhatsapp);
-        telefone.setAluno(aluno);
+        telefone.setFilme(filme);
 
-        telefoneAlunoRepository.save(telefone); // Salva o telefone com ID gerado automaticamente
+        telefoneFilmeRepository.save(telefone); // Salva o telefone com ID gerado automaticamente
 
-        return "redirect:/alunos/atualizar/telefone/" + id;
+        return "redirect:/filmes/atualizar/telefone/" + id;
     }
 
     /**
-     * Processa a exclusão de um telefone do aluno.
+     * Processa a exclusão de um telefone do filme.
      *
-     * @param id ID do aluno.
+     * @param id ID do filme.
      * @param idTelefone ID do telefone.
      * @return Redireciona para a página de atualização de telefones.
      */
-    @PostMapping("/alunos/excluir/telefone")
+    @PostMapping("/filmes/excluir/telefone")
     public String excluirTelefone(@RequestParam int id, @RequestParam int idTelefone, Model model) {
-        // Busca o aluno pelo ID
-        Aluno aluno = alunoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado: " + id));
+        // Busca o filme pelo ID
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
         // Busca e remove o telefone
-        TelefoneAluno telefone = telefoneAlunoRepository.findById(idTelefone)
+        TelefoneFilme telefone = telefoneFilmeRepository.findById(idTelefone)
                 .orElseThrow(() -> new IllegalArgumentException("Telefone não encontrado: " + idTelefone));
-        telefoneAlunoRepository.delete(telefone);
+        telefoneFilmeRepository.delete(telefone);
 
-        // Atualiza o modelo com o aluno e seus telefones
-        aluno.setTelefones(telefoneAlunoRepository.findByAlunoId(id)); // Atualiza a lista de telefones
-        model.addAttribute("aluno", aluno);
+        // Atualiza o modelo com o filme e seus telefones
+        filme.setTelefones(telefoneFilmeRepository.findByFilmeId(id)); // Atualiza a lista de telefones
+        model.addAttribute("filme", filme);
 
-        return "aluno-telefone";
+        return "flime-telefone";
     }
 }
