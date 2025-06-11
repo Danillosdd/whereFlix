@@ -150,7 +150,7 @@
                             <h1 class="mb-4 text-center">Lista de Filmes</h1>
 
                             <form action="/filmes/busca" method="get" class="d-flex mb-4">
-                                <input type="text" name="nome" class="form-control me-2" placeholder="Nome do Filme"
+                                <input type="text" name="nome" class="form-control me-2" placeholder="Título do Filme"
                                     th:value="${nomePesquisado}" />
                                 <button type="submit" class="btn btn-primary">Buscar</button>
                             </form>
@@ -159,16 +159,15 @@
                                 <table class="table table-striped table-hover align-middle text-center">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th scope="col" style="width: 30%;">Nome</th>
+                                            <th scope="col" style="width: 30%;">Título</th>
                                             <th scope="col" style="width: 15%;">E-mail</th>
                                             <th scope="col" style="width: 20%;">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="filme : ${filmes}">
-                                            <td th:text="${filme.matricula}">123</td>
-                                            <td th:text="${filme.nome}">Fulano de Tal</td>
-                                            <td th:text="${filme.email}">fulano@ueg.br</td>
+                                            <td th:text="${filme.nome}"></td>
+                                            <td th:text="${filme.email}"></td>
                                             <td class="text-center">
                                                 <a class="btn btn-info btn-sm me-1 d-inline-block"
                                                     th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}"
@@ -253,4 +252,47 @@
 
                         <li>
                             <a href="#" class="quicklink-link">Help center</a>
-   
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Terms of service</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Privacy policy</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="footer-copy">
+                    &copy; 2023 Filmlane. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- back to top button -->
+    <a href="#" class="back-to-top-btn" data-back-to-top>
+        <ion-icon name="arrow-up"></ion-icon>
+    </a>
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
