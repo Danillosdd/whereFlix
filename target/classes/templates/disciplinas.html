@@ -155,6 +155,11 @@
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
 
+                        <!-- Exibição de Mensagem de Erro -->
+                        <div th:if="${errorMessage}" class="alert alert-danger text-center">
+                            <span th:text="${errorMessage}"></span>
+                        </div>
+
                         <!-- Tabela de Disciplinas -->
                         <table class="table table-bordered">
                             <thead class="table-dark">
@@ -197,6 +202,42 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir a disciplina <strong id="disciplinaNome"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a id="confirmDeleteButton" href="#" class="btn btn-danger">Excluir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+            const disciplinaNome = document.getElementById('disciplinaNome');
+
+            confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const disciplinaId = button.getAttribute('data-id');
+                const disciplinaNomeTexto = button.getAttribute('data-nome');
+                disciplinaNome.textContent = disciplinaNomeTexto;
+                confirmDeleteButton.href = `/disciplinas/excluir/${disciplinaId}`;
+            });
+        });
+    </script>
 
     <!-- Rodapé -->
     <footer class="footer">

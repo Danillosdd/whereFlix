@@ -37,4 +37,6 @@ public interface FilmeRepository extends JpaRepository<Filme, Integer> {
      * @return Objeto Filme correspondente à matrícula fornecida, ou null se não encontrado.
      */
     Filme findByMatricula(Integer matricula);
+
+    boolean existsByNomeIgnoreCase(String nome);
 }

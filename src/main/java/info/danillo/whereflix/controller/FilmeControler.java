@@ -86,6 +86,14 @@ public class FilmeControler {
             @RequestParam String email,
             @RequestParam List<Integer> disciplinas,
             Model model) {
+
+        // Validação: Nome repetido
+        if (filmeRepository.existsByNomeIgnoreCase(nome)) {
+            model.addAttribute("erro", "Já existe um filme com este nome.");
+            model.addAttribute("disciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
+            return "filme-cadastrar";
+        }
+
         // Validações
         if (nome == null || nome.isEmpty() || email == null || email.isEmpty()) {
             model.addAttribute("erro", "Nome e email são obrigatórios.");

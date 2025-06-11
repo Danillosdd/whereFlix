@@ -146,7 +146,7 @@
             <div class="container mt-5">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="mb-4 text-center text-danger">Exclusão de Fime</h1>
+                        <h1 class="mb-4 text-center text-danger">Exclusão de Filme</h1>
 
                         <!-- Formulário de Exclusão -->
                         <form id="deleteForm" th:action="@{/filmes/excluir}" method="post">
@@ -355,6 +355,35 @@
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir este filme?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+            confirmDeleteButton.addEventListener('click', function () {
+                document.getElementById('deleteForm').submit();
+            });
+        });
+    </script>
 
 </body>
 
