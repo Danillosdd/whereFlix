@@ -122,7 +122,7 @@ public class FilmeControler {
         filme.setDisciplinas(disciplinasSelecionadas);
         filmeRepository.save(filme);
 
-        return "redirect:/flimes";
+        return "redirect:/filmes";
     }
 
     /**
@@ -285,6 +285,6 @@ public class FilmeControler {
         filme.setTelefones(telefoneFilmeRepository.findByFilmeId(id)); // Atualiza a lista de telefones
         model.addAttribute("filme", filme);
 
-        return "flime-telefone";
+        return "filme-telefone";
     }
 }

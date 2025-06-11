@@ -159,10 +159,10 @@
                                 <table class="table table-striped table-hover align-middle text-center">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th scope="col">Matrícula</th>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">E-mail</th>
-                                            <th scope="col">Ações</th>
+                                            <th scope="col" style="width: 15%;">Matrícula</th>
+                                            <th scope="col" style="width: 30%;">Nome</th>
+                                            <th scope="col" style="width: 35%;">E-mail</th>
+                                            <th scope="col" style="width: 20%;">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -171,15 +171,15 @@
                                             <td th:text="${filme.nome}">Fulano de Tal</td>
                                             <td th:text="${filme.email}">fulano@ueg.br</td>
                                             <td>
-                                                <a class="btn btn-info btn-sm me-2"
+                                                <a class="btn btn-info btn-sm me-2 d-inline-block"
                                                     th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}">
                                                     <i class="bi bi-telephone"></i> Telefones
                                                 </a>
-                                                <a class="btn btn-warning btn-sm me-2"
+                                                <a class="btn btn-warning btn-sm me-2 d-inline-block"
                                                     th:href="@{'/filmes/atualizar/' + ${filme.id}}">
                                                     <i class="bi bi-pencil-square"></i> Atualizar
                                                 </a>
-                                                <a class="btn btn-danger btn-sm"
+                                                <a class="btn btn-danger btn-sm d-inline-block"
                                                     th:href="@{'/filmes/excluir/' + ${filme.id}}">
                                                     <i class="bi bi-trash"></i> Excluir
                                                 </a>
@@ -251,83 +251,3 @@
 
                         <li>
                             <a href="#" class="quicklink-link">Help center</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="quicklink-link">Terms of use</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="quicklink-link">Privacy</a>
-                        </li>
-
-                    </ul>
-
-                    <ul class="social-list">
-
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-twitter"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-pinterest"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-linkedin"></ion-icon>
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-
-                <p class="copyright">
-                    &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
-                </p>
-
-                <img src="/assets/img/footer-bottom-img.png" alt="Online banking companies logo"
-                    class="footer-bottom-img">
-
-            </div>
-        </div>
-
-    </footer>
-
-    <!-- GO TO TOP -->
-    <a href="#top" class="go-top" data-go-top>
-        <ion-icon name="chevron-up"></ion-icon>
-    </a>
-
-    <!-- custom js link -->
-    <script src="/assets/js/script.js"></script>
-
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-    <!-- Antigo -->
-    <!-- Vendor JS Files -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-</body>
-
-</html>
