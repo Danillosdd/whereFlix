@@ -149,7 +149,7 @@
                         <h1 class="mb-4 text-center">Cadastro de Filme</h1>
 
                         <!-- Formulário de Cadastro -->
-                        <form th:action="@{/filmes/cadastrar}" method="post" class="needs-validation" novalidate>
+                        <form th:action="@{/filmes/cadastrar}" method="post" class="needs-validation">
                             <!-- Exibição de Mensagens de Erro -->
                             <div th:if="${erro}" class="alert alert-danger">
                                 <p th:text="${erro}"></p>
@@ -159,7 +159,7 @@
                             <div class="form-group mb-3">
                                 <label for="matricula" class="form-label">Matrícula:</label>
                                 <input type="number" id="matricula" name="matricula" class="form-control"
-                                    th:value="${matricula}" placeholder="Digite a matrícula do filme" required />
+                                    th:value="${matricula}" placeholder="Digite a matrícula do filme" required>
                                 <div class="invalid-feedback">Por favor, insira a matrícula.</div>
                             </div>
 
