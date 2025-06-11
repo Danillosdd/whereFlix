@@ -45,13 +45,13 @@ public class DisciplinaController {
         return "disciplinas";
     }
 
-    @GetMapping("/cadastrar")
+    @GetMapping("/disciplinas/cadastrar")
     public String exibirFormularioCadastro(Model model) {
         model.addAttribute("disciplina", new Disciplina());
         return "disciplina-cadastrar"; // Nome do arquivo HTML
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/disciplinas/cadastrar")
     public String salvarDisciplina(@ModelAttribute Disciplina disciplina, Model model) {
         // Validação: Campo "nome" vazio
         if (disciplina.getNome() == null || disciplina.getNome().trim().isEmpty()) {
@@ -77,7 +77,7 @@ public class DisciplinaController {
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de edição de disciplina.
      */
-    @GetMapping("/atualizar/{id}")
+    @GetMapping("/disciplinas/atualizar/{id}")
     public String exibirFormularioEdicao(@PathVariable Integer id, Model model) {
         Disciplina disciplina = disciplinaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + id));
@@ -92,7 +92,7 @@ public class DisciplinaController {
      * @param disciplina Objeto disciplina preenchido no formulário.
      * @return Redireciona para a página de lista de disciplinas.
      */
-    @PostMapping("/atualizar/{id}")
+    @PostMapping("/disciplinas/atualizar/{id}")
     public String atualizarDisciplina(@PathVariable Integer id, @ModelAttribute Disciplina disciplina, Model model) {
         // Verifica se já existe outra disciplina com o mesmo nome
         if (disciplinaRepository.existsByNome(disciplina.getNome()) &&
@@ -114,7 +114,7 @@ public class DisciplinaController {
      * @param id ID da disciplina a ser excluída.
      * @return Redireciona para a página de lista de disciplinas.
      */
-    @GetMapping("/excluir/{id}")
+    @GetMapping("/disciplinas/excluir/{id}")
     public String excluirDisciplina(@PathVariable Integer id, Model model) {
         try {
             disciplinaRepository.deleteById(id);
