@@ -97,10 +97,7 @@
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
 
-                    <li><a href="/filmes/cadastrar" class="navbar-link">Cadastrar Filme</a></li>
-
-
-                    <li><a href="/disciplinas" class="navbar-link">Cadastrar Disciplina</a></li>
+                    <li><a href="/disciplinas" class="navbar-link">Lista de Disciplinas</a></li>
 
                 </ul>
 
@@ -151,19 +148,12 @@
                     <div class="card-body">
                         <h1 class="mb-4 text-center">Lista de Disciplinas</h1>
 
-                        <!-- Botão para Cadastrar Nova Disciplina -->
-                        <div class="text-end mb-3">
-                            <a href="/disciplinas/cadastrar" class="btn btn-primary">
-                                <i class="bi bi-plus"></i> Cadastrar Nova Disciplina
-                            </a>
-                        </div>
-
                         <!-- Tabela de Disciplinas -->
                         <table class="table table-bordered">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Nome</th>
-                                    <th>Ações</th>
+                                    <th style="width: 70%;">Nome</th>
+                                    <th style="width: 30%;">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,12 +162,13 @@
                                     <td>
                                         <!-- Botão Editar -->
                                         <a th:href="@{/disciplinas/atualizar/{id}(id=${disciplina.id})}"
-                                            class="btn btn-warning btn-sm">
+                                            class="btn btn-warning btn-sm d-inline-block me-2">
                                             <i class="bi bi-pencil"></i> Editar
                                         </a>
 
                                         <!-- Botão Deletar -->
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        <button class="btn btn-danger btn-sm d-inline-block"
+                                            data-bs-toggle="modal"
                                             data-bs-target="#confirmDeleteModal"
                                             th:attr="data-id=${disciplina.id}, data-nome=${disciplina.nome}">
                                             <i class="bi bi-trash"></i> Deletar
@@ -186,6 +177,13 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <!-- Botão para Cadastrar Nova Disciplina -->
+                        <div class="text-center mb-3">
+                            <a href="/disciplinas/cadastrar" class="btn btn-primary d-inline-block">
+                                <i class="bi bi-plus"></i> Cadastrar Nova Disciplina
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
