@@ -1,5 +1,7 @@
 package info.danillo.whereflix.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,14 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/disciplinas")
 public class DisciplinaController {
 
     @Autowired
     private DisciplinaRepository disciplinaRepository;
+
+    /**
+     * Página inicial do sistema.
+     *
+     * @return Nome da página inicial.
+     */
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 
     /**
      * Exibe a lista de disciplinas.
@@ -22,9 +33,25 @@ public class DisciplinaController {
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de listagem de disciplinas.
      */
-    @GetMapping
+    @GetMapping("/disciplinas")
     public String listarDisciplinas(Model model) {
         model.addAttribute("disciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
+        model.addAttribute("mensagem", "Todos as disciplinas cadastradas");
+        return "disciplinas";
+    }
+
+    /**
+     * Busca disciplina pelo nome.
+     *
+     * @param nome  Nome a ser pesquisado.
+     * @param model Objeto para adicionar atributos à view.
+     * @return Nome da página de listagem de filmes.
+     */
+    @GetMapping("/disciplinas/busca")
+    public String getBusca(@RequestParam String nome, Model model) {
+        List<Disciplina> disciplinas = disciplinaRepository.buscarPorNome(nome);
+        model.addAttribute("disciplinas", disciplinas);
+        model.addAttribute("nomePesquisado", nome);
         return "disciplinas";
     }
 
@@ -33,7 +60,7 @@ public class DisciplinaController {
         model.addAttribute("disciplina", new Disciplina());
         return "disciplina-cadastrar"; // Nome do arquivo HTML
     }
-    
+
     @PostMapping("/cadastrar")
     public String salvarDisciplina(@ModelAttribute Disciplina disciplina, Model model) {
         // Validação: Campo "nome" vazio
@@ -56,7 +83,7 @@ public class DisciplinaController {
     /**
      * Exibe o formulário para editar uma disciplina.
      *
-     * @param id ID da disciplina a ser editada.
+     * @param id    ID da disciplina a ser editada.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de edição de disciplina.
      */
@@ -71,7 +98,7 @@ public class DisciplinaController {
     /**
      * Processa a atualização de uma disciplina.
      *
-     * @param id ID da disciplina a ser atualizada.
+     * @param id         ID da disciplina a ser atualizada.
      * @param disciplina Objeto disciplina preenchido no formulário.
      * @return Redireciona para a página de lista de disciplinas.
      */
@@ -79,7 +106,7 @@ public class DisciplinaController {
     public String atualizarDisciplina(@PathVariable Integer id, @ModelAttribute Disciplina disciplina, Model model) {
         // Verifica se já existe outra disciplina com o mesmo nome
         if (disciplinaRepository.existsByNome(disciplina.getNome()) &&
-            !disciplinaRepository.findById(id).map(Disciplina::getNome).orElse("").equals(disciplina.getNome())) {
+                !disciplinaRepository.findById(id).map(Disciplina::getNome).orElse("").equals(disciplina.getNome())) {
             model.addAttribute("errorMessage", "Já existe uma disciplina com este nome.");
             model.addAttribute("disciplina", disciplina);
             return "disciplina-atualizar"; // Retorna à página de edição com a mensagem de erro
@@ -103,7 +130,8 @@ public class DisciplinaController {
             disciplinaRepository.deleteById(id);
             return "redirect:/disciplinas";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "Não é possível excluir a disciplina, pois ela está vinculada a um ou mais filmes.");
+            model.addAttribute("errorMessage",
+                    "Não é possível excluir a disciplina, pois ela está vinculada a um ou mais filmes.");
             model.addAttribute("disciplinas", disciplinaRepository.findAll());
             return "disciplinas";
         }

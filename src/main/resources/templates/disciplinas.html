@@ -148,6 +148,13 @@
                     <div class="card-body">
                         <h1 class="mb-4 text-center">Lista de Disciplinas</h1>
 
+                        <!-- Formulário de Busca -->
+                        <form action="/disciplinas/busca" method="get" class="d-flex mb-4">
+                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome da Disciplina"
+                                th:value="${nomePesquisado}" />
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+
                         <!-- Tabela de Disciplinas -->
                         <table class="table table-bordered">
                             <thead class="table-dark">
