@@ -22,9 +22,6 @@ public class Filme {
     @GeneratedValue
     private Integer id;
 
-    // Número de matrícula do filme.
-    private Integer matricula;
-
     // Nome completo do filme.
     private String nome;
 
@@ -50,12 +47,10 @@ public class Filme {
     /**
      * Construtor para inicializar um filme com matrícula, nome e email.
      *
-     * @param matricula Número de matrícula do filme.
      * @param nome Nome completo do filme.
      * @param email Endereço de email do filme.
      */
-    public Filme(Integer matricula, String nome, String email) {
-        this.matricula = matricula;
+    public Filme(String nome, String email) {
         this.nome = nome;
         this.email = email;
     }
@@ -78,24 +73,6 @@ public class Filme {
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * Obtém o número de matrícula do filme.
-     *
-     * @return Número de matrícula.
-     */
-    public Integer getMatricula() {
-        return matricula;
-    }
-
-    /**
-     * Define o número de matrícula do filme.
-     *
-     * @param matricula Número de matrícula.
-     */
-    public void setMatricula(Integer matricula) {
-        this.matricula = matricula;
     }
 
     /**

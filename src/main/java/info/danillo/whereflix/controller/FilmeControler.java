@@ -27,7 +27,6 @@ public class FilmeControler {
     @Autowired
     private TelefoneFilmeRepository telefoneFilmeRepository;
 
-
     /**
      * Exibe a lista de todos os filmes cadastrados.
      *
@@ -45,7 +44,7 @@ public class FilmeControler {
     /**
      * Busca filmes pelo nome.
      *
-     * @param nome Nome a ser pesquisado.
+     * @param nome  Nome a ser pesquisado.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de listagem de filmes.
      */
@@ -72,16 +71,14 @@ public class FilmeControler {
     /**
      * Processa o cadastro de um novo filme.
      *
-     * @param matricula Número de matrícula do filme.
-     * @param nome Nome do filme.
-     * @param email Email do filme.
+     * @param nome        Nome do filme.
+     * @param email       Email do filme.
      * @param disciplinas IDs das disciplinas selecionadas.
-     * @param model Objeto para adicionar atributos à view.
+     * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/cadastrar")
     public String postCreate(
-            @RequestParam Integer matricula,
             @RequestParam String nome,
             @RequestParam String email,
             @RequestParam List<Integer> disciplinas,
@@ -100,18 +97,8 @@ public class FilmeControler {
             return "filme-cadastrar";
         }
 
-        if (matricula == null || matricula <= 0) {
-            model.addAttribute("erro", "Matrícula deve ser um número positivo.");
-            return "filme-cadastrar";
-        }
-
-        if (filmeRepository.existsByMatricula(matricula)) {
-            model.addAttribute("erro", "Matrícula já cadastrada.");
-            return "filme-cadastrar";
-        }
-
         // Criação do filme
-        Filme filme = new Filme(matricula, nome, email);
+        Filme filme = new Filme(nome, email);
         List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
         for (Integer idDisciplina : disciplinas) {
             Disciplina disciplina = disciplinaRepository.findById(idDisciplina)
@@ -127,7 +114,7 @@ public class FilmeControler {
     /**
      * Exibe o formulário para atualizar um filme.
      *
-     * @param id ID do filme.
+     * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de atualização de filme.
      */
@@ -145,19 +132,17 @@ public class FilmeControler {
     /**
      * Processa a atualização de um filme.
      *
-     * @param id ID do filme.
-     * @param nome Nome do filme.
-     * @param matricula Número de matrícula do filme.
-     * @param email Email do filme.
+     * @param id          ID do filme.
+     * @param nome        Nome do filme.
+     * @param email       Email do filme.
      * @param disciplinas IDs das disciplinas selecionadas.
-     * @param model Objeto para adicionar atributos à view.
+     * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/atualizar")
     public String updateFilme(
             @RequestParam int id,
             @RequestParam String nome,
-            @RequestParam Integer matricula,
             @RequestParam String email,
             @RequestParam List<Integer> disciplinas,
             Model model) {
@@ -166,7 +151,6 @@ public class FilmeControler {
 
         // Atualiza os dados do filme
         filme.setNome(nome);
-        filme.setMatricula(matricula);
         filme.setEmail(email);
 
         List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
@@ -184,7 +168,7 @@ public class FilmeControler {
     /**
      * Exibe o formulário para excluir um filme.
      *
-     * @param id ID do filme.
+     * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de exclusão de filme.
      */
@@ -211,7 +195,7 @@ public class FilmeControler {
     /**
      * Exibe o formulário para atualizar os telefones de um filme.
      *
-     * @param id ID do filme.
+     * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de atualização de telefones.
      */
@@ -226,9 +210,9 @@ public class FilmeControler {
     /**
      * Processa a adição de um novo telefone para o filme.
      *
-     * @param id ID do filme.
+     * @param id           ID do filme.
      * @param novoTelefone Número do telefone.
-     * @param whatsapp Indica se o telefone é WhatsApp.
+     * @param whatsapp     Indica se o telefone é WhatsApp.
      * @return Redireciona para a página de atualização de telefones.
      */
     @PostMapping("/filmes/atualizar/telefone")
@@ -265,7 +249,7 @@ public class FilmeControler {
     /**
      * Processa a exclusão de um telefone do filme.
      *
-     * @param id ID do filme.
+     * @param id         ID do filme.
      * @param idTelefone ID do telefone.
      * @return Redireciona para a página de atualização de telefones.
      */
