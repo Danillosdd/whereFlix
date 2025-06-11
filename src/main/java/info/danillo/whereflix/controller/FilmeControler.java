@@ -27,15 +27,6 @@ public class FilmeControler {
     @Autowired
     private TelefoneFilmeRepository telefoneFilmeRepository;
 
-    /**
-     * Página inicial do sistema.
-     *
-     * @return Nome da página inicial.
-     */
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
 
     /**
      * Exibe a lista de todos os filmes cadastrados.

@@ -18,16 +18,6 @@ public class DisciplinaController {
     private DisciplinaRepository disciplinaRepository;
 
     /**
-     * Página inicial do sistema.
-     *
-     * @return Nome da página inicial.
-     */
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
-    /**
      * Exibe a lista de disciplinas.
      *
      * @param model Objeto para adicionar atributos à view.
