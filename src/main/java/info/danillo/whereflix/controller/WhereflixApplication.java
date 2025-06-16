@@ -14,9 +14,9 @@ public class WhereflixApplication {
     @Bean
     public org.springframework.boot.CommandLineRunner loadTipos(TipoRepository tipoRepository) {
         return args -> {
-            inserirOuAtualizarTipo(tipoRepository, "Ação");
-            inserirOuAtualizarTipo(tipoRepository, "Comédia");
-            inserirOuAtualizarTipo(tipoRepository, "Drama");
+            inserirOuAtualizarTipo(tipoRepository, "Filme");
+            inserirOuAtualizarTipo(tipoRepository, "Série");
+            inserirOuAtualizarTipo(tipoRepository, "TV Show");
         };
     }
 
