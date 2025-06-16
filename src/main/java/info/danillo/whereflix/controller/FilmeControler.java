@@ -30,6 +30,9 @@ public class FilmeControler {
     @Autowired
     private TipoRepository tipoRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
     /**
      * Exibe a lista de todos os filmes cadastrados.
      *
@@ -70,6 +73,7 @@ public class FilmeControler {
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
         model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
+        model.addAttribute("categorias", categoriaRepository.findAll());
         return "filme-cadastrar";
     }
 
@@ -78,6 +82,7 @@ public class FilmeControler {
      *
      * @param nome        Nome do filme.
      * @param tipo        Tipo do filme.
+     * @param categoria    Categoria do filme.
      * @param qualidade   Qualidade do filme.
      * @param duracao     Duração do filme.
      * @param classificacao Classificação do filme.
@@ -90,6 +95,7 @@ public class FilmeControler {
     public String postCreate(
             @RequestParam String nome,
             @RequestParam Integer tipo,
+            @RequestParam Integer categoria,
             @RequestParam String qualidade,
             @RequestParam Integer duracao,
             @RequestParam Double classificacao,
@@ -116,6 +122,10 @@ public class FilmeControler {
         filme.setDuracao(duracao);
         filme.setClassificacao(classificacao);
         filme.setAno(ano);
+
+        Categoria cat = categoriaRepository.findById(categoria)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada: " + categoria));
+        filme.setCategoria(cat);
 
         List<Streaming> streamingsSelecionadas = new ArrayList<>();
         for (Integer idStreaming : streamings) {

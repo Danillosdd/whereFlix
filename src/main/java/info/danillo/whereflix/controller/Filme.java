@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 /**
@@ -44,6 +45,9 @@ public class Filme {
     private Integer duracao;  // duração em minutos
     private Double classificacao; // ex: 6.5
     private Integer ano; // ex: 2024
+
+    @ManyToOne
+    private Categoria categoria;
 
     /**
      * Construtor padrão necessário para o JPA.
@@ -192,5 +196,13 @@ public class Filme {
 
     public void setAno(Integer ano) {
         this.ano = ano;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

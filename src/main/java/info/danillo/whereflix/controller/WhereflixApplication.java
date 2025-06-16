@@ -30,4 +30,34 @@ public class WhereflixApplication {
         }
         tipoRepository.save(tipo);
     }
+
+    @Bean
+    public org.springframework.boot.CommandLineRunner loadCategorias(CategoriaRepository categoriaRepository) {
+        return args -> {
+            inserirOuAtualizarCategoria(categoriaRepository, "Animação");
+            inserirOuAtualizarCategoria(categoriaRepository, "Aventura");
+            inserirOuAtualizarCategoria(categoriaRepository, "Biografia");
+            inserirOuAtualizarCategoria(categoriaRepository, "Comédia");
+            inserirOuAtualizarCategoria(categoriaRepository, "Drama");
+            inserirOuAtualizarCategoria(categoriaRepository, "Documentário");
+            inserirOuAtualizarCategoria(categoriaRepository, "Fantasia");
+            inserirOuAtualizarCategoria(categoriaRepository, "Fatos Reais");
+            inserirOuAtualizarCategoria(categoriaRepository, "Ficção Científica");
+            inserirOuAtualizarCategoria(categoriaRepository, "Romance");
+            inserirOuAtualizarCategoria(categoriaRepository, "Super-heróis");
+            inserirOuAtualizarCategoria(categoriaRepository, "Suspense");
+            inserirOuAtualizarCategoria(categoriaRepository, "Terror");
+        };
+    }
+
+    private void inserirOuAtualizarCategoria(CategoriaRepository categoriaRepository, String nome) {
+        Categoria categoria = categoriaRepository.findByNomeIgnoreCase(nome).orElse(null);
+        if (categoria == null) {
+            categoria = new Categoria();
+            categoria.setNome(nome);
+        } else {
+            categoria.setNome(nome);
+        }
+        categoriaRepository.save(categoria);
+    }
 }
