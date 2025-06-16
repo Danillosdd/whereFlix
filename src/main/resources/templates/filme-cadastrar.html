@@ -166,9 +166,11 @@
                             <!-- Campo Tipo -->
                             <div class="form-group mb-3">
                                 <label for="tipo" class="form-label">Tipo:</label>
-                                <input type="tipo" id="tipo" name="tipo" class="form-control" th:value="${tipo}"
-                                    placeholder="Digite o tipo do filme" required />
-                                <div class="invalid-feedback">Por favor, insira um tipo válido.</div>
+                                <select id="tipo" name="tipo" class="form-control" required>
+                                    <option value="">Selecione o tipo</option>
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"></option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione um tipo.</div>
                             </div>
 
                             <!-- Campo Streamings -->

@@ -27,6 +27,9 @@ public class FilmeControler {
     @Autowired
     private TelefoneFilmeRepository telefoneFilmeRepository;
 
+    @Autowired
+    private TipoRepository tipoRepository;
+
     /**
      * Exibe a lista de todos os filmes cadastrados.
      *
@@ -65,6 +68,7 @@ public class FilmeControler {
     @GetMapping("/filmes/cadastrar")
     public String getCreate(Model model) {
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+        model.addAttribute("tipos", tipoRepository.findAll());
         return "filme-cadastrar";
     }
 
@@ -80,7 +84,7 @@ public class FilmeControler {
     @PostMapping("/filmes/cadastrar")
     public String postCreate(
             @RequestParam String nome,
-            @RequestParam String tipo,
+            @RequestParam Integer tipo,
             @RequestParam List<Integer> streamings,
             Model model) {
 
@@ -126,6 +130,7 @@ public class FilmeControler {
 
         // Buscar streamings ordenadas por nome
         model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
+        model.addAttribute("tipos", tipoRepository.findAll());
         return "filme-atualizar";
     }
 

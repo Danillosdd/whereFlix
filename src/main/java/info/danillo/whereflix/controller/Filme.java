@@ -38,6 +38,8 @@ public class Filme {
     @ManyToMany
     private List<Streaming> streamings;
 
+    private Integer tipo; // código do tipo
+
     /**
      * Construtor padrão necessário para o JPA.
      */
@@ -145,5 +147,13 @@ public class Filme {
      */
     public void setStreamings(List<Streaming> streamings) {
         this.streamings = streamings;
+    }
+
+    public Integer getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
     }
 }
