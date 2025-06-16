@@ -168,35 +168,38 @@
                             <!-- Campo Tipo -->
                             <div class="form-group mb-3">
                                 <label for="tipo" class="form-label">Tipo:</label>
-                                <select id="tipo" name="tipo" class="form-control" required>
-                                    <option value="">Selecione o tipo</option>
-                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"
-                                        th:selected="${tipo.id} == ${filme.tipo}"></option>
+                                <select class="form-select" id="tipo" name="tipo" required>
+                                    <option value="">Selecione</option>
+                                    <option th:each="tipo : ${tipos}"
+                                            th:value="${tipo.id}"
+                                            th:text="${tipo.nome}"
+                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo} : false">
+                                    </option>
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecione um tipo.</div>
                             </div>
 
                             <!-- Campo Categoria -->
                             <div class="form-group mb-3">
                                 <label for="categoria" class="form-label">Categoria:</label>
-                                <select id="categoria" name="categoria" class="form-control" required>
-                                    <option value="">Selecione a categoria</option>
-                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
-                                        th:text="${categoria.nome}"
-                                        th:selected="${categoria.id} == ${filme.categoria.id}"></option>
+                                <select class="form-select" id="categoria" name="categoria.id" required>
+                                    <option value="">Selecione</option>
+                                    <option th:each="categoria : ${categorias}"
+                                            th:value="${categoria.id}"
+                                            th:text="${categoria.nome}"
+                                            th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
+                                    </option>
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecione uma categoria.</div>
                             </div>
 
                             <!-- Campo Qualidade -->
                             <div class="form-group mb-3">
                                 <label for="qualidade" class="form-label">Qualidade:</label>
-                                <select id="qualidade" name="qualidade" class="form-control" required>
-                                    <option value="">Selecione a qualidade</option>
-                                    <option th:each="q : ${qualidades}" th:value="${q}" th:text="${q}"
-                                        th:selected="${q == filme.qualidade}"></option>
+                                <select class="form-select" id="qualidade" name="qualidade" required>
+                                    <option value="">Selecione</option>
+                                    <option value="HD" th:selected="${filme.qualidade} == 'HD'">HD</option>
+                                    <option value="FullHD" th:selected="${filme.qualidade} == 'FullHD'">FullHD</option>
+                                    <option value="4K" th:selected="${filme.qualidade} == '4K'">4K</option>
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecione a qualidade.</div>
                             </div>
 
                             <!-- Campo Duração -->
