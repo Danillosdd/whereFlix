@@ -154,8 +154,8 @@
 
                             <!-- Campo Título -->
                             <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Título:</label>
-                                <input type="text" id="nome" name="nome" class="form-control" th:value="${filme.nome}"
+                                <label for="titulo" class="form-label">Título:</label>
+                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}"
                                     disabled>
                             </div>
 
@@ -167,7 +167,7 @@
                                     <option th:each="tipo : ${tipos}"
                                             th:value="${tipo.id}"
                                             th:text="${tipo.nome}"
-                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo} : false">
+                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -224,8 +224,11 @@
                             <div class="form-group mb-3">
                                 <label for="streamings" class="form-label">Streamings:</label>
                                 <select id="streamings" name="streamings" class="form-control" multiple disabled>
-                                    <option th:each="streaming : ${todasStreamings}" th:value="${streaming.id}" th:text="${streaming.nome}"
-                                        th:selected="${filme.streamings.contains(streaming)}"></option>
+                                    <option th:each="streaming : ${streamings}"
+                                            th:value="${streaming.id}"
+                                            th:text="${streaming.nome}"
+                                            th:selected="${filme.streamings.contains(streaming)}">
+                                    </option>
                                 </select>
                             </div>
 

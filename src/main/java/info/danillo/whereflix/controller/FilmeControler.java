@@ -40,7 +40,7 @@ public class FilmeControler {
      * Exibe a lista de todos os filmes cadastrados.
      *
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de listagem de filmes.
+     * @return Título da página de listagem de filmes.
      */
     @GetMapping("/filmes")
     public String getFilmes(Model model) {
@@ -51,17 +51,17 @@ public class FilmeControler {
     }
 
     /**
-     * Busca filmes pelo nome.
+     * Busca filmes pelo título.
      *
-     * @param nome  Nome a ser pesquisado.
+     * @param titulo  Título a ser pesquisado.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de listagem de filmes.
+     * @return Título da página de listagem de filmes.
      */
     @GetMapping("/filmes/busca")
-    public String getBusca(@RequestParam String nome, Model model) {
-        List<Filme> filmes = filmeRepository.buscarPorNome(nome);
+    public String getBusca(@RequestParam String titulo, Model model) {
+        List<Filme> filmes = filmeRepository.buscarPorTitulo(titulo);
         model.addAttribute("filmes", filmes);
-        model.addAttribute("nomePesquisado", nome);
+        model.addAttribute("tituloPesquisado", titulo);
         return "filmes";
     }
 
@@ -69,7 +69,7 @@ public class FilmeControler {
      * Exibe o formulário para cadastrar um novo filme.
      *
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de cadastro de filme.
+     * @return Título da página de cadastro de filme.
      */
     @GetMapping("/filmes/cadastrar")
     public String getCadastrar(Model model) {
@@ -84,7 +84,7 @@ public class FilmeControler {
     /**
      * Processa o cadastro de um novo filme.
      *
-     * @param nome       Nome do filme.
+     * @param titulo     Título do filme.
      * @param tipo       Tipo do filme.
      * @param categoria  Categoria do filme.
      * @param qualidade  Qualidade do filme.
@@ -97,7 +97,7 @@ public class FilmeControler {
      */
     @PostMapping("/filmes/cadastrar")
     public String cadastrarFilme(
-            @RequestParam String nome,
+            @RequestParam String titulo,
             @RequestParam Integer tipo,
             @RequestParam Integer categoria,
             @RequestParam Integer qualidade,
@@ -107,22 +107,22 @@ public class FilmeControler {
             @RequestParam List<Integer> streamings,
             Model model) {
 
-        // Validação: Nome repetido
-        if (filmeRepository.existsByNomeIgnoreCase(nome)) {
-            model.addAttribute("erro", "Já existe um filme com este nome.");
+        // Validação: Título repetido
+        if (filmeRepository.existsByTituloIgnoreCase(titulo)) {
+            model.addAttribute("erro", "Já existe um filme com este título.");
             model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
             return "filme-cadastrar";
         }
 
         // Validações
-        if (nome == null || nome.isEmpty() || tipo == null) {
-            model.addAttribute("erro", "Nome e tipo são obrigatórios.");
+        if (titulo == null || titulo.isEmpty() || tipo == null) {
+            model.addAttribute("erro", "Título e tipo são obrigatórios.");
             return "filme-cadastrar";
         }
 
         // Criação do filme
         Filme filme = new Filme();
-        filme.setNome(nome);
+        filme.setTitulo(titulo);
 
         // CORREÇÃO: buscar o objeto Tipo pelo ID
         Tipo tipoObj = tipoRepository.findById(tipo)
@@ -144,6 +144,9 @@ public class FilmeControler {
             streamingsSelecionadas.add(streaming);
         }
         filme.setStreamings(streamingsSelecionadas);
+        filme.setDuracao(duracao);
+        filme.setAvaliacao(avaliacao);
+        filme.setAno(ano);
         filmeRepository.save(filme);
 
         return "redirect:/filmes";
@@ -154,17 +157,17 @@ public class FilmeControler {
      *
      * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de atualização de filme.
+     * @return Título da página de atualização de filme.
      */
     @GetMapping("/filmes/atualizar/{id}")
-    public String getUpdate(@PathVariable Integer id, Model model) {
+    public String getAtualizarFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+            .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
         model.addAttribute("filme", filme);
-        model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
+        model.addAttribute("categorias", categoriaRepository.findAll());
         model.addAttribute("qualidades", qualidadeRepository.findAll());
-        model.addAttribute("categorias", categoriaRepository.findAll()); // <-- Adicione esta linha
+        model.addAttribute("todasStreamings", streamingRepository.findAll());
         return "filme-atualizar";
     }
 
@@ -172,7 +175,7 @@ public class FilmeControler {
      * Processa a atualização de um filme.
      *
      * @param id         ID do filme.
-     * @param nome       Nome do filme.
+     * @param titulo     Título do filme.
      * @param tipo       Tipo do filme.
      * @param categoria  Categoria do filme. // <-- Adicione este parâmetro
      * @param streamings IDs das streamings selecionadas.
@@ -182,7 +185,7 @@ public class FilmeControler {
     @PostMapping("/filmes/atualizar")
     public String atualizarFilme(
             @RequestParam Integer id,
-            @RequestParam String nome,
+            @RequestParam String titulo,
             @RequestParam Integer tipo,
             @RequestParam Integer categoria, // <-- Adicione este parâmetro
             @RequestParam Integer qualidade, // <-- agora recebe o id da qualidade
@@ -194,7 +197,7 @@ public class FilmeControler {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
-        filme.setNome(nome);
+        filme.setTitulo(titulo);
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
@@ -223,15 +226,16 @@ public class FilmeControler {
      *
      * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de exclusão de filme.
+     * @return Título da página de exclusão de filme.
      */
     @GetMapping("/filmes/excluir/{id}")
-    public String exibirTelaExcluir(@PathVariable Integer id, Model model) {
+    public String excluirFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeRepository.findById(id).orElseThrow();
         model.addAttribute("filme", filme);
+        model.addAttribute("tipos", tipoRepository.findAll());
+        model.addAttribute("categorias", categoriaRepository.findAll());
         model.addAttribute("qualidades", qualidadeRepository.findAll());
-        model.addAttribute("tipos", tipoRepository.findAll()); // ADICIONE ESTA LINHA
-        model.addAttribute("categorias", categoriaRepository.findAll()); // E ESTA
+        model.addAttribute("streamings", streamingRepository.findAll());
         return "filme-excluir";
     }
 
@@ -252,7 +256,7 @@ public class FilmeControler {
      *
      * @param id    ID do filme.
      * @param model Objeto para adicionar atributos à view.
-     * @return Nome da página de atualização de telefones.
+     * @return Título da página de atualização de telefones.
      */
     @GetMapping("/filmes/atualizar/telefone/{id}")
     public String updateTelefone(@PathVariable Integer id, Model model) {

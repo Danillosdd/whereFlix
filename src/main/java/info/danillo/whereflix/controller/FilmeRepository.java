@@ -15,15 +15,15 @@ import org.springframework.data.repository.query.Param;
 public interface FilmeRepository extends JpaRepository<Filme, Integer> {
 
     /**
-     * Busca filmes cujo nome contenha o texto fornecido, ignorando maiúsculas e
+     * Busca filmes cujo título contenha o texto fornecido, ignorando maiúsculas e
      * minúsculas.
      * A consulta utiliza JPQL para realizar a busca com o operador LIKE.
      *
-     * @param nome Texto a ser pesquisado no nome dos filmes.
+     * @param titulo Texto a ser pesquisado no título dos filmes.
      * @return Lista de filmes que correspondem ao critério de busca.
      */
-    @Query("SELECT a FROM Filme a WHERE LOWER(a.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
-    List<Filme> buscarPorNome(@Param("nome") String nome);
+    @Query("SELECT a FROM Filme a WHERE LOWER(a.titulo) LIKE LOWER(CONCAT('%', :titulo, '%'))")
+    List<Filme> buscarPorTitulo(@Param("titulo") String titulo);
 
-    boolean existsByNomeIgnoreCase(String nome);
+    boolean existsByTituloIgnoreCase(String titulo);
 }

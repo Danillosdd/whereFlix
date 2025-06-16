@@ -12,7 +12,8 @@ import jakarta.persistence.OneToMany;
 
 /**
  * Classe que representa a entidade Filme no sistema.
- * Contém informações básicas do filme, como matrícula, nome e email,
+ * Contém informações básicas do filme, como título, tipo, qualidade, categoria,
+ * duração, avaliação e ano de lançamento.
  * além de relacionamentos com telefones e streamings.
  */
 @Entity
@@ -23,11 +24,8 @@ public class Filme {
     @GeneratedValue
     private Integer id;
 
-    // Nome completo do filme.
-    private String nome;
-
-    // Endereço de email do filme.
-    private String email;
+    // Título completo do filme.
+    private String titulo;
 
     // Relacionamento One-to-Many com a entidade TelefoneFilmes.
     // Um filme pode ter vários telefones.
@@ -48,7 +46,7 @@ public class Filme {
     @ManyToOne
     private Categoria categoria;
 
-    private Integer duracao;  // duração em minutos
+    private Integer duracao; // duração em minutos
     private Double avaliacao; // ex: 6.5
     private Integer ano; // ex: 2024
 
@@ -59,14 +57,12 @@ public class Filme {
     }
 
     /**
-     * Construtor para inicializar um filme com matrícula, nome e email.
+     * Construtor para inicializar um filme com o título fornecido.
      *
-     * @param nome Nome completo do filme.
-     * @param email Endereço de email do filme.
+     * @param titulo Título completo do filme.
      */
-    public Filme(String nome, String email) {
-        this.nome = nome;
-        this.email = email;
+    public Filme(String titulo) {
+        this.titulo = titulo;
     }
 
     // Getters e Setters
@@ -90,39 +86,21 @@ public class Filme {
     }
 
     /**
-     * Obtém o nome completo do filme.
+     * Obtém o titulo completo do filme.
      *
-     * @return Nome do filme.
+     * @return Título do filme.
      */
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
     /**
-     * Define o nome completo do filme.
+     * Define o título completo do filme.
      *
-     * @param nome Nome do filme.
+     * @param titulo Título do filme.
      */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * Obtém o endereço de email do filme.
-     *
-     * @return Email do filme.
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Define o endereço de email do filme.
-     *
-     * @param email Email do filme.
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     /**
@@ -169,8 +147,13 @@ public class Filme {
         this.tipo = tipo;
     }
 
-    public Qualidade getQualidade() { return qualidade; }
-    public void setQualidade(Qualidade qualidade) { this.qualidade = qualidade; }
+    public Qualidade getQualidade() {
+        return qualidade;
+    }
+
+    public void setQualidade(Qualidade qualidade) {
+        this.qualidade = qualidade;
+    }
 
     public Integer getDuracao() {
         return duracao;

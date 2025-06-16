@@ -149,8 +149,8 @@
                             <h1 class="mb-4 text-center">Lista de Filmes</h1>
 
                             <form action="/filmes/busca" method="get" class="d-flex mb-4">
-                                <input type="text" name="nome" class="form-control me-2" placeholder="Título do Filme"
-                                    th:value="${nomePesquisado}" />
+                                <input type="text" name="titulo" class="form-control me-2" placeholder="Título do Filme"
+                                    th:value="${tituloPesquisado}" />
                                 <button type="submit" class="btn btn-primary">Buscar</button>
                             </form>
 
@@ -170,7 +170,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="filme : ${filmes}">
-                                            <td th:text="${filme.nome}"></td>
+                                            <td th:text="${filme.titulo}"></td>
                                             <td th:text="${filme.tipo != null ? filme.tipo.nome : ''}"></td>
                                             <td th:text="${filme.categoria != null ? filme.categoria.nome : ''}"></td>
                                             <td th:text="${filme.qualidade != null ? filme.qualidade.nome : ''}"></td>
