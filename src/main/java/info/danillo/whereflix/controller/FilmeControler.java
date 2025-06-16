@@ -72,7 +72,7 @@ public class FilmeControler {
      * Processa o cadastro de um novo filme.
      *
      * @param nome        Nome do filme.
-     * @param email       Email do filme.
+     * @param tipo        Tipo do filme.
      * @param streamings IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
@@ -80,7 +80,7 @@ public class FilmeControler {
     @PostMapping("/filmes/cadastrar")
     public String postCreate(
             @RequestParam String nome,
-            @RequestParam String email,
+            @RequestParam String tipo,
             @RequestParam List<Integer> streamings,
             Model model) {
 
@@ -92,13 +92,13 @@ public class FilmeControler {
         }
 
         // Validações
-        if (nome == null || nome.isEmpty() || email == null || email.isEmpty()) {
-            model.addAttribute("erro", "Nome e email são obrigatórios.");
+        if (nome == null || nome.isEmpty() || tipo == null || tipo.isEmpty()) {
+            model.addAttribute("erro", "Nome e tipo são obrigatórios.");
             return "filme-cadastrar";
         }
 
         // Criação do filme
-        Filme filme = new Filme(nome, email);
+        Filme filme = new Filme(nome, tipo);
         List<Streaming> streamingsSelecionadas = new ArrayList<>();
         for (Integer idStreaming : streamings) {
             Streaming streaming = streamingRepository.findById(idStreaming)
@@ -134,7 +134,7 @@ public class FilmeControler {
      *
      * @param id          ID do filme.
      * @param nome        Nome do filme.
-     * @param email       Email do filme.
+     * @param tipo        Tipo do filme.
      * @param streamings IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
@@ -143,7 +143,7 @@ public class FilmeControler {
     public String updateFilme(
             @RequestParam int id,
             @RequestParam String nome,
-            @RequestParam String email,
+            @RequestParam String tipo,
             @RequestParam List<Integer> streamings,
             Model model) {
         Filme filme = filmeRepository.findById(id)
@@ -151,7 +151,7 @@ public class FilmeControler {
 
         // Atualiza os dados do filme
         filme.setNome(nome);
-        filme.setEmail(email);
+        filme.setTipo(tipo);
 
         List<Streaming> streamingsSelecionadas = new ArrayList<>();
         for (Integer idStreaming : streamings) {

@@ -160,14 +160,14 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th scope="col" style="width: 30%;">Título</th>
-                                            <th scope="col" style="width: 15%;">E-mail</th>
+                                            <th scope="col" style="width: 15%;">Tipo</th>
                                             <th scope="col" style="width: 20%;">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="filme : ${filmes}">
                                             <td th:text="${filme.nome}"></td>
-                                            <td th:text="${filme.email}"></td>
+                                            <td th:text="${filme.tipo}"></td>
                                             <td class="text-center">
                                                 <a class="btn btn-info btn-sm me-1 d-inline-block"
                                                     th:href="@{'/filmes/atualizar/telefone/' + ${filme.id}}"
