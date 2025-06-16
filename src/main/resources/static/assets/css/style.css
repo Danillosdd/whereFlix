@@ -560,11 +560,8 @@ body.active {
   justify-content: flex-start;
   align-items: center;
   padding-block: var(--section-padding);
+  flex-direction: column;
 
-}
-
-.card {
-  margin-top: 100px;
 }
 
 .hero-content {
@@ -1191,9 +1188,9 @@ body.active {
   transition: color 0.2s;
 }
 
-.star-rating input[type="radio"]:checked ~ label,
+.star-rating input[type="radio"]:checked~label,
 .star-rating label:hover,
-.star-rating label:hover ~ label {
+.star-rating label:hover~label {
   color: #ffc107;
 }
 
