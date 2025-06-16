@@ -214,13 +214,14 @@
                                     th:value="${filme.ano}" required>
                                 <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
                             </div>
+                            
                             <!-- Campo Avaliação -->
                             <div class="form-group mb-3">
                                 <label for="avaliacaoRange" class="form-label" style="display:inline;">
-                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;">0</span> Estrelas):
+                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;" th:text="${filme.avaliacao}">0</span> Estrelas):
                                 </label>
                                 <input type="range" class="form-control-range" min="0" max="10" step="0.1" id="avaliacaoRange"
-                                    name="avaliacao" value="0"
+                                    name="avaliacao" th:value="${filme.avaliacao}"
                                     oninput="document.getElementById('avaliacaoLabel').innerText = this.value">
                             </div>
 

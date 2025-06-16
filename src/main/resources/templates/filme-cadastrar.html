@@ -214,10 +214,11 @@
                             <!-- Campo Avaliação -->
                             <div class="form-group mb-3">
                                 <label for="avaliacaoRange" class="form-label" style="display:inline;">
-                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;">0</span> Estrelas):
+                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;"
+                                        th:text="${avaliacao != null ? avaliacao : 0}">0</span> Estrelas):
                                 </label>
                                 <input type="range" class="form-control-range" min="0" max="10" step="0.1" id="avaliacaoRange"
-                                    name="avaliacao" value="0"
+                                    name="avaliacao" th:value="${avaliacao != null ? avaliacao : 0}"
                                     oninput="document.getElementById('avaliacaoLabel').innerText = this.value">
                             </div>
 
@@ -296,3 +297,41 @@
 
                         <li>
                             <a href="#" class="quicklink-link">Help center</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Terms of service</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="quicklink-link">Privacy policy</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="footer-copy">
+                    &copy; 2023 Filmlane. All rights reserved.
+                </p>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
