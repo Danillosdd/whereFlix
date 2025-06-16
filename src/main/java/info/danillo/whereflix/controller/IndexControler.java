@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
- * Filme. Inclui funcionalidades de CRUD para filmes, telefones e disciplinas.
+ * Filme. Inclui funcionalidades de CRUD para filmes, telefones e streamings.
  */
 @Controller
 public class IndexControler {

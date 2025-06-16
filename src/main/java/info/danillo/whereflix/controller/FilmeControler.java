@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
- * Filme. Inclui funcionalidades de CRUD para filmes, telefones e disciplinas.
+ * Filme. Inclui funcionalidades de CRUD para filmes, telefones e streamings.
  */
 @Controller
 public class FilmeControler {
@@ -22,7 +22,7 @@ public class FilmeControler {
     private FilmeRepository filmeRepository;
 
     @Autowired
-    private DisciplinaRepository disciplinaRepository;
+    private StreamingRepository streamingRepository;
 
     @Autowired
     private TelefoneFilmeRepository telefoneFilmeRepository;
@@ -64,7 +64,7 @@ public class FilmeControler {
      */
     @GetMapping("/filmes/cadastrar")
     public String getCreate(Model model) {
-        model.addAttribute("disciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
+        model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
         return "filme-cadastrar";
     }
 
@@ -73,7 +73,7 @@ public class FilmeControler {
      *
      * @param nome        Nome do filme.
      * @param email       Email do filme.
-     * @param disciplinas IDs das disciplinas selecionadas.
+     * @param streamings IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
@@ -81,13 +81,13 @@ public class FilmeControler {
     public String postCreate(
             @RequestParam String nome,
             @RequestParam String email,
-            @RequestParam List<Integer> disciplinas,
+            @RequestParam List<Integer> streamings,
             Model model) {
 
         // Validação: Nome repetido
         if (filmeRepository.existsByNomeIgnoreCase(nome)) {
             model.addAttribute("erro", "Já existe um filme com este nome.");
-            model.addAttribute("disciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
+            model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
             return "filme-cadastrar";
         }
 
@@ -99,13 +99,13 @@ public class FilmeControler {
 
         // Criação do filme
         Filme filme = new Filme(nome, email);
-        List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
-        for (Integer idDisciplina : disciplinas) {
-            Disciplina disciplina = disciplinaRepository.findById(idDisciplina)
-                    .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + idDisciplina));
-            disciplinasSelecionadas.add(disciplina);
+        List<Streaming> streamingsSelecionadas = new ArrayList<>();
+        for (Integer idStreaming : streamings) {
+            Streaming streaming = streamingRepository.findById(idStreaming)
+                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
+            streamingsSelecionadas.add(streaming);
         }
-        filme.setDisciplinas(disciplinasSelecionadas);
+        filme.setStreamings(streamingsSelecionadas);
         filmeRepository.save(filme);
 
         return "redirect:/filmes";
@@ -124,8 +124,8 @@ public class FilmeControler {
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
         model.addAttribute("filme", filme);
 
-        // Buscar disciplinas ordenadas por nome
-        model.addAttribute("todasDisciplinas", disciplinaRepository.findAllByOrderByNomeAsc());
+        // Buscar streamings ordenadas por nome
+        model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
         return "filme-atualizar";
     }
 
@@ -135,7 +135,7 @@ public class FilmeControler {
      * @param id          ID do filme.
      * @param nome        Nome do filme.
      * @param email       Email do filme.
-     * @param disciplinas IDs das disciplinas selecionadas.
+     * @param streamings IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
@@ -144,7 +144,7 @@ public class FilmeControler {
             @RequestParam int id,
             @RequestParam String nome,
             @RequestParam String email,
-            @RequestParam List<Integer> disciplinas,
+            @RequestParam List<Integer> streamings,
             Model model) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
@@ -153,13 +153,13 @@ public class FilmeControler {
         filme.setNome(nome);
         filme.setEmail(email);
 
-        List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
-        for (Integer idDisciplina : disciplinas) {
-            Disciplina disciplina = disciplinaRepository.findById(idDisciplina)
-                    .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + idDisciplina));
-            disciplinasSelecionadas.add(disciplina);
+        List<Streaming> streamingsSelecionadas = new ArrayList<>();
+        for (Integer idStreaming : streamings) {
+            Streaming streaming = streamingRepository.findById(idStreaming)
+                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
+            streamingsSelecionadas.add(streaming);
         }
-        filme.setDisciplinas(disciplinasSelecionadas);
+        filme.setStreamings(streamingsSelecionadas);
         filmeRepository.save(filme);
 
         return "redirect:/filmes";

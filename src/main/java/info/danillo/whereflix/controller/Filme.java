@@ -12,7 +12,7 @@ import jakarta.persistence.OneToMany;
 /**
  * Classe que representa a entidade Filme no sistema.
  * Contém informações básicas do filme, como matrícula, nome e email,
- * além de relacionamentos com telefones e disciplinas.
+ * além de relacionamentos com telefones e streamings.
  */
 @Entity
 public class Filme {
@@ -33,10 +33,10 @@ public class Filme {
     @OneToMany(mappedBy = "filme", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TelefoneFilme> telefones;
 
-    // Relacionamento Many-to-Many com a entidade Disciplina.
-    // Um filme pode estar matriculado em várias disciplinas.
+    // Relacionamento Many-to-Many com a entidade Streaming.
+    // Um filme pode estar matriculado em várias streamings.
     @ManyToMany
-    private List<Disciplina> disciplinas;
+    private List<Streaming> streamings;
 
     /**
      * Construtor padrão necessário para o JPA.
@@ -130,20 +130,20 @@ public class Filme {
     }
 
     /**
-     * Obtém a lista de disciplinas em que o filme está matriculado.
+     * Obtém a lista de streamings em que o filme está matriculado.
      *
-     * @return Lista de disciplinas.
+     * @return Lista de streamings.
      */
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
+    public List<Streaming> getStreamings() {
+        return streamings;
     }
 
     /**
-     * Define a lista de disciplinas em que o filme está matriculado.
+     * Define a lista de streamings em que o filme está matriculado.
      *
-     * @param disciplinas Lista de disciplinas.
+     * @param streamings Lista de streamings.
      */
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setStreamings(List<Streaming> streamings) {
+        this.streamings = streamings;
     }
 }

@@ -97,7 +97,7 @@
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
 
-                    <li><a href="/disciplinas" class="navbar-link">Lista de Disciplinas</a></li>
+                    <li><a href="/streamings" class="navbar-link">Lista de Streamings</a></li>
 
                 </ul>
 
@@ -146,11 +146,11 @@
             <div class="container mt-5">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="mb-4 text-center">Lista de Disciplinas</h1>
+                        <h1 class="mb-4 text-center">Lista de Streamings</h1>
 
                         <!-- Formulário de Busca -->
-                        <form action="/disciplinas/busca" method="get" class="d-flex mb-4">
-                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome da Disciplina"
+                        <form action="/streamings/busca" method="get" class="d-flex mb-4">
+                            <input type="text" name="nome" class="form-control me-2" placeholder="Nome da Streaming"
                                 th:value="${nomePesquisado}" />
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
@@ -160,7 +160,7 @@
                             <span th:text="${errorMessage}"></span>
                         </div>
 
-                        <!-- Tabela de Disciplinas -->
+                        <!-- Tabela de Streamings -->
                         <table class="table table-bordered">
                             <thead class="table-dark">
                                 <tr>
@@ -169,11 +169,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="disciplina : ${disciplinas}">
-                                    <td th:text="${disciplina.nome}"></td>
+                                <tr th:each="streaming : ${streamings}">
+                                    <td th:text="${streaming.nome}"></td>
                                     <td class="text-center">
                                         <!-- Botão Editar -->
-                                        <a th:href="@{/disciplinas/atualizar/{id}(id=${disciplina.id})}"
+                                        <a th:href="@{/streamings/atualizar/{id}(id=${streaming.id})}"
                                             class="btn btn-warning btn-sm d-inline-block me-1"
                                             title="Editar">
                                             <i class="bi bi-pencil"></i>
@@ -182,7 +182,7 @@
                                         <button class="btn btn-danger btn-sm d-inline-block"
                                             data-bs-toggle="modal"
                                             data-bs-target="#confirmDeleteModal"
-                                            th:attr="data-id=${disciplina.id}, data-nome=${disciplina.nome}"
+                                            th:attr="data-id=${streaming.id}, data-nome=${streaming.nome}"
                                             title="Deletar">
                                             <i class="bi bi-trash"></i>
                                         </button>
@@ -191,10 +191,10 @@
                             </tbody>
                         </table>
 
-                        <!-- Botão para Cadastrar Nova Disciplina -->
+                        <!-- Botão para Cadastrar Nova Streaming -->
                         <div class="text-center mb-3">
-                            <a href="/disciplinas/cadastrar" class="btn btn-primary d-inline-block">
-                                <i class="bi bi-plus"></i> Cadastrar Nova Disciplina
+                            <a href="/streamings/cadastrar" class="btn btn-primary d-inline-block">
+                                <i class="bi bi-plus"></i> Cadastrar Nova Streaming
                             </a>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    Tem certeza que deseja excluir a disciplina <strong id="disciplinaNome"></strong>?
+                    Tem certeza que deseja excluir a streaming <strong id="streamingNome"></strong>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -227,14 +227,14 @@
         document.addEventListener('DOMContentLoaded', function () {
             const confirmDeleteModal = document.getElementById('confirmDeleteModal');
             const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-            const disciplinaNome = document.getElementById('disciplinaNome');
+            const streamingNome = document.getElementById('streamingNome');
 
             confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
-                const disciplinaId = button.getAttribute('data-id');
-                const disciplinaNomeTexto = button.getAttribute('data-nome');
-                disciplinaNome.textContent = disciplinaNomeTexto;
-                confirmDeleteButton.href = `/disciplinas/excluir/${disciplinaId}`;
+                const streamingId = button.getAttribute('data-id');
+                const streamingNomeTexto = button.getAttribute('data-nome');
+                streamingNome.textContent = streamingNomeTexto;
+                confirmDeleteButton.href = `/streamings/excluir/${streamingId}`;
             });
         });
     </script>

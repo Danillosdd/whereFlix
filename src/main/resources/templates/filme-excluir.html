@@ -97,7 +97,7 @@
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
 
-                    <li><a href="/disciplinas" class="navbar-link">Lista de Disciplinas</a></li>
+                    <li><a href="/streamings" class="navbar-link">Lista de Streamings</a></li>
 
                 </ul>
 
@@ -167,9 +167,9 @@
                                     th:value="${filme.email}" disabled>
                             </div>
 
-                            <!-- Campo Disciplinas -->
+                            <!-- Campo Streamings -->
                             <div class="form-group mb-3">
-                                <label for="disciplinas" class="form-label">Disciplinas:</label>
+                                <label for="streamings" class="form-label">Streamings:</label>
                                 <table class="table table-bordered table-striped">
                                     <thead class="table-dark">
                                         <tr>
@@ -177,8 +177,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="disciplina : ${filme.disciplinas}">
-                                            <td th:text="${disciplina.nome}"></td>
+                                        <tr th:each="streaming : ${filme.streamings}">
+                                            <td th:text="${streaming.nome}"></td>
                                         </tr>
                                     </tbody>
                                 </table>

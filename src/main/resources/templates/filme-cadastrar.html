@@ -97,7 +97,7 @@
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
 
-                    <li><a href="/disciplinas" class="navbar-link">Lista de Disciplinas</a></li>
+                    <li><a href="/streamings" class="navbar-link">Lista de Streamings</a></li>
 
                 </ul>
 
@@ -171,17 +171,17 @@
                                 <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
                             </div>
 
-                            <!-- Campo Disciplinas -->
+                            <!-- Campo Streamings -->
                             <div class="form-group mb-3">
-                                <label for="disciplinas" class="form-label">Disciplinas:</label>
-                                <select id="disciplinas" name="disciplinas" class="form-control select2" multiple
+                                <label for="streamings" class="form-label">Streamings:</label>
+                                <select id="streamings" name="streamings" class="form-control select2" multiple
                                     required>
-                                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}"
-                                        th:text="${disciplina.nome}">
-                                        Disciplina
+                                    <option th:each="streaming : ${streamings}" th:value="${streaming.id}"
+                                        th:text="${streaming.nome}">
+                                        Streaming
                                     </option>
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecione pelo menos uma disciplina.</div>
+                                <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>
 
                             <!-- Botões -->

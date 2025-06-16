@@ -97,7 +97,7 @@
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
 
-                    <li><a href="/disciplinas" class="navbar-link">Lista de Disciplinas</a></li>
+                    <li><a href="/streamings" class="navbar-link">Lista de Streamings</a></li>
 
                 </ul>
 
@@ -146,25 +146,26 @@
             <div class="container mt-5">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="mb-4 text-center">Cadastro de Disciplina</h1>
-                        <!-- Exibição de Mensagem de Erro -->
+                        <h1 class="mb-4 text-center">Atualizar Streaming</h1>
                         <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-                        <form th:action="@{/disciplinas/cadastrar}" method="post">
+                        <form th:action="@{/streamings/atualizar/{id}(id=${streaming.id})}" method="post">
                             <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Nome da Disciplina:</label>
+                                <label for="nome" class="form-label">Nome da Streaming:</label>
                                 <input type="text" id="nome" name="nome" class="form-control"
-                                    placeholder="Digite o nome da disciplina" required>
+                                    th:value="${streaming.nome}" placeholder="Digite o nome da streaming" required>
                             </div>
                             <div class="text-center">
-                                <a href="/disciplinas" class="btn btn-secondary d-inline-block me-2">Voltar</a>
-                                <button type="submit" class="btn btn-primary d-inline-block">Cadastrar</button>
+                                <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
+                                <button type="submit" class="btn btn-primary d-inline-block">Atualizar</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <!-- Rodapé -->
     <footer class="footer">
 
