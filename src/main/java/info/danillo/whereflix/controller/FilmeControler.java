@@ -181,6 +181,7 @@ public class FilmeControler {
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
+        filme.setFoto(nomeArquivo);
         filmeRepository.save(filme);
 
         return "redirect:/filmes";
