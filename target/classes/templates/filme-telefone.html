@@ -168,81 +168,83 @@
                             <!-- Tabela de Telefones -->
                             <div class="mb-4">
                                 <label for="telefones" class="form-label">Telefones:</label>
-                                <table class="table table-striped table-hover align-middle text-center">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Telefone</th>
-                                            <th scope="col">WhatsApp</th>
-                                            <th scope="col">Ação</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Verifica se há telefones -->
-                                        <tr th:if="${filme.telefones == null or #lists.isEmpty(filme.telefones)}">
-                                            <td colspan="3" class="text-center">Nenhum telefone cadastrado.</td>
-                                        </tr>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">Telefone</th>
+                                                <th scope="col">WhatsApp</th>
+                                                <th scope="col">Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Verifica se há telefones -->
+                                            <tr th:if="${filme.telefones == null or #lists.isEmpty(filme.telefones)}">
+                                                <td colspan="3" class="text-center">Nenhum telefone cadastrado.</td>
+                                            </tr>
 
-                                        <!-- Telefones Existentes -->
-                                        <tr th:each="telefone : ${filme.telefones}">
-                                            <td th:text="${telefone.numero}"></td>
-                                            <td>
-                                                <span
-                                                    th:text="${telefone.whatsapp != null && telefone.whatsapp ? 'Sim' : 'Não'}"></span>
-                                            </td>
-                                            <td>
-                                                <!-- Botão para Excluir Telefone -->
-                                                <form action="/filmes/excluir/telefone" method="post" class="d-inline">
-                                                    <input type="hidden" name="id" th:value="${filme.id}">
-                                                    <input type="hidden" name="idTelefone" th:value="${telefone.id}">
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="bi bi-trash"></i> Excluir
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <!-- Telefones Existentes -->
+                                            <tr th:each="telefone : ${filme.telefones}">
+                                                <td th:text="${telefone.numero}"></td>
+                                                <td>
+                                                    <span
+                                                        th:text="${telefone.whatsapp != null && telefone.whatsapp ? 'Sim' : 'Não'}"></span>
+                                                </td>
+                                                <td>
+                                                    <!-- Botão para Excluir Telefone -->
+                                                    <form action="/filmes/excluir/telefone" method="post" class="d-inline">
+                                                        <input type="hidden" name="id" th:value="${filme.id}">
+                                                        <input type="hidden" name="idTelefone" th:value="${telefone.id}">
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="bi bi-trash"></i> Excluir
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
 
-                                        <!-- Linha para Adicionar Novo Telefone -->
-                                        <tr>
-                                            <td>
-                                                <input type="text" id="novoTelefone" name="novoTelefone"
-                                                    class="form-control" placeholder="Digite o telefone" required>
-                                                <div class="invalid-feedback">Por favor, insira um número de telefone
-                                                    válido.</div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="form-check me-3">
-                                                        <input class="form-check-input" type="radio" id="whatsappSim"
-                                                            name="whatsapp" value="true" required checked>
-                                                        <label class="form-check-label" for="whatsappSim">Sim</label>
+                                            <!-- Linha para Adicionar Novo Telefone -->
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="novoTelefone" name="novoTelefone"
+                                                        class="form-control" placeholder="Digite o telefone" required>
+                                                    <div class="invalid-feedback">Por favor, insira um número de telefone
+                                                        válido.</div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="form-check me-3">
+                                                            <input class="form-check-input" type="radio" id="whatsappSim"
+                                                                name="whatsapp" value="true" required checked>
+                                                            <label class="form-check-label" for="whatsappSim">Sim</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" id="whatsappNao"
+                                                                name="whatsapp" value="false" required>
+                                                            <label class="form-check-label" for="whatsappNao">Não</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" id="whatsappNao"
-                                                            name="whatsapp" value="false" required>
-                                                        <label class="form-check-label" for="whatsappNao">Não</label>
-                                                    </div>
-                                                </div>
 
+                                        </div>
+                                        </td>
+                                        <td>
+                                            <!-- Botão para Adicionar Telefone -->
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="bi bi-plus-circle"></i> Adicionar
+                                            </button>
+                                        </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            </td>
-                            <td>
-                                <!-- Botão para Adicionar Telefone -->
-                                <button type="submit" class="btn btn-success btn-sm">
-                                    <i class="bi bi-plus-circle"></i> Adicionar
-                                </button>
-                            </td>
-                            </tr>
-                            </tbody>
-                            </table>
-                    </div>
 
-                    <!-- Botões -->
-                    <div class="text-center mt-4">
-                        <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
+                            <!-- Botões -->
+                            <div class="text-center mt-4">
+                                <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
-            </div>
             </div>
         </section>
     </main>
