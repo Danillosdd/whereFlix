@@ -1,5 +1,9 @@
 package info.danillo.whereflix.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
@@ -72,7 +77,8 @@ public class FilmeControler {
      * @return Título da página de cadastro de filme.
      */
     @GetMapping("/filmes/cadastrar")
-    public String getCadastrar(Model model) {
+    public String mostrarFormularioCadastro(Model model) {
+        model.addAttribute("filme", new Filme()); // Garante que o objeto existe
         model.addAttribute("tipos", tipoRepository.findAll());
         model.addAttribute("categorias", categoriaRepository.findAll());
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
@@ -105,7 +111,35 @@ public class FilmeControler {
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
+            @RequestParam("foto") MultipartFile foto,
             Model model) {
+
+        // Caminho absoluto do diretório de imagens na raiz do projeto
+        String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+        File pasta = new File(uploadDir);
+        if (!pasta.exists()) {
+            pasta.mkdirs();
+        }
+        String nomeArquivo = foto.getOriginalFilename();
+        Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
+
+        // Verifica se já existe uma imagem com o mesmo nome
+        if (Files.exists(caminhoFoto)) {
+            model.addAttribute("erro", "Já existe uma imagem com esse nome. Renomeie o arquivo e tente novamente.");
+            model.addAttribute("tipos", tipoRepository.findAll());
+            model.addAttribute("categorias", categoriaRepository.findAll());
+            model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+            model.addAttribute("qualidades", qualidadeRepository.findAll());
+            return "filme-cadastrar";
+        }
+
+        try {
+            // Salva o arquivo no diretório
+            foto.transferTo(caminhoFoto.toFile());
+        } catch (Exception e) {
+            model.addAttribute("erro", "Erro ao salvar a imagem: " + e.getMessage());
+            return "filme-cadastrar";
+        }
 
         // Validação: Título repetido
         if (filmeRepository.existsByTituloIgnoreCase(titulo)) {

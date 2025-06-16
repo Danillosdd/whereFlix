@@ -148,7 +148,8 @@
                         <h1 class="mb-4 text-center">Cadastro de Filme</h1>
 
                         <!-- Formulário de Cadastro -->
-                        <form th:action="@{/filmes/cadastrar}" method="post" class="needs-validation">
+                        <form th:action="@{/filmes/cadastrar}" method="post" class="needs-validation"
+                            enctype="multipart/form-data">
                             <!-- Exibição de Mensagens de Erro -->
                             <div th:if="${erro}" class="alert alert-danger">
                                 <p th:text="${erro}"></p>
@@ -237,6 +238,15 @@
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>
+
+                            <!-- Campo Foto -->
+                            <div class="form-group mb-3">
+                                <label for="foto" class="form-label">Banner do Filme:</label>
+                                <input type="file" id="foto" name="foto" class="form-control" accept="image/*" required>
+                                <div class="invalid-feedback">Por favor, envie uma imagem do filme.</div>
+                                <img th:if="${filme != null}" th:src="@{'/upload/' + ${filme.foto}}" ...>
+                            </div>
+
 
                             <!-- Botões -->
                             <div class="text-center mt-4">
@@ -359,28 +369,28 @@
         </div>
 
     </footer>
-    
-        <!-- back to top button -->
-        <a href="#" class="back-to-top-btn" data-back-to-top>
-            <ion-icon name="arrow-up"></ion-icon>
-        </a>
 
-        <!-- GO TO TOP -->
-        <a href="#top" class="go-top" data-go-top>
-            <ion-icon name="chevron-up"></ion-icon>
-        </a>
+    <!-- back to top button -->
+    <a href="#" class="back-to-top-btn" data-back-to-top>
+        <ion-icon name="arrow-up"></ion-icon>
+    </a>
 
-        <!-- custom js link -->
-        <script src="/assets/js/script.js"></script>
+    <!-- GO TO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+        <ion-icon name="chevron-up"></ion-icon>
+    </a>
 
-        <!-- ionicon link -->
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- custom js link -->
+    <script src="/assets/js/script.js"></script>
 
-        <!-- Vendor JS Files -->
-        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/vendor/ionicons/ionicons.js"></script>
-        <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 </body>
 
 </html>

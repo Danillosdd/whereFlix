@@ -50,6 +50,8 @@ public class Filme {
     private Double avaliacao; // ex: 6.5
     private Integer ano; // ex: 2024
 
+    private String foto;
+
     /**
      * Construtor padrão necessário para o JPA.
      */
@@ -185,5 +187,13 @@ public class Filme {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
