@@ -84,15 +84,15 @@ public class FilmeControler {
     /**
      * Processa o cadastro de um novo filme.
      *
-     * @param nome        Nome do filme.
-     * @param tipo        Tipo do filme.
-     * @param categoria    Categoria do filme.
-     * @param qualidade   Qualidade do filme.
-     * @param duracao     Duração do filme.
-     * @param avaliacao Classificação do filme.
-     * @param ano         Ano de lançamento do filme.
-     * @param streamings  IDs das streamings selecionadas.
-     * @param model       Objeto para adicionar atributos à view.
+     * @param nome       Nome do filme.
+     * @param tipo       Tipo do filme.
+     * @param categoria  Categoria do filme.
+     * @param qualidade  Qualidade do filme.
+     * @param duracao    Duração do filme.
+     * @param avaliacao  Classificação do filme.
+     * @param ano        Ano de lançamento do filme.
+     * @param streamings IDs das streamings selecionadas.
+     * @param model      Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/cadastrar")
@@ -100,7 +100,7 @@ public class FilmeControler {
             @RequestParam String nome,
             @RequestParam Integer tipo,
             @RequestParam Integer categoria,
-            @RequestParam Integer qualidade, // <-- agora recebe o id da qualidade
+            @RequestParam Integer qualidade,
             @RequestParam Integer duracao,
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
@@ -121,12 +121,13 @@ public class FilmeControler {
         }
 
         // Criação do filme
-        Filme filme = new Filme(); // Usa o construtor padrão
+        Filme filme = new Filme();
         filme.setNome(nome);
-        filme.setTipo(tipo);
-        filme.setDuracao(duracao);
-        filme.setAvaliacao(avaliacao);
-        filme.setAno(ano);
+
+        // CORREÇÃO: buscar o objeto Tipo pelo ID
+        Tipo tipoObj = tipoRepository.findById(tipo)
+                .orElseThrow(() -> new IllegalArgumentException("Tipo não encontrado: " + tipo));
+        filme.setTipo(tipoObj);
 
         Categoria cat = categoriaRepository.findById(categoria)
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada: " + categoria));
@@ -170,12 +171,12 @@ public class FilmeControler {
     /**
      * Processa a atualização de um filme.
      *
-     * @param id          ID do filme.
-     * @param nome        Nome do filme.
-     * @param tipo        Tipo do filme.
-     * @param categoria    Categoria do filme. // <-- Adicione este parâmetro
+     * @param id         ID do filme.
+     * @param nome       Nome do filme.
+     * @param tipo       Tipo do filme.
+     * @param categoria  Categoria do filme. // <-- Adicione este parâmetro
      * @param streamings IDs das streamings selecionadas.
-     * @param model       Objeto para adicionar atributos à view.
+     * @param model      Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/atualizar")
@@ -189,16 +190,19 @@ public class FilmeControler {
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
-            Model model
-    ) {
+            Model model) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
         filme.setNome(nome);
-        filme.setTipo(tipo);
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
+
+        // Associa o tipo
+        Tipo tipoObj = tipoRepository.findById(tipo)
+                .orElseThrow(() -> new IllegalArgumentException("Tipo não encontrado: " + tipo));
+        filme.setTipo(tipoObj);
 
         // Associa a categoria
         Categoria cat = categoriaRepository.findById(categoria)
@@ -209,8 +213,6 @@ public class FilmeControler {
         Qualidade qualidadeObj = qualidadeRepository.findById(qualidade)
                 .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
         filme.setQualidade(qualidadeObj);
-
-        // ...atualize as streamings conforme sua lógica...
 
         filmeRepository.save(filme);
         return "redirect:/filmes";
@@ -228,7 +230,7 @@ public class FilmeControler {
         Filme filme = filmeRepository.findById(id).orElseThrow();
         model.addAttribute("filme", filme);
         model.addAttribute("qualidades", qualidadeRepository.findAll());
-        model.addAttribute("tipos", tipoRepository.findAll());         // ADICIONE ESTA LINHA
+        model.addAttribute("tipos", tipoRepository.findAll()); // ADICIONE ESTA LINHA
         model.addAttribute("categorias", categoriaRepository.findAll()); // E ESTA
         return "filme-excluir";
     }

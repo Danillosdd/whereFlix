@@ -39,16 +39,18 @@ public class Filme {
     @ManyToMany
     private List<Streaming> streamings;
 
-    private Integer tipo; // código do tipo
+    @ManyToOne
+    private Tipo tipo;
 
     @ManyToOne
-    private Qualidade qualidade; // HD, FULL HD, 2K, 4K
-    private Integer duracao;  // duração em minutos
-    private Double avaliacao; // ex: 6.5
-    private Integer ano; // ex: 2024
+    private Qualidade qualidade;
 
     @ManyToOne
     private Categoria categoria;
+
+    private Integer duracao;  // duração em minutos
+    private Double avaliacao; // ex: 6.5
+    private Integer ano; // ex: 2024
 
     /**
      * Construtor padrão necessário para o JPA.
@@ -159,11 +161,11 @@ public class Filme {
         this.streamings = streamings;
     }
 
-    public Integer getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 

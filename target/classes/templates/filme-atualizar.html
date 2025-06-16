@@ -148,7 +148,7 @@
                         <h1 class="mb-4 text-center">Atualizar Filme</h1>
 
                         <!-- Formulário de Atualização -->
-                        <form th:action="@{/filmes/atualizar}" method="post" class="needs-validation" novalidate>
+                        <form method="post" action="/filmes/atualizar" class="needs-validation" novalidate>
                             <!-- Exibição de Erros -->
                             <div th:if="${erro}" class="alert alert-danger">
                                 <p th:text="${erro}"></p>
@@ -173,7 +173,7 @@
                                     <option th:each="tipo : ${tipos}"
                                             th:value="${tipo.id}"
                                             th:text="${tipo.nome}"
-                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo} : false">
+                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
                                     </option>
                                 </select>
                             </div>
