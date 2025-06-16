@@ -83,15 +83,15 @@
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Movie</a>
+                        <a href="#" class="navbar-link">Filmes</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Show</a>
+                        <a href="#" class="navbar-link">Séries</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Web Series</a>
+                        <a href="#" class="navbar-link">Shows</a>
                     </li>
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -255,8 +255,7 @@
                                     <img id="preview"
                                         th:src="@{${filme.foto != null} ? '/upload/' + ${filme.foto} : '/assets/img/sem-foto.png'}"
                                         th:attr="data-original=${filme.foto != null ? '/upload/' + filme.foto : '/assets/img/sem-foto.png'}"
-                                        src="/assets/img/sem-foto.png"
-                                        alt="Pré-visualização"
+                                        src="/assets/img/sem-foto.png" alt="Pré-visualização"
                                         style="max-width: 100%; max-height: 100%;">
                                 </div>
                             </div>

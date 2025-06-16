@@ -80,19 +80,19 @@
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="/" class="navbar-link">Home</a>       
+                        <a href="/" class="navbar-link">Home</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Movie</a>
+                        <a href="#" class="navbar-link">Filmes</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Show</a>
+                        <a href="#" class="navbar-link">Séries</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Web Series</a>
+                        <a href="#" class="navbar-link">Shows</a>
                     </li>
 
                     <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -161,8 +161,8 @@
                             <!-- Campo Título -->
                             <div class="mb-3">
                                 <label for="titulo" class="form-label">Título do Filme:</label>
-                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}"
-                                    disabled>
+                                <input type="text" id="titulo" name="titulo" class="form-control"
+                                    th:value="${filme.titulo}" disabled>
                             </div>
 
                             <!-- Tabela de Telefones -->
@@ -192,9 +192,11 @@
                                                 </td>
                                                 <td>
                                                     <!-- Botão para Excluir Telefone -->
-                                                    <form action="/filmes/excluir/telefone" method="post" class="d-inline">
+                                                    <form action="/filmes/excluir/telefone" method="post"
+                                                        class="d-inline">
                                                         <input type="hidden" name="id" th:value="${filme.id}">
-                                                        <input type="hidden" name="idTelefone" th:value="${telefone.id}">
+                                                        <input type="hidden" name="idTelefone"
+                                                            th:value="${telefone.id}">
                                                         <button type="submit" class="btn btn-danger btn-sm">
                                                             <i class="bi bi-trash"></i> Excluir
                                                         </button>
@@ -207,44 +209,48 @@
                                                 <td>
                                                     <input type="text" id="novoTelefone" name="novoTelefone"
                                                         class="form-control" placeholder="Digite o telefone" required>
-                                                    <div class="invalid-feedback">Por favor, insira um número de telefone
+                                                    <div class="invalid-feedback">Por favor, insira um número de
+                                                        telefone
                                                         válido.</div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="form-check me-3">
-                                                            <input class="form-check-input" type="radio" id="whatsappSim"
-                                                                name="whatsapp" value="true" required checked>
-                                                            <label class="form-check-label" for="whatsappSim">Sim</label>
+                                                            <input class="form-check-input" type="radio"
+                                                                id="whatsappSim" name="whatsapp" value="true" required
+                                                                checked>
+                                                            <label class="form-check-label"
+                                                                for="whatsappSim">Sim</label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="whatsappNao"
-                                                                name="whatsapp" value="false" required>
-                                                            <label class="form-check-label" for="whatsappNao">Não</label>
+                                                            <input class="form-check-input" type="radio"
+                                                                id="whatsappNao" name="whatsapp" value="false" required>
+                                                            <label class="form-check-label"
+                                                                for="whatsappNao">Não</label>
                                                         </div>
                                                     </div>
 
-                                        </div>
-                                        </td>
-                                        <td>
-                                            <!-- Botão para Adicionar Telefone -->
-                                            <button type="submit" class="btn btn-success btn-sm">
-                                                <i class="bi bi-plus-circle"></i> Adicionar
-                                            </button>
-                                        </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
+                                </td>
+                                <td>
+                                    <!-- Botão para Adicionar Telefone -->
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="bi bi-plus-circle"></i> Adicionar
+                                    </button>
+                                </td>
+                                </tr>
+                                </tbody>
+                                </table>
                             </div>
-
-                            <!-- Botões -->
-                            <div class="text-center mt-4">
-                                <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
-                            </div>
-                        </form>
                     </div>
+
+                    <!-- Botões -->
+                    <div class="text-center mt-4">
+                        <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
+                    </div>
+                    </form>
                 </div>
+            </div>
             </div>
         </section>
     </main>
