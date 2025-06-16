@@ -79,7 +79,7 @@
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="/" class="navbar-link">Home</a>       
+                        <a href="/" class="navbar-link">Home</a>
                     </li>
 
                     <li>
@@ -155,8 +155,8 @@
                             <!-- Campo Título -->
                             <div class="form-group mb-3">
                                 <label for="titulo" class="form-label">Título:</label>
-                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}"
-                                    disabled>
+                                <input type="text" id="titulo" name="titulo" class="form-control"
+                                    th:value="${filme.titulo}" disabled>
                             </div>
 
                             <!-- Campo Tipo (desabilitado) -->
@@ -164,10 +164,8 @@
                                 <label for="tipo" class="form-label">Tipo:</label>
                                 <select class="form-select" id="tipo" name="tipo" disabled>
                                     <option value="">Selecione</option>
-                                    <option th:each="tipo : ${tipos}"
-                                            th:value="${tipo.id}"
-                                            th:text="${tipo.nome}"
-                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"
+                                        th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -177,10 +175,9 @@
                                 <label for="categoria" class="form-label">Categoria:</label>
                                 <select class="form-select" id="categoria" name="categoria" disabled>
                                     <option value="">Selecione</option>
-                                    <option th:each="categoria : ${categorias}"
-                                            th:value="${categoria.id}"
-                                            th:text="${categoria.nome}"
-                                            th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                        th:text="${categoria.nome}"
+                                        th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -190,10 +187,9 @@
                                 <label for="qualidade" class="form-label">Qualidade:</label>
                                 <select class="form-select" id="qualidade" name="qualidade" disabled>
                                     <option value="">Selecione</option>
-                                    <option th:each="qualidade : ${qualidades}"
-                                            th:value="${qualidade.id}"
-                                            th:text="${qualidade.nome}"
-                                            th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
+                                    <option th:each="qualidade : ${qualidades}" th:value="${qualidade.id}"
+                                        th:text="${qualidade.nome}"
+                                        th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -201,33 +197,35 @@
                             <!-- Campo Duração -->
                             <div class="form-group mb-3">
                                 <label for="duracao" class="form-label">Duração (min):</label>
-                                <input type="number" id="duracao" name="duracao" class="form-control" th:value="${filme.duracao}" disabled>
+                                <input type="number" id="duracao" name="duracao" class="form-control"
+                                    th:value="${filme.duracao}" disabled>
                             </div>
 
                             <!-- Campo Ano -->
                             <div class="form-group mb-3">
                                 <label for="ano" class="form-label">Ano:</label>
-                                <input type="number" id="ano" name="ano" class="form-control" th:value="${filme.ano}" disabled>
+                                <input type="number" id="ano" name="ano" class="form-control" th:value="${filme.ano}"
+                                    disabled>
                             </div>
 
 
                             <!-- Campo Avaliação -->
                             <div class="form-group mb-3">
                                 <label for="avaliacaoRange" class="form-label" style="display:inline;">
-                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;" th:text="${filme.avaliacao}">0</span> Estrelas):
+                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;"
+                                        th:text="${filme.avaliacao}">0</span> Estrelas):
                                 </label>
-                                <input type="range" class="form-control-range" min="0" max="10" step="0.1" id="avaliacaoRange"
-                                    name="avaliacao" th:value="${filme.avaliacao}" disabled>
+                                <input type="range" class="form-control-range" min="0" max="10" step="0.1"
+                                    id="avaliacaoRange" name="avaliacao" th:value="${filme.avaliacao}" disabled>
                             </div>
-                            
+
                             <!-- Campo Streamings -->
                             <div class="form-group mb-3">
                                 <label for="streamings" class="form-label">Streamings:</label>
                                 <select id="streamings" name="streamings" class="form-control" multiple disabled>
-                                    <option th:each="streaming : ${streamings}"
-                                            th:value="${streaming.id}"
-                                            th:text="${streaming.nome}"
-                                            th:selected="${filme.streamings.contains(streaming)}">
+                                    <option th:each="streaming : ${streamings}" th:value="${streaming.id}"
+                                        th:text="${streaming.nome}"
+                                        th:selected="${filme.streamings.contains(streaming)}">
                                     </option>
                                 </select>
                             </div>
@@ -236,8 +234,8 @@
                             <div class="text-center mt-4">
                                 <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
                                 <!-- Botão para abrir a modal -->
-                                <button type="button" class="btn btn-danger d-inline-block w-auto" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteModal">
+                                <button type="button" class="btn btn-danger d-inline-block w-auto"
+                                    data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                                     Excluir
                                 </button>
                             </div>
@@ -248,7 +246,7 @@
         </section>
     </main>
 
-      <!-- Rodapé -->
+    <!-- Rodapé -->
     <footer class="footer">
 
         <div class="footer-top">
@@ -358,6 +356,11 @@
 
     </footer>
 
+    <!-- back to top button -->
+    <a href="#" class="back-to-top-btn" data-back-to-top>
+        <ion-icon name="arrow-up"></ion-icon>
+    </a>
+
     <!-- GO TO TOP -->
     <a href="#top" class="go-top" data-go-top>
         <ion-icon name="chevron-up"></ion-icon>
@@ -370,9 +373,10 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Antigo -->
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 
 
     <!-- Modal de Confirmação de Exclusão -->
