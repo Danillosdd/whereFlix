@@ -221,13 +221,15 @@ public class FilmeControler {
             @RequestParam Integer id,
             @RequestParam String titulo,
             @RequestParam Integer tipo,
-            @RequestParam Integer categoria, // <-- Adicione este parâmetro
-            @RequestParam Integer qualidade, // <-- agora recebe o id da qualidade
+            @RequestParam Integer categoria,
+            @RequestParam Integer qualidade,
             @RequestParam Integer duracao,
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
+            @RequestParam(value = "foto", required = false) MultipartFile foto,
             Model model) {
+
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
@@ -250,6 +252,31 @@ public class FilmeControler {
         Qualidade qualidadeObj = qualidadeRepository.findById(qualidade)
                 .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
         filme.setQualidade(qualidadeObj);
+
+        // Atualiza a imagem se foi enviada uma nova
+        if (foto != null && !foto.isEmpty()) {
+            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+            File pasta = new File(uploadDir);
+            if (!pasta.exists()) {
+                pasta.mkdirs();
+            }
+            String nomeArquivo = foto.getOriginalFilename();
+            Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
+
+            try {
+                foto.transferTo(caminhoFoto.toFile());
+                filme.setFoto(nomeArquivo); // Atualiza o nome da imagem no objeto Filme
+            } catch (Exception e) {
+                model.addAttribute("erro", "Erro ao salvar a imagem: " + e.getMessage());
+                model.addAttribute("filme", filme);
+                model.addAttribute("tipos", tipoRepository.findAll());
+                model.addAttribute("categorias", categoriaRepository.findAll());
+                model.addAttribute("qualidades", qualidadeRepository.findAll());
+                model.addAttribute("todasStreamings", streamingRepository.findAll());
+                return "filme-atualizar";
+            }
+        }
+        // Se não enviou nova imagem, mantém a imagem antiga (não faz nada)
 
         filmeRepository.save(filme);
         return "redirect:/filmes";

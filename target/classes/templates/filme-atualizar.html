@@ -148,7 +148,7 @@
                         <h1 class="mb-4 text-center">Atualizar Filme</h1>
 
                         <!-- Formulário de Atualização -->
-                        <form method="post" action="/filmes/atualizar" class="needs-validation" novalidate>
+                        <form th:action="@{/filmes/atualizar}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                             <!-- Exibição de Erros -->
                             <div th:if="${erro}" class="alert alert-danger">
                                 <p th:text="${erro}"></p>
@@ -239,6 +239,17 @@
                                         th:selected="${filme.streamings.contains(streaming)}"></option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
+                            </div>
+
+                            <!-- Campo Imagem -->
+                            <div class="form-group mb-3">
+                                <label for="foto" class="form-label">Imagem do Filme:</label>
+                                <input type="file" id="foto" name="foto" accept="image/*" class="form-control">
+                            </div>
+
+                            <!-- Exibir imagem atual, se houver -->
+                            <div class="mb-3" th:if="${filme.foto != null}">
+                                <img th:src="@{'/upload/' + ${filme.foto}}" alt="Imagem atual" width="120">
                             </div>
 
                             <!-- Botões -->
