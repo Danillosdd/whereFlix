@@ -212,13 +212,17 @@ public class FilmeControler {
      * @param model Objeto para adicionar atributos à view.
      * @return Nome da página de exclusão de filme.
      */
-    @GetMapping("/filmes/excluir/{id}")
-    public String exibirTelaExclusao(@PathVariable Integer id, Model model) {
-        Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
-        model.addAttribute("filme", filme);
-        return "filme-excluir";
-    }
+@GetMapping("/filmes/excluir/{id}")
+public String exibirTelaExclusao(@PathVariable Integer id, Model model) {
+    Filme filme = filmeRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+    model.addAttribute("filme", filme);
+    model.addAttribute("tipos", tipoRepository.findAll());
+    model.addAttribute("categorias", categoriaRepository.findAll());
+    model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
+    model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
+    return "filme-excluir";
+}
 
     /**
      * Processa a exclusão de um filme.

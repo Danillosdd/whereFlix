@@ -162,43 +162,60 @@
                             <!-- Campo Tipo -->
                             <div class="form-group mb-3">
                                 <label for="tipo" class="form-label">Tipo:</label>
-                                <input type="text" id="tipo" name="tipo" class="form-control"
-                                    th:value="${filme.tipo}" disabled>
+                                <select id="tipo" name="tipo" class="form-control" disabled>
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"
+                                        th:selected="${tipo.id} == ${filme.tipo}"></option>
+                                </select>
                             </div>
 
-                            <!-- Campo Telefones -->
+                            <!-- Campo Categoria -->
                             <div class="form-group mb-3">
-                                <label for="telefones" class="form-label">Telefones:</label>
-                                <table class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Número</th>
-                                            <th scope="col">WhatsApp</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="telefone : ${filme.telefones}">
-                                            <td th:text="${telefone.numero}"></td>
-                                            <td>
-                                                <span th:if="${telefone.whatsapp}" class="badge bg-success">Sim</span>
-                                                <span th:if="${!telefone.whatsapp}" class="badge bg-danger">Não</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <label for="categoria" class="form-label">Categoria:</label>
+                                <select id="categoria" name="categoria" class="form-control" disabled>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}"
+                                        th:selected="${categoria.id} == ${filme.categoria.id}"></option>
+                                </select>
+                            </div>
+
+                            <!-- Campo Qualidade -->
+                            <div class="form-group mb-3">
+                                <label for="qualidade" class="form-label">Qualidade:</label>
+                                <select id="qualidade" name="qualidade" class="form-control" disabled>
+                                    <option th:each="q : ${qualidades}" th:value="${q}" th:text="${q}" th:selected="${q == filme.qualidade}"></option>
+                                </select>
+                            </div>
+
+                            <!-- Campo Duração -->
+                            <div class="form-group mb-3">
+                                <label for="duracao" class="form-label">Duração (min):</label>
+                                <input type="number" id="duracao" name="duracao" class="form-control" th:value="${filme.duracao}" disabled>
+                            </div>
+
+                            <!-- Campo Ano -->
+                            <div class="form-group mb-3">
+                                <label for="ano" class="form-label">Ano:</label>
+                                <input type="number" id="ano" name="ano" class="form-control" th:value="${filme.ano}" disabled>
+                            </div>
+
+                            <!-- Campo Classificação (estrelas) -->
+                            <div class="mb-3">
+                                <label class="form-label">Classificação:</label>
+                                <div class="star-rating">
+                                    <input type="radio" name="avaliacao" id="star5" value="5" th:checked="${filme.avaliacao == 5}" disabled><label for="star5"><i class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star4" value="4" th:checked="${filme.avaliacao == 4}" disabled><label for="star4"><i class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star3" value="3" th:checked="${filme.avaliacao == 3}" disabled><label for="star3"><i class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star2" value="2" th:checked="${filme.avaliacao == 2}" disabled><label for="star2"><i class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star1" value="1" th:checked="${filme.avaliacao == 1}" disabled><label for="star1"><i class="bi bi-star-fill"></i></label>
+                                </div>
                             </div>
 
                             <!-- Campo Streamings -->
                             <div class="form-group mb-3">
                                 <label for="streamings" class="form-label">Streamings:</label>
-                                <select id="streamings" name="streamings" class="form-control select2" multiple
-                                    required>
-                                    <option th:each="streaming : ${streamings}" th:value="${streaming.id}"
-                                        th:text="${streaming.nome}">
-                                        Streaming
-                                    </option>
+                                <select id="streamings" name="streamings" class="form-control" multiple disabled>
+                                    <option th:each="streaming : ${todasStreamings}" th:value="${streaming.id}" th:text="${streaming.nome}"
+                                        th:selected="${filme.streamings.contains(streaming)}"></option>
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>
 
                             <!-- Botões -->
