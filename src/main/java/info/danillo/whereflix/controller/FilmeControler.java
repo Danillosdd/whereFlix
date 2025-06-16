@@ -49,7 +49,7 @@ public class FilmeControler {
      */
     @GetMapping("/filmes")
     public String getFilmes(Model model) {
-        List<Filme> filmesBd = filmeRepository.findAll();
+        List<Filme> filmesBd = filmeRepository.findAllByOrderByTituloAsc();
         model.addAttribute("filmes", filmesBd);
         model.addAttribute("mensagem", "Todos os filmes cadastrados");
         return "filmes";
@@ -78,12 +78,11 @@ public class FilmeControler {
      */
     @GetMapping("/filmes/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
-        model.addAttribute("filme", new Filme()); // Garante que o objeto existe
+        model.addAttribute("filme", new Filme());
         model.addAttribute("tipos", tipoRepository.findAll());
-        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc()); // <-- aqui
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("qualidades", qualidadeRepository.findAll());
-        // ... outros atributos se necessário
         return "filme-cadastrar";
     }
 
@@ -127,7 +126,7 @@ public class FilmeControler {
         if (Files.exists(caminhoFoto)) {
             model.addAttribute("erro", "Já existe uma imagem com esse nome. Renomeie o arquivo e tente novamente.");
             model.addAttribute("tipos", tipoRepository.findAll());
-            model.addAttribute("categorias", categoriaRepository.findAll());
+            model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
             model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
             model.addAttribute("qualidades", qualidadeRepository.findAll());
             return "filme-cadastrar";
@@ -200,7 +199,7 @@ public class FilmeControler {
             .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
         model.addAttribute("filme", filme);
         model.addAttribute("tipos", tipoRepository.findAll());
-        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc()); // <-- aqui
         model.addAttribute("qualidades", qualidadeRepository.findAll());
         model.addAttribute("todasStreamings", streamingRepository.findAll());
         return "filme-atualizar";
@@ -279,7 +278,7 @@ public class FilmeControler {
                 model.addAttribute("erro", "Erro ao salvar a imagem: " + e.getMessage());
                 model.addAttribute("filme", filme);
                 model.addAttribute("tipos", tipoRepository.findAll());
-                model.addAttribute("categorias", categoriaRepository.findAll());
+                model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
                 model.addAttribute("qualidades", qualidadeRepository.findAll());
                 model.addAttribute("todasStreamings", streamingRepository.findAll());
                 return "filme-atualizar";

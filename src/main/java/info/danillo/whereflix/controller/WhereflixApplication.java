@@ -34,6 +34,7 @@ public class WhereflixApplication {
     @Bean
     public org.springframework.boot.CommandLineRunner loadCategorias(CategoriaRepository categoriaRepository) {
         return args -> {
+            inserirOuAtualizarCategoria(categoriaRepository, "Ação");
             inserirOuAtualizarCategoria(categoriaRepository, "Animação");
             inserirOuAtualizarCategoria(categoriaRepository, "Aventura");
             inserirOuAtualizarCategoria(categoriaRepository, "Biografia");

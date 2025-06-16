@@ -26,4 +26,6 @@ public interface FilmeRepository extends JpaRepository<Filme, Integer> {
     List<Filme> buscarPorTitulo(@Param("titulo") String titulo);
 
     boolean existsByTituloIgnoreCase(String titulo);
+
+    List<Filme> findAllByOrderByTituloAsc();
 }
