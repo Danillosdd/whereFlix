@@ -2,10 +2,8 @@ package info.danillo.whereflix.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-
-import info.danillo.whereflix.repository.TipoRepository;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
