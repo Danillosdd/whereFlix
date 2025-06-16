@@ -179,7 +179,7 @@
                                 <label for="streamings" class="form-label">Streaming:</label>
                                 <select id="streamings" name="streamings" th:field="*{filme.streamings}"
                                     class="form-control select2" multiple required>
-                                    <option th:each="streaming : ${todasStreaming}" th:value="${streaming.id}"
+                                    <option th:each="streaming : ${todasStreamings}" th:value="${streaming.id}"
                                         th:text="${streaming.nome}">
                                         Streaming
                                     </option>
