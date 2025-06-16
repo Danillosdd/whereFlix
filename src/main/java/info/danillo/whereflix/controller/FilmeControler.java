@@ -261,6 +261,14 @@ public class FilmeControler {
             if (!pasta.exists()) {
                 pasta.mkdirs();
             }
+            // Deleta a foto antiga, se existir
+            if (filme.getFoto() != null) {
+                File fotoAntiga = new File(uploadDir + filme.getFoto());
+                if (fotoAntiga.exists()) {
+                    fotoAntiga.delete();
+                }
+            }
+            // Salva a nova foto
             String nomeArquivo = foto.getOriginalFilename();
             Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
 
@@ -277,7 +285,7 @@ public class FilmeControler {
                 return "filme-atualizar";
             }
         }
-        // Se não enviou nova imagem, mantém a imagem antiga (não faz nada)
+        // Se não enviou nova imagem, mantém a imagem antiga
 
         filmeRepository.save(filme);
         return "redirect:/filmes";
@@ -309,6 +317,16 @@ public class FilmeControler {
      */
     @PostMapping("filmes/excluir")
     public String excluirFilme(@RequestParam Integer id) {
+        Filme filme = filmeRepository.findById(id).orElse(null);
+
+        if (filme != null && filme.getFoto() != null) {
+            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+            File arquivo = new File(uploadDir + filme.getFoto());
+            if (arquivo.exists()) {
+                arquivo.delete();
+            }
+        }
+
         filmeRepository.deleteById(id);
         return "redirect:/filmes";
     }
