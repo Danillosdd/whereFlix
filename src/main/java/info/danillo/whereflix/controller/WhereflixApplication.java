@@ -2,21 +2,32 @@ package info.danillo.whereflix.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
-/**
- * Classe principal da aplicação Spring Boot.
- * Responsável por inicializar e configurar o contexto da aplicação.
- */
 @SpringBootApplication
 public class WhereflixApplication {
 
-    /**
-     * Método principal que inicia a aplicação.
-     *
-     * @param args Argumentos de linha de comando.
-     */
     public static void main(String[] args) {
-        // Inicializa a aplicação Spring Boot
         SpringApplication.run(WhereflixApplication.class, args);
+    }
+
+    @Bean
+    public org.springframework.boot.CommandLineRunner loadTipos(TipoRepository tipoRepository) {
+        return args -> {
+            inserirOuAtualizarTipo(tipoRepository, "Ação");
+            inserirOuAtualizarTipo(tipoRepository, "Comédia");
+            inserirOuAtualizarTipo(tipoRepository, "Drama");
+        };
+    }
+
+    private void inserirOuAtualizarTipo(TipoRepository tipoRepository, String nome) {
+        Tipo tipo = tipoRepository.findByNomeIgnoreCase(nome).orElse(null);
+        if (tipo == null) {
+            tipo = new Tipo();
+            tipo.setNome(nome);
+        } else {
+            tipo.setNome(nome); // Atualiza o nome se quiser
+        }
+        tipoRepository.save(tipo);
     }
 }

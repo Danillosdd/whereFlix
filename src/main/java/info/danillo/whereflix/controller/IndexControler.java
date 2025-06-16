@@ -23,6 +23,12 @@ public class IndexControler {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
+        return "index"; // Isso renderiza o template src/main/resources/templates/index.html
+    }
+
+    @GetMapping("/index")
+    public String index2(Model model) {
+        model.addAttribute("tipos", tipoRepository.findAll());
         return "index";
     }
 
