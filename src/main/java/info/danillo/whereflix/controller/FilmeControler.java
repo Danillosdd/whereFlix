@@ -69,6 +69,7 @@ public class FilmeControler {
     public String getCreate(Model model) {
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
+        model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
         return "filme-cadastrar";
     }
 
@@ -77,7 +78,11 @@ public class FilmeControler {
      *
      * @param nome        Nome do filme.
      * @param tipo        Tipo do filme.
-     * @param streamings IDs das streamings selecionadas.
+     * @param qualidade   Qualidade do filme.
+     * @param duracao     Duração do filme.
+     * @param classificacao Classificação do filme.
+     * @param ano         Ano de lançamento do filme.
+     * @param streamings  IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
@@ -85,6 +90,10 @@ public class FilmeControler {
     public String postCreate(
             @RequestParam String nome,
             @RequestParam Integer tipo,
+            @RequestParam String qualidade,
+            @RequestParam Integer duracao,
+            @RequestParam Double classificacao,
+            @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
             Model model) {
 
@@ -103,6 +112,11 @@ public class FilmeControler {
 
         // Criação do filme
         Filme filme = new Filme(nome, tipo);
+        filme.setQualidade(qualidade);
+        filme.setDuracao(duracao);
+        filme.setClassificacao(classificacao);
+        filme.setAno(ano);
+
         List<Streaming> streamingsSelecionadas = new ArrayList<>();
         for (Integer idStreaming : streamings) {
             Streaming streaming = streamingRepository.findById(idStreaming)
@@ -131,6 +145,7 @@ public class FilmeControler {
         // Buscar streamings ordenadas por nome
         model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
+        model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
         return "filme-atualizar";
     }
 
@@ -145,28 +160,30 @@ public class FilmeControler {
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/atualizar")
-    public String updateFilme(
-            @RequestParam int id,
+    public String atualizarFilme(
+            @RequestParam Integer id,
             @RequestParam String nome,
-            @RequestParam String tipo,
+            @RequestParam Integer tipo,
+            @RequestParam String qualidade,
+            @RequestParam Integer duracao,
+            @RequestParam Double classificacao,
+            @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
-            Model model) {
+            Model model
+    ) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
 
-        // Atualiza os dados do filme
         filme.setNome(nome);
         filme.setTipo(tipo);
+        filme.setQualidade(qualidade);
+        filme.setDuracao(duracao);
+        filme.setClassificacao(classificacao);
+        filme.setAno(ano);
+        // Atualize os streamings conforme sua lógica (exemplo):
+        // filme.setStreamings(...);
 
-        List<Streaming> streamingsSelecionadas = new ArrayList<>();
-        for (Integer idStreaming : streamings) {
-            Streaming streaming = streamingRepository.findById(idStreaming)
-                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
-            streamingsSelecionadas.add(streaming);
-        }
-        filme.setStreamings(streamingsSelecionadas);
         filmeRepository.save(filme);
-
         return "redirect:/filmes";
     }
 

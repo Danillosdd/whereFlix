@@ -40,6 +40,11 @@ public class Filme {
 
     private Integer tipo; // código do tipo
 
+    private String qualidade; // HD, FULL HD, 2K, 4K
+    private Integer duracao;  // duração em minutos
+    private Double classificacao; // ex: 6.5
+    private Integer ano; // ex: 2024
+
     /**
      * Construtor padrão necessário para o JPA.
      */
@@ -155,5 +160,37 @@ public class Filme {
 
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
+    }
+
+    public String getQualidade() {
+        return qualidade;
+    }
+
+    public void setQualidade(String qualidade) {
+        this.qualidade = qualidade;
+    }
+
+    public Integer getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+    }
+
+    public Double getClassificacao() {
+        return classificacao;
+    }
+
+    public void setClassificacao(Double classificacao) {
+        this.classificacao = classificacao;
+    }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
     }
 }

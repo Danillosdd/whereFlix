@@ -80,7 +80,7 @@
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="/" class="navbar-link">Home</a>       
+                        <a href="/" class="navbar-link">Home</a>
                     </li>
 
                     <li>
@@ -168,9 +168,44 @@
                                 <label for="tipo" class="form-label">Tipo:</label>
                                 <select id="tipo" name="tipo" class="form-control" required>
                                     <option value="">Selecione o tipo</option>
-                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"></option>
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}">
+                                    </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione um tipo.</div>
+                            </div>
+
+                            <!-- Campo Qualidade -->
+                            <div class="form-group mb-3">
+                                <label for="qualidade" class="form-label">Qualidade:</label>
+                                <select id="qualidade" name="qualidade" class="form-control" required>
+                                    <option value="">Selecione a qualidade</option>
+                                    <option th:each="q : ${qualidades}" th:value="${q}" th:text="${q}"></option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione a qualidade.</div>
+                            </div>
+
+                            <!-- Campo Duração -->
+                            <div class="form-group mb-3">
+                                <label for="duracao" class="form-label">Duração (min):</label>
+                                <input type="number" id="duracao" name="duracao" class="form-control" min="1" max="999"
+                                    required>
+                                <div class="invalid-feedback">Informe a duração (até 999 minutos).</div>
+                            </div>
+
+                            <!-- Campo Classificação -->
+                            <div class="form-group mb-3">
+                                <label for="classificacao" class="form-label">Classificação:</label>
+                                <input type="number" id="classificacao" name="classificacao" class="form-control"
+                                    step="0.1" min="0" max="10" required>
+                                <div class="invalid-feedback">Informe a classificação (ex: 6.5).</div>
+                            </div>
+
+                            <!-- Campo Ano -->
+                            <div class="form-group mb-3">
+                                <label for="ano" class="form-label">Ano:</label>
+                                <input type="number" id="ano" name="ano" class="form-control" min="1900" max="2100"
+                                    required>
+                                <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
                             </div>
 
                             <!-- Campo Streamings -->

@@ -167,23 +167,6 @@
                                     th:value="${filme.tipo}" disabled>
                             </div>
 
-                            <!-- Campo Streamings -->
-                            <div class="form-group mb-3">
-                                <label for="streamings" class="form-label">Streamings:</label>
-                                <table class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Descrição</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="streaming : ${filme.streamings}">
-                                            <td th:text="${streaming.nome}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
                             <!-- Campo Telefones -->
                             <div class="form-group mb-3">
                                 <label for="telefones" class="form-label">Telefones:</label>
@@ -204,6 +187,19 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <!-- Campo Streamings -->
+                            <div class="form-group mb-3">
+                                <label for="streamings" class="form-label">Streamings:</label>
+                                <select id="streamings" name="streamings" class="form-control select2" multiple
+                                    required>
+                                    <option th:each="streaming : ${streamings}" th:value="${streaming.id}"
+                                        th:text="${streaming.nome}">
+                                        Streaming
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>
 
                             <!-- Botões -->
