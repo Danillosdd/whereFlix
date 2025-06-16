@@ -16,7 +16,7 @@ public class WhereflixApplication {
         return args -> {
             inserirOuAtualizarTipo(tipoRepository, "Filme");
             inserirOuAtualizarTipo(tipoRepository, "Série");
-            inserirOuAtualizarTipo(tipoRepository, "TV Show");
+            inserirOuAtualizarTipo(tipoRepository, "Show");
         };
     }
 
