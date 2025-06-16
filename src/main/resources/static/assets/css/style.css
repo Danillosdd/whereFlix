@@ -554,8 +554,6 @@ body.active {
   background-size: cover;
   background-position: center;
   min-height: 750px;
-  height: 100vh;
-  max-height: 1000px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
