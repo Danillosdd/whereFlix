@@ -148,7 +148,8 @@
                         <h1 class="mb-4 text-center">Atualizar Filme</h1>
 
                         <!-- Formulário de Atualização -->
-                        <form th:action="@{/filmes/atualizar}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <form th:action="@{/filmes/atualizar}" method="post" enctype="multipart/form-data"
+                            class="needs-validation" novalidate>
                             <!-- Exibição de Erros -->
                             <div th:if="${erro}" class="alert alert-danger">
                                 <p th:text="${erro}"></p>
@@ -160,7 +161,9 @@
                             <!-- Campo Título -->
                             <div class="form-group mb-3">
                                 <label for="titulo" class="form-label">Título:</label>
-                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}" placeholder="Digite o título completo do filme" required />
+                                <input type="text" id="titulo" name="titulo" class="form-control"
+                                    th:value="${filme.titulo}" placeholder="Digite o título completo do filme"
+                                    required />
                                 <div class="invalid-feedback">Por favor, insira o título completo.</div>
                             </div>
 
@@ -169,10 +172,8 @@
                                 <label for="tipo" class="form-label">Tipo:</label>
                                 <select class="form-select" id="tipo" name="tipo" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="tipo : ${tipos}"
-                                            th:value="${tipo.id}"
-                                            th:text="${tipo.nome}"
-                                            th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"
+                                        th:selected="${filme.tipo != null} ? ${tipo.id} == ${filme.tipo.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -182,10 +183,9 @@
                                 <label for="categoria" class="form-label">Categoria:</label>
                                 <select class="form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="categoria : ${categorias}"
-                                            th:value="${categoria.id}"
-                                            th:text="${categoria.nome}"
-                                            th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                        th:text="${categoria.nome}"
+                                        th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -195,10 +195,9 @@
                                 <label for="qualidade" class="form-label">Qualidade:</label>
                                 <select class="form-select" id="qualidade" name="qualidade" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="qualidade : ${qualidades}"
-                                            th:value="${qualidade.id}"
-                                            th:text="${qualidade.nome}"
-                                            th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
+                                    <option th:each="qualidade : ${qualidades}" th:value="${qualidade.id}"
+                                        th:text="${qualidade.nome}"
+                                        th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
                                     </option>
                                 </select>
                             </div>
@@ -218,14 +217,15 @@
                                     th:value="${filme.ano}" required>
                                 <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
                             </div>
-                            
+
                             <!-- Campo Avaliação -->
                             <div class="form-group mb-3">
                                 <label for="avaliacaoRange" class="form-label" style="display:inline;">
-                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;" th:text="${filme.avaliacao}">0</span> Estrelas):
+                                    Avaliação (<span id="avaliacaoLabel" style="display:inline;"
+                                        th:text="${filme.avaliacao}">0</span> Estrelas):
                                 </label>
-                                <input type="range" class="form-control-range" min="0" max="10" step="0.1" id="avaliacaoRange"
-                                    name="avaliacao" th:value="${filme.avaliacao}"
+                                <input type="range" class="form-control-range" min="0" max="10" step="0.1"
+                                    id="avaliacaoRange" name="avaliacao" th:value="${filme.avaliacao}"
                                     oninput="document.getElementById('avaliacaoLabel').innerText = this.value">
                             </div>
 
@@ -241,15 +241,22 @@
                                 <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>
 
-                            <!-- Campo Imagem -->
+                            <!-- Upload da Foto -->
                             <div class="form-group mb-3">
-                                <label for="foto" class="form-label">Imagem do Filme:</label>
-                                <input type="file" id="foto" name="foto" accept="image/*" class="form-control">
+                                <label for="foto" class="form-label">Banner do Filme:</label>
+                                <input type="file" id="foto" name="foto" accept="image/*" class="form-control"
+                                    onchange="previewImage(event)" required>
+                                <div class="invalid-feedback">Por favor, envie uma imagem do filme.</div>
+
                             </div>
 
-                            <!-- Exibir imagem atual, se houver -->
-                            <div class="mb-3" th:if="${filme.foto != null}">
-                                <img th:src="@{'/upload/' + ${filme.foto}}" alt="Imagem atual" width="120">
+                            <!-- Visualização da Foto -->
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="height: 320px;">
+                                <div id="preview-container"
+                                    style="width: 200px; height: 300px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
+                                    <img id="preview" src="/assets/img/sem-foto.png" alt="Pré-visualização"
+                                        style="max-width: 100%; max-height: 100%;">
+                                </div>
                             </div>
 
                             <!-- Botões -->
@@ -264,7 +271,7 @@
         </section>
     </main>
 
-     <!-- Rodapé -->
+    <!-- Rodapé -->
     <footer class="footer">
 
         <div class="footer-top">
@@ -374,27 +381,27 @@
 
     </footer>
 
-        <!-- back to top button -->
-        <a href="#" class="back-to-top-btn" data-back-to-top>
-            <ion-icon name="arrow-up"></ion-icon>
-        </a>
+    <!-- back to top button -->
+    <a href="#" class="back-to-top-btn" data-back-to-top>
+        <ion-icon name="arrow-up"></ion-icon>
+    </a>
 
-        <!-- GO TO TOP -->
-        <a href="#top" class="go-top" data-go-top>
-            <ion-icon name="chevron-up"></ion-icon>
-        </a>
+    <!-- GO TO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+        <ion-icon name="chevron-up"></ion-icon>
+    </a>
 
-        <!-- custom js link -->
-        <script src="/assets/js/script.js"></script>
+    <!-- custom js link -->
+    <script src="/assets/js/script.js"></script>
 
-        <!-- ionicon link -->
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        <!-- Vendor JS Files -->
-        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/vendor/ionicons/ionicons.js"></script>
-        <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 
 
 </body>
