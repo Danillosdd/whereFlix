@@ -69,11 +69,11 @@ public class FilmeControler {
      * @return Nome da página de cadastro de filme.
      */
     @GetMapping("/filmes/cadastrar")
-    public String getCreate(Model model) {
-        model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+    public String getCadastrar(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
-        model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
         model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+        // ... outros atributos se necessário
         return "filme-cadastrar";
     }
 
@@ -95,7 +95,7 @@ public class FilmeControler {
     public String postCreate(
             @RequestParam String nome,
             @RequestParam Integer tipo,
-            @RequestParam Integer categoria,
+            @RequestParam Integer categoria, // <-- espera "categoria"
             @RequestParam String qualidade,
             @RequestParam Integer duracao,
             @RequestParam Double avaliacao,

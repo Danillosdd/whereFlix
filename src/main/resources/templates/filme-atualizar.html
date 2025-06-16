@@ -181,7 +181,7 @@
                             <!-- Campo Categoria -->
                             <div class="form-group mb-3">
                                 <label for="categoria" class="form-label">Categoria:</label>
-                                <select class="form-select" id="categoria" name="categoria.id" required>
+                                <select class="form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione</option>
                                     <option th:each="categoria : ${categorias}"
                                             th:value="${categoria.id}"

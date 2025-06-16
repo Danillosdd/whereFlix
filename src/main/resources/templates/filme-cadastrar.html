@@ -167,8 +167,10 @@
                                 <label for="tipo" class="form-label">Tipo:</label>
                                 <select class="form-select" id="tipo" name="tipo" required>
                                     <option value="">Selecione</option>
-                                    <option value="1">Filme</option>
-                                    <option value="2">Série</option>
+                                    <option th:each="tipo : ${tipos}"
+                                            th:value="${tipo.id}"
+                                            th:text="${tipo.nome}">
+                                    </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione um tipo.</div>
                             </div>
@@ -178,8 +180,10 @@
                                 <label for="categoria" class="form-label">Categoria:</label>
                                 <select class="form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione</option>
-                                    <option value="1">Ação</option>
-                                    <option value="2">Comédia</option>
+                                    <option th:each="categoria : ${categorias}"
+                                            th:value="${categoria.id}"
+                                            th:text="${categoria.nome}">
+                                    </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione uma categoria.</div>
                             </div>

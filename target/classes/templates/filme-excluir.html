@@ -180,7 +180,7 @@
                                     <option th:each="categoria : ${categorias}"
                                             th:value="${categoria.id}"
                                             th:text="${categoria.nome}"
-                                            th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria} : false">
+                                            th:selected="${filme.categoria != null} ? ${categoria.id} == ${filme.categoria.id} : false">
                                     </option>
                                 </select>
                             </div>
