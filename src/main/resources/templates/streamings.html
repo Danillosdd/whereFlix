@@ -161,7 +161,7 @@
                         </div>
 
                         <!-- Tabela de Streamings -->
-                        <table class="table table-bordered">
+                        <table class="table table-striped table-hover align-middle text-center">
                             <thead class="table-dark">
                                 <tr>
                                     <th style="width: 80%;">Nome</th>
@@ -170,7 +170,8 @@
                             </thead>
                             <tbody>
                                 <tr th:each="streaming : ${streamings}">
-                                    <td th:text="${streaming.nome}"></td>
+                                    <!-- Linha da tabela -->
+                                    <td class="text-start" th:text="${streaming.nome}"></td>
                                     <td class="text-center">
                                         <!-- Botão Editar -->
                                         <a th:href="@{/streamings/atualizar/{id}(id=${streaming.id})}"
