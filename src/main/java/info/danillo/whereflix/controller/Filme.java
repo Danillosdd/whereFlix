@@ -41,7 +41,8 @@ public class Filme {
 
     private Integer tipo; // código do tipo
 
-    private String qualidade; // HD, FULL HD, 2K, 4K
+    @ManyToOne
+    private Qualidade qualidade; // HD, FULL HD, 2K, 4K
     private Integer duracao;  // duração em minutos
     private Double avaliacao; // ex: 6.5
     private Integer ano; // ex: 2024
@@ -166,13 +167,8 @@ public class Filme {
         this.tipo = tipo;
     }
 
-    public String getQualidade() {
-        return qualidade;
-    }
-
-    public void setQualidade(String qualidade) {
-        this.qualidade = qualidade;
-    }
+    public Qualidade getQualidade() { return qualidade; }
+    public void setQualidade(Qualidade qualidade) { this.qualidade = qualidade; }
 
     public Integer getDuracao() {
         return duracao;

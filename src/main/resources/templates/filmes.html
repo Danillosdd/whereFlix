@@ -173,7 +173,7 @@
                                             <td th:text="${filme.nome}"></td>
                                             <td th:text="${filme.tipo}"></td>
                                             <td th:text="${filme.categoria != null ? filme.categoria.nome : ''}"></td>
-                                            <td th:text="${filme.qualidade}"></td>
+                                            <td th:text="${filme.qualidade != null ? filme.qualidade.nome : ''}"></td>
                                             <td th:text="${filme.duracao}"></td>
                                             <td th:text="${filme.ano}"></td>
                                             <td th:text="${filme.avaliacao}"></td>

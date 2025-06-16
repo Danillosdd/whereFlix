@@ -60,4 +60,24 @@ public class WhereflixApplication {
         }
         categoriaRepository.save(categoria);
     }
+
+    @Bean
+    public org.springframework.boot.CommandLineRunner loadQualidades(QualidadeRepository qualidadeRepository) {
+        return args -> {
+            inserirOuAtualizarQualidade(qualidadeRepository, "HD");
+            inserirOuAtualizarQualidade(qualidadeRepository, "FullHD");
+            inserirOuAtualizarQualidade(qualidadeRepository, "4K");
+        };
+    }
+
+    private void inserirOuAtualizarQualidade(QualidadeRepository qualidadeRepository, String nome) {
+        Qualidade qualidade = qualidadeRepository.findAll().stream()
+            .filter(q -> q.getNome().equalsIgnoreCase(nome))
+            .findFirst().orElse(null);
+        if (qualidade == null) {
+            qualidade = new Qualidade();
+            qualidade.setNome(nome);
+            qualidadeRepository.save(qualidade);
+        }
+    }
 }

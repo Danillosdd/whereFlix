@@ -33,6 +33,9 @@ public class FilmeControler {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private QualidadeRepository qualidadeRepository;
+
     /**
      * Exibe a lista de todos os filmes cadastrados.
      *
@@ -73,6 +76,7 @@ public class FilmeControler {
         model.addAttribute("tipos", tipoRepository.findAll());
         model.addAttribute("categorias", categoriaRepository.findAll());
         model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+        model.addAttribute("qualidades", qualidadeRepository.findAll());
         // ... outros atributos se necessário
         return "filme-cadastrar";
     }
@@ -92,11 +96,11 @@ public class FilmeControler {
      * @return Redireciona para a página de listagem de filmes.
      */
     @PostMapping("/filmes/cadastrar")
-    public String postCreate(
+    public String cadastrarFilme(
             @RequestParam String nome,
             @RequestParam Integer tipo,
-            @RequestParam Integer categoria, // <-- espera "categoria"
-            @RequestParam String qualidade,
+            @RequestParam Integer categoria,
+            @RequestParam Integer qualidade, // <-- agora recebe o id da qualidade
             @RequestParam Integer duracao,
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
@@ -120,7 +124,6 @@ public class FilmeControler {
         Filme filme = new Filme(); // Usa o construtor padrão
         filme.setNome(nome);
         filme.setTipo(tipo);
-        filme.setQualidade(qualidade);
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
@@ -128,6 +131,10 @@ public class FilmeControler {
         Categoria cat = categoriaRepository.findById(categoria)
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada: " + categoria));
         filme.setCategoria(cat);
+
+        Qualidade qualidadeObj = qualidadeRepository.findById(qualidade)
+                .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
+        filme.setQualidade(qualidadeObj);
 
         List<Streaming> streamingsSelecionadas = new ArrayList<>();
         for (Integer idStreaming : streamings) {
@@ -155,7 +162,7 @@ public class FilmeControler {
         model.addAttribute("filme", filme);
         model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
-        model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
+        model.addAttribute("qualidades", qualidadeRepository.findAll());
         model.addAttribute("categorias", categoriaRepository.findAll()); // <-- Adicione esta linha
         return "filme-atualizar";
     }
@@ -177,7 +184,7 @@ public class FilmeControler {
             @RequestParam String nome,
             @RequestParam Integer tipo,
             @RequestParam Integer categoria, // <-- Adicione este parâmetro
-            @RequestParam String qualidade,
+            @RequestParam Integer qualidade, // <-- agora recebe o id da qualidade
             @RequestParam Integer duracao,
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
@@ -189,7 +196,6 @@ public class FilmeControler {
 
         filme.setNome(nome);
         filme.setTipo(tipo);
-        filme.setQualidade(qualidade);
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
@@ -198,6 +204,11 @@ public class FilmeControler {
         Categoria cat = categoriaRepository.findById(categoria)
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada: " + categoria));
         filme.setCategoria(cat);
+
+        // Associa a qualidade
+        Qualidade qualidadeObj = qualidadeRepository.findById(qualidade)
+                .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
+        filme.setQualidade(qualidadeObj);
 
         // ...atualize as streamings conforme sua lógica...
 

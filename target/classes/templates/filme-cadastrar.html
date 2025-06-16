@@ -193,9 +193,11 @@
                                 <label for="qualidade" class="form-label">Qualidade:</label>
                                 <select class="form-select" id="qualidade" name="qualidade" required>
                                     <option value="">Selecione</option>
-                                    <option value="HD">HD</option>
-                                    <option value="FullHD">FullHD</option>
-                                    <option value="4K">4K</option>
+                                    <option th:each="qualidade : ${qualidades}"
+                                            th:value="${qualidade.id}"
+                                            th:text="${qualidade.nome}"
+                                            th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
+                                    </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione a qualidade.</div>
                             </div>
