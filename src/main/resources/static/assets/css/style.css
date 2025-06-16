@@ -1171,9 +1171,31 @@ body.active {
   font-size: 16px;
 }
 
+/*-----------------------------------*\
+ * #STAR RATING
+\*-----------------------------------*/
 
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+}
 
+.star-rating input[type="radio"] {
+  display: none;
+}
 
+.star-rating label {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffc107;
+}
 
 /*-----------------------------------*\
  * #MEDIA QUERIES

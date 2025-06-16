@@ -15,7 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Antigo -->
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -142,8 +141,8 @@
 
     <!-- Conteúdo Principal -->
     <main>
-        <section class="hero">
-            <div class="container mt-5">
+        <section class="hero mt-5">
+            <div class="container">
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <h1 class="mb-4 text-center">Atualizar Filme</h1>
@@ -169,36 +168,73 @@
                             <!-- Campo Tipo -->
                             <div class="form-group mb-3">
                                 <label for="tipo" class="form-label">Tipo:</label>
-                                <input type="tipo" id="tipo" name="tipo" class="form-control" th:value="${filme.tipo}"
-                                    placeholder="Digite o tipo do filme" required />
-                                <div class="invalid-feedback">Por favor, insira um tipo válido.</div>
+                                <select id="tipo" name="tipo" class="form-control" required>
+                                    <option value="">Selecione o tipo</option>
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"
+                                        th:selected="${tipo.id} == ${filme.tipo}"></option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione um tipo.</div>
+                            </div>
+
+                            <!-- Campo Categoria -->
+                            <div class="form-group mb-3">
+                                <label for="categoria" class="form-label">Categoria:</label>
+                                <select id="categoria" name="categoria" class="form-control" required>
+                                    <option value="">Selecione a categoria</option>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                        th:text="${categoria.nome}"
+                                        th:selected="${categoria.id} == ${filme.categoria.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione uma categoria.</div>
                             </div>
 
                             <!-- Campo Qualidade -->
                             <div class="form-group mb-3">
                                 <label for="qualidade" class="form-label">Qualidade:</label>
-                                <input type="text" id="qualidade" class="form-control" th:value="${filme.qualidade}"
-                                    disabled>
+                                <select id="qualidade" name="qualidade" class="form-control" required>
+                                    <option value="">Selecione a qualidade</option>
+                                    <option th:each="q : ${qualidades}" th:value="${q}" th:text="${q}"
+                                        th:selected="${q == filme.qualidade}"></option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione a qualidade.</div>
                             </div>
 
                             <!-- Campo Duração -->
                             <div class="form-group mb-3">
-                                <label for="duracao" class="form-label">Duração:</label>
-                                <input type="text" id="duracao" class="form-control" th:value="${filme.duracao}"
-                                    disabled>
+                                <label for="duracao" class="form-label">Duração (min):</label>
+                                <input type="number" id="duracao" name="duracao" class="form-control" min="1" max="999"
+                                    th:value="${filme.duracao}" required>
+                                <div class="invalid-feedback">Informe a duração (até 999 minutos).</div>
                             </div>
 
-                            <!-- Campo Classificação -->
-                            <div class="form-group mb-3">
-                                <label for="classificacao" class="form-label">Classificação:</label>
-                                <input type="text" id="classificacao" class="form-control"
-                                    th:value="${filme.classificacao}" disabled>
+                            <!-- Campo Avaliação -->
+                            <div class="mb-3">
+                                <label class="form-label">Avaliação:</label>
+                                <div class="star-rating">
+                                    <input type="radio" name="avaliacao" id="star5" value="5"
+                                        th:checked="${filme.avaliacao == 5}" required><label for="star5"><i
+                                            class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star4" value="4"
+                                        th:checked="${filme.avaliacao == 4}"><label for="star4"><i
+                                            class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star3" value="3"
+                                        th:checked="${filme.avaliacao == 3}"><label for="star3"><i
+                                            class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star2" value="2"
+                                        th:checked="${filme.avaliacao == 2}"><label for="star2"><i
+                                            class="bi bi-star-fill"></i></label>
+                                    <input type="radio" name="avaliacao" id="star1" value="1"
+                                        th:checked="${filme.avaliacao == 1}"><label for="star1"><i
+                                            class="bi bi-star-fill"></i></label>
+                                </div>
                             </div>
 
                             <!-- Campo Ano -->
                             <div class="form-group mb-3">
                                 <label for="ano" class="form-label">Ano:</label>
-                                <input type="text" id="ano" class="form-control" th:value="${filme.ano}" disabled>
+                                <input type="number" id="ano" name="ano" class="form-control" min="1900" max="2100"
+                                    th:value="${filme.ano}" required>
+                                <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
                             </div>
 
                             <!-- Campo Streamings -->
@@ -206,10 +242,9 @@
                                 <label for="streamings" class="form-label">Streamings:</label>
                                 <select id="streamings" name="streamings" class="form-control select2" multiple
                                     required>
-                                    <option th:each="streaming : ${streamings}" th:value="${streaming.id}"
-                                        th:text="${streaming.nome}">
-                                        Streaming
-                                    </option>
+                                    <option th:each="streaming : ${todasStreamings}" th:value="${streaming.id}"
+                                        th:text="${streaming.nome}"
+                                        th:selected="${filme.streamings.contains(streaming)}"></option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
                             </div>

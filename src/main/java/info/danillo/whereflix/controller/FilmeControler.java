@@ -85,7 +85,7 @@ public class FilmeControler {
      * @param categoria    Categoria do filme.
      * @param qualidade   Qualidade do filme.
      * @param duracao     Duração do filme.
-     * @param classificacao Classificação do filme.
+     * @param avaliacao Classificação do filme.
      * @param ano         Ano de lançamento do filme.
      * @param streamings  IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
@@ -98,7 +98,7 @@ public class FilmeControler {
             @RequestParam Integer categoria,
             @RequestParam String qualidade,
             @RequestParam Integer duracao,
-            @RequestParam Double classificacao,
+            @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
             Model model) {
@@ -111,16 +111,18 @@ public class FilmeControler {
         }
 
         // Validações
-        if (nome == null || nome.isEmpty() || tipo == null || tipo.isEmpty()) {
+        if (nome == null || nome.isEmpty() || tipo == null) {
             model.addAttribute("erro", "Nome e tipo são obrigatórios.");
             return "filme-cadastrar";
         }
 
         // Criação do filme
-        Filme filme = new Filme(nome, tipo);
+        Filme filme = new Filme(); // Usa o construtor padrão
+        filme.setNome(nome);
+        filme.setTipo(tipo);
         filme.setQualidade(qualidade);
         filme.setDuracao(duracao);
-        filme.setClassificacao(classificacao);
+        filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
 
         Categoria cat = categoriaRepository.findById(categoria)
@@ -151,11 +153,10 @@ public class FilmeControler {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
         model.addAttribute("filme", filme);
-
-        // Buscar streamings ordenadas por nome
         model.addAttribute("todasStreamings", streamingRepository.findAllByOrderByNomeAsc());
         model.addAttribute("tipos", tipoRepository.findAll());
         model.addAttribute("qualidades", List.of("HD", "FULL HD", "2K", "4K"));
+        model.addAttribute("categorias", categoriaRepository.findAll()); // <-- Adicione esta linha
         return "filme-atualizar";
     }
 
@@ -165,6 +166,7 @@ public class FilmeControler {
      * @param id          ID do filme.
      * @param nome        Nome do filme.
      * @param tipo        Tipo do filme.
+     * @param categoria    Categoria do filme. // <-- Adicione este parâmetro
      * @param streamings IDs das streamings selecionadas.
      * @param model       Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
@@ -174,9 +176,10 @@ public class FilmeControler {
             @RequestParam Integer id,
             @RequestParam String nome,
             @RequestParam Integer tipo,
+            @RequestParam Integer categoria, // <-- Adicione este parâmetro
             @RequestParam String qualidade,
             @RequestParam Integer duracao,
-            @RequestParam Double classificacao,
+            @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
             Model model
@@ -188,10 +191,15 @@ public class FilmeControler {
         filme.setTipo(tipo);
         filme.setQualidade(qualidade);
         filme.setDuracao(duracao);
-        filme.setClassificacao(classificacao);
+        filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
-        // Atualize os streamings conforme sua lógica (exemplo):
-        // filme.setStreamings(...);
+
+        // Associa a categoria
+        Categoria cat = categoriaRepository.findById(categoria)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada: " + categoria));
+        filme.setCategoria(cat);
+
+        // ...atualize as streamings conforme sua lógica...
 
         filmeRepository.save(filme);
         return "redirect:/filmes";

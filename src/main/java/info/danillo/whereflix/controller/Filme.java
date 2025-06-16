@@ -43,7 +43,7 @@ public class Filme {
 
     private String qualidade; // HD, FULL HD, 2K, 4K
     private Integer duracao;  // duração em minutos
-    private Double classificacao; // ex: 6.5
+    private Double avaliacao; // ex: 6.5
     private Integer ano; // ex: 2024
 
     @ManyToOne
@@ -182,12 +182,12 @@ public class Filme {
         this.duracao = duracao;
     }
 
-    public Double getClassificacao() {
-        return classificacao;
+    public Double getAvaliacao() {
+        return avaliacao;
     }
 
-    public void setClassificacao(Double classificacao) {
-        this.classificacao = classificacao;
+    public void setAvaliacao(Double avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public Integer getAno() {
