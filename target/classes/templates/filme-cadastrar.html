@@ -167,9 +167,7 @@
                                 <label for="tipo" class="form-label">Tipo:</label>
                                 <select class="form-select" id="tipo" name="tipo" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="tipo : ${tipos}"
-                                            th:value="${tipo.id}"
-                                            th:text="${tipo.nome}">
+                                    <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}">
                                     </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione um tipo.</div>
@@ -180,9 +178,8 @@
                                 <label for="categoria" class="form-label">Categoria:</label>
                                 <select class="form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="categoria : ${categorias}"
-                                            th:value="${categoria.id}"
-                                            th:text="${categoria.nome}">
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                        th:text="${categoria.nome}">
                                     </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione uma categoria.</div>
@@ -193,10 +190,8 @@
                                 <label for="qualidade" class="form-label">Qualidade:</label>
                                 <select class="form-select" id="qualidade" name="qualidade" required>
                                     <option value="">Selecione</option>
-                                    <option th:each="qualidade : ${qualidades}"
-                                            th:value="${qualidade.id}"
-                                            th:text="${qualidade.nome}"
-                                            th:selected="${filme.qualidade != null} ? ${qualidade.id} == ${filme.qualidade.id} : false">
+                                    <option th:each="qualidade : ${qualidades}" th:value="${qualidade.id}"
+                                        th:text="${qualidade.nome}">
                                     </option>
                                 </select>
                                 <div class="invalid-feedback">Por favor, selecione a qualidade.</div>
@@ -225,8 +220,8 @@
                                     Avaliação (<span id="avaliacaoLabel" style="display:inline;"
                                         th:text="${avaliacao != null ? avaliacao : 0}">0</span> Estrelas):
                                 </label>
-                                <input type="range" class="form-control-range" min="0" max="10" step="0.1" id="avaliacaoRange"
-                                    name="avaliacao" th:value="${avaliacao != null ? avaliacao : 0}"
+                                <input type="range" class="form-control-range" min="0" max="10" step="0.1"
+                                    id="avaliacaoRange" name="avaliacao" th:value="${avaliacao != null ? avaliacao : 0}"
                                     oninput="document.getElementById('avaliacaoLabel').innerText = this.value">
                             </div>
 
