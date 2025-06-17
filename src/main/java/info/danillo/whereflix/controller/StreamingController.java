@@ -1,9 +1,5 @@
 package info.danillo.whereflix.controller;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class StreamingController {
@@ -57,9 +52,7 @@ public class StreamingController {
     }
 
     @PostMapping("/streamings/cadastrar")
-    public String salvarStreaming(@ModelAttribute Streaming streaming,
-                                 @RequestParam("foto") MultipartFile foto,
-                                 Model model) {
+    public String salvarStreaming(@ModelAttribute Streaming streaming, Model model) {
         // Validação: Campo "nome" vazio
         if (streaming.getNome() == null || streaming.getNome().trim().isEmpty()) {
             model.addAttribute("errorMessage", "O nome da streaming é obrigatório.");
@@ -72,32 +65,7 @@ public class StreamingController {
             return "streaming-cadastrar";
         }
 
-        // Upload da foto
-        if (foto != null && !foto.isEmpty()) {
-            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
-            File pasta = new File(uploadDir);
-            if (!pasta.exists()) pasta.mkdirs();
-
-            String nomeArquivo = foto.getOriginalFilename();
-            Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
-
-            // Verifica se já existe uma imagem com o mesmo nome
-            if (Files.exists(caminhoFoto)) {
-                model.addAttribute("errorMessage", "Já existe uma imagem com esse nome. Renomeie o arquivo e tente novamente.");
-                return "streaming-cadastrar";
-            }
-
-            try {
-                foto.transferTo(caminhoFoto.toFile());
-                streaming.setFoto(nomeArquivo);
-            } catch (Exception e) {
-                model.addAttribute("errorMessage", "Erro ao salvar a imagem: " + e.getMessage());
-                return "streaming-cadastrar";
-            }
-        } else {
-            streaming.setFoto(null);
-        }
-
+        // Salvar streaming
         streamingRepository.save(streaming);
         return "redirect:/streamings";
     }
@@ -125,51 +93,18 @@ public class StreamingController {
      * @return Redireciona para a página de lista de streamings.
      */
     @PostMapping("/streamings/atualizar/{id}")
-    public String atualizarStreaming(@PathVariable Integer id,
-                                 @ModelAttribute Streaming streaming,
-                                 @RequestParam(value = "foto", required = false) MultipartFile foto,
-                                 Model model) {
-        Streaming streamingAntiga = streamingRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + id));
-
-        // Atualiza campos
-        streamingAntiga.setNome(streaming.getNome());
-        streamingAntiga.setCurso(streaming.getCurso());
-
-        // Atualiza a imagem se foi enviada uma nova
-        if (foto != null && !foto.isEmpty()) {
-            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
-            File pasta = new File(uploadDir);
-            if (!pasta.exists()) pasta.mkdirs();
-
-            // Deleta a foto antiga, se existir
-            if (streamingAntiga.getFoto() != null) {
-                File fotoAntiga = new File(uploadDir + streamingAntiga.getFoto());
-                if (fotoAntiga.exists()) fotoAntiga.delete();
-            }
-
-            String nomeArquivo = foto.getOriginalFilename();
-            Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
-
-            // Verifica se já existe uma imagem com o mesmo nome
-            if (Files.exists(caminhoFoto)) {
-                model.addAttribute("errorMessage", "Já existe uma imagem com esse nome. Renomeie o arquivo e tente novamente.");
-                model.addAttribute("streaming", streamingAntiga);
-                return "streaming-atualizar";
-            }
-
-            try {
-                foto.transferTo(caminhoFoto.toFile());
-                streamingAntiga.setFoto(nomeArquivo);
-            } catch (Exception e) {
-                model.addAttribute("errorMessage", "Erro ao salvar a imagem: " + e.getMessage());
-                model.addAttribute("streaming", streamingAntiga);
-                return "streaming-atualizar";
-            }
+    public String atualizarStreaming(@PathVariable Integer id, @ModelAttribute Streaming streaming, Model model) {
+        // Verifica se já existe outra streaming com o mesmo nome
+        if (streamingRepository.existsByNome(streaming.getNome()) &&
+                !streamingRepository.findById(id).map(Streaming::getNome).orElse("").equals(streaming.getNome())) {
+            model.addAttribute("errorMessage", "Já existe uma streaming com este nome.");
+            model.addAttribute("streaming", streaming);
+            return "streaming-atualizar"; // Retorna à página de edição com a mensagem de erro
         }
-        // Se não enviou nova imagem, mantém a imagem antiga
 
-        streamingRepository.save(streamingAntiga);
+        // Atualiza a streaming
+        streaming.setId(id);
+        streamingRepository.save(streaming);
         return "redirect:/streamings";
     }
 
@@ -190,22 +125,6 @@ public class StreamingController {
             model.addAttribute("streamings", streamingRepository.findAll());
             return "streamings";
         }
-    }
-
-    @PostMapping("/streamings/excluir")
-    public String excluirStreaming(@RequestParam Integer id) {
-        Streaming streaming = streamingRepository.findById(id).orElse(null);
-
-        if (streaming != null && streaming.getFoto() != null) {
-            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
-            File arquivo = new File(uploadDir + streaming.getFoto());
-            if (arquivo.exists()) {
-                arquivo.delete();
-            }
-        }
-
-        streamingRepository.deleteById(id);
-        return "redirect:/streamings";
     }
 
 }
