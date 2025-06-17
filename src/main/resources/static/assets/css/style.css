@@ -1822,3 +1822,32 @@ body.active {
   }
 
 }
+
+/* Paginação personalizada: preto, branco e amarelo */
+.pagination .page-item .page-link {
+  background: #fff;
+  color: #212529;
+  border: 1px solid #212529;
+  border-radius: 0.5rem;
+  margin: 0 2px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pagination .page-item.active .page-link {
+  background: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+}
+
+.pagination .page-link:hover, .pagination .page-item:not(.active) .page-link:focus {
+  background: #212529;
+  color: #ffc107;
+  border-color: #212529;
+}
+
+.pagination .page-item.disabled .page-link {
+  background: #f8f9fa;
+  color: #bdbdbd;
+  border-color: #dee2e6;
+}
