@@ -219,9 +219,9 @@
               </div>
 
               <!-- Visualização da Foto -->
-              <div class="d-flex justify-content-center align-items-center mb-3" style="height: 320px;">
+              <div class="d-flex justify-content-center align-items-center mb-3" style="height: 220px;">
                 <div id="preview-container"
-                  style="width: 200px; height: 300px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
+                  style="width: 200px; height: 200px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
                   <img id="preview"
                     th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
                     th:attr="data-original=${streaming.foto != null ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
@@ -231,7 +231,7 @@
               <div class="text-center mb-3">
                 <small style="color: #888; font-size: 0.9em;">
                   <i class="bi bi-info-circle"></i>
-                  Largura <b>600px</b> e Altura <b>900px</b>
+                  Largura <b>200px</b> e Altura <b>200px</b>
                 </small>
               </div>
 
