@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * Classe que representa a entidade Filme no sistema.
@@ -48,8 +47,6 @@ public class Filme {
     private Categoria categoria;
 
     private Integer duracao; // duração em minutos
-
-    @NotNull(message = "A avaliação é obrigatória")
     private Double avaliacao; // ex: 6.5
     private Integer ano; // ex: 2024
 

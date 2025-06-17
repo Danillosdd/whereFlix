@@ -153,16 +153,6 @@ public class FilmeControler {
             return "filme-cadastrar";
         }
 
-        // CORREÇÃO: AVALIAÇÃO OBRIGATÓRIA
-        if (avaliacao == null) {
-            model.addAttribute("erro", "A avaliação é obrigatória.");
-            model.addAttribute("tipos", tipoRepository.findAll());
-            model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
-            model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
-            model.addAttribute("qualidades", qualidadeRepository.findAll());
-            return "filme-cadastrar";
-        }
-
         // Criação do filme
         Filme filme = new Filme();
         filme.setTitulo(titulo);
@@ -263,15 +253,6 @@ public class FilmeControler {
                 .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
         filme.setQualidade(qualidadeObj);
 
-        // ATUALIZA AS STREAMINGS
-        List<Streaming> streamingsSelecionadas = new ArrayList<>();
-        for (Integer idStreaming : streamings) {
-            Streaming streaming = streamingRepository.findById(idStreaming)
-                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
-            streamingsSelecionadas.add(streaming);
-        }
-        filme.setStreamings(streamingsSelecionadas);
-
         // Atualiza a imagem se foi enviada uma nova
         if (foto != null && !foto.isEmpty()) {
             String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
@@ -304,17 +285,6 @@ public class FilmeControler {
             }
         }
         // Se não enviou nova imagem, mantém a imagem antiga
-
-        // CORREÇÃO: AVALIAÇÃO OBRIGATÓRIA
-        if (avaliacao == null) {
-            model.addAttribute("erro", "A avaliação é obrigatória.");
-            model.addAttribute("filme", filme);
-            model.addAttribute("tipos", tipoRepository.findAll());
-            model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
-            model.addAttribute("qualidades", qualidadeRepository.findAll());
-            model.addAttribute("todasStreamings", streamingRepository.findAll());
-            return "filme-atualizar";
-        }
 
         filmeRepository.save(filme);
         return "redirect:/filmes";
