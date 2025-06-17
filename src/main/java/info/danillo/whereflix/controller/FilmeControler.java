@@ -153,6 +153,16 @@ public class FilmeControler {
             return "filme-cadastrar";
         }
 
+        // CORREÇÃO: AVALIAÇÃO OBRIGATÓRIA
+        if (avaliacao == null) {
+            model.addAttribute("erro", "A avaliação é obrigatória.");
+            model.addAttribute("tipos", tipoRepository.findAll());
+            model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
+            model.addAttribute("streamings", streamingRepository.findAllByOrderByNomeAsc());
+            model.addAttribute("qualidades", qualidadeRepository.findAll());
+            return "filme-cadastrar";
+        }
+
         // Criação do filme
         Filme filme = new Filme();
         filme.setTitulo(titulo);
@@ -294,6 +304,17 @@ public class FilmeControler {
             }
         }
         // Se não enviou nova imagem, mantém a imagem antiga
+
+        // CORREÇÃO: AVALIAÇÃO OBRIGATÓRIA
+        if (avaliacao == null) {
+            model.addAttribute("erro", "A avaliação é obrigatória.");
+            model.addAttribute("filme", filme);
+            model.addAttribute("tipos", tipoRepository.findAll());
+            model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc());
+            model.addAttribute("qualidades", qualidadeRepository.findAll());
+            model.addAttribute("todasStreamings", streamingRepository.findAll());
+            return "filme-atualizar";
+        }
 
         filmeRepository.save(filme);
         return "redirect:/filmes";
