@@ -220,7 +220,6 @@
                 <thead class="table-dark">
                   <tr>
                     <th style="width: 70%;">Nome</th>
-                    <th style="width: 15%;" class="text-center">Foto</th>
                     <th style="width: 15%;">Ações</th>
                   </tr>
                 </thead>
@@ -228,10 +227,6 @@
                   <tr th:each="streaming : ${streamings}">
                     <!-- Linha da tabela -->
                     <td class="text-start" th:text="${streaming.nome}"></td>
-                    <td class="text-center">
-                      <img th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
-                           src="/assets/img/sem-foto.png" alt="Foto da Streaming" style="width:64px; height:64px; object-fit:cover; border-radius:4px;">
-                    </td>
                     <td class="text-center">
                       <!-- Botão Editar -->
                       <a th:href="@{/streamings/atualizar/{id}(id=${streaming.id})}"
