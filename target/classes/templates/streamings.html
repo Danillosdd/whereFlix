@@ -230,7 +230,7 @@
                     <td class="text-start" th:text="${streaming.nome}"></td>
                     <td class="text-center">
                       <img th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
-                           src="/assets/img/sem-foto.png" alt="Foto da Streaming" style="width:48px; height:48px; object-fit:cover; border-radius:4px;">
+                           src="/assets/img/sem-foto.png" alt="Foto da Streaming" style="width:64px; height:64px; object-fit:cover; border-radius:4px;">
                     </td>
                     <td class="text-center">
                       <!-- Botão Editar -->
@@ -250,10 +250,10 @@
               </table>
             </div>
 
-            <!-- Botão para Cadastrar Nova Streaming -->
+            <!-- Botão para Cadastrar Novo Streaming -->
             <div class="text-center mb-3">
               <a href="/streamings/cadastrar" class="btn btn-primary d-inline-block">
-                <i class="bi bi-plus"></i> Cadastrar Nova Streaming
+                <i class="bi bi-plus"></i> Cadastrar Novo Streaming
               </a>
             </div>
           </div>

@@ -202,7 +202,7 @@
           <div class="card-body">
             <h1 class="mb-4 text-center">Atualizar Streaming</h1>
             <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-            <form th:action="@{/streamings/atualizar/{id}(id=${streaming.id})}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/streamings/cadastrar}" method="post" enctype="multipart/form-data">
               <div class="form-group mb-3">
                 <label for="nome" class="form-label">Nome da Streaming:</label>
                 <input type="text" id="nome" name="nome" class="form-control" th:value="${streaming.nome}"
