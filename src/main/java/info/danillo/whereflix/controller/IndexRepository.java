@@ -19,6 +19,7 @@ public interface IndexRepository extends JpaRepository<Filme, Integer> {
 
     // Bem avaliados
     List<Filme> findTop8ByOrderByAvaliacaoDesc();
+    List<Filme> findTop8ByTipoNomeOrderByAvaliacaoDesc(String tipo);
 
     // 4 filmes aleatórios (usando JPQL)
     @Query(value = "SELECT * FROM filme ORDER BY RANDOM() LIMIT 4", nativeQuery = true)

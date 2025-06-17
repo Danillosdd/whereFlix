@@ -25,4 +25,13 @@ public class LancamentoRestController {
             return indexRepository.findTop4ByTipoNomeOrderByAnoDesc(tipo);
         }
     }
+
+    @GetMapping("/bem-avaliados")
+    public List<Filme> getBemAvaliados(@RequestParam(required = false) String tipo) {
+        if (tipo == null || tipo.isEmpty()) {
+            return indexRepository.findTop8ByOrderByAvaliacaoDesc();
+        } else {
+            return indexRepository.findTop8ByTipoNomeOrderByAvaliacaoDesc(tipo);
+        }
+    }
 }

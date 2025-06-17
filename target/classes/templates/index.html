@@ -96,7 +96,7 @@
           </li>
 
           <li>
-            <a href="/#avaliados" class="navbar-link">Bem Avaliados</a>
+            <a href="/#bem-avaliados" class="navbar-link">Bem Avaliados</a>
           </li>
 
           <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -304,30 +304,29 @@
         - #BEM AVALIADOS
       -->
 
-      <section class="top-rated" id="avaliados">
+      <section class="top-rated" id="bem-avaliados">
         <div class="container">
 
           <p class="section-subtitle">Online Streaming</p>
 
           <h2 class="h2 section-title">Bem Avaliados</h2>
 
-          <ul class="filter-list">
-
+          <ul class="filter-list filter-bem-avaliados">
             <li>
-              <button class="filter-btn">Filmes</button>
+              <button class="filter-btn active" data-tipo="">Todos</button>
             </li>
-
             <li>
-              <button class="filter-btn">Séries</button>
+              <button class="filter-btn" data-tipo="Filme">Filmes</button>
             </li>
-
             <li>
-              <button class="filter-btn">Show</button>
+              <button class="filter-btn" data-tipo="Série">Séries</button>
             </li>
-
+            <li>
+              <button class="filter-btn" data-tipo="Show">Shows</button>
+            </li>
           </ul>
 
-          <ul class="movies-list avaliados">
+          <ul class="movies-list bem-avaliados">
             <li th:each="filme : ${bemAvaliados}">
               <div class="movie-card">
                 <a th:href="@{'/movie-details/' + ${filme.id}}">
@@ -475,7 +474,7 @@
             </li>
 
             <li>
-              <a href="/#avaliados" class="footer-link">Bem Avaliados</a>
+              <a href="/#bem-avaliados" class="footer-link">Bem Avaliados</a>
             </li>
 
           </ul>
@@ -594,6 +593,55 @@
           .then(res => res.json())
           .then(filmes => {
             const ul = document.querySelector('.movies-list.has-scrollbar.lancamentos');
+            ul.innerHTML = '';
+            filmes.forEach(filme => {
+              ul.innerHTML += `
+                <li>
+                  <div class="movie-card">
+                    <a href="/movie-details/${filme.id}">
+                      <figure class="card-banner">
+                        <img src="${filme.foto ? '/upload/' + filme.foto : '/assets/img/sem-foto.png'}" alt="${filme.titulo}" />
+                      </figure>
+                    </a>
+                    <div class="title-wrapper">
+                      <a href="/movie-details/${filme.id}">
+                        <h3 class="card-title">${filme.titulo}</h3>
+                      </a>
+                      <time>${filme.ano}</time>
+                    </div>
+                    <div class="card-meta">
+                      <div class="badge badge-outline">${filme.qualidade ? filme.qualidade.nome : 'HD'}</div>
+                      <div class="duration">
+                        <ion-icon name="time-outline"></ion-icon>
+                        <time>${filme.duracao} min</time>
+                      </div>
+                      <div class="rating">
+                        <ion-icon name="star"></ion-icon>
+                        <data>${filme.avaliacao}</data>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              `;
+            });
+          });
+      });
+    });
+
+    document.querySelectorAll('.filter-btn-bem-avaliados').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn-bem-avaliados').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const tipo = this.getAttribute('data-tipo');
+        let url = '/api/bem-avaliados';
+        if (tipo) {
+          url += `?tipo=${encodeURIComponent(tipo)}`;
+        }
+        fetch(url)
+          .then(res => res.json())
+          .then(filmes => {
+            const ul = document.querySelector('.movies-list.bem-avaliados');
             ul.innerHTML = '';
             filmes.forEach(filme => {
               ul.innerHTML += `
