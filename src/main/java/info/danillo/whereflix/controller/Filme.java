@@ -45,6 +45,8 @@ public class Filme {
 
     private String foto;
 
+    private String sinopse;
+
     /**
      * Construtor padrão necessário para o JPA.
      */
@@ -171,5 +173,13 @@ public class Filme {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
     }
 }

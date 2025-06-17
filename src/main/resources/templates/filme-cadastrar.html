@@ -264,6 +264,15 @@
                 <div class="invalid-feedback">Por favor, selecione pelo menos uma streaming.</div>
               </div>
 
+              <!-- Campo Sinopse -->
+              <div class="form-group mb-3">
+                <label for="sinopse" class="form-label">Sinopse:</label>
+                <textarea id="sinopse" name="sinopse" class="form-control" maxlength="255" rows="3"
+                  placeholder="Digite a sinopse do filme (máx. 255 caracteres)" required
+                  th:text="${filme.sinopse}"></textarea>
+                <div class="invalid-feedback">A sinopse é obrigatória e deve ter até 255 caracteres.</div>
+              </div>
+
               <!-- Upload da Foto -->
               <div class="form-group mb-3">
                 <label for="foto" class="form-label">Banner do Filme:</label>

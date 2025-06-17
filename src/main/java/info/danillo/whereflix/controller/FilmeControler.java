@@ -94,6 +94,7 @@ public class FilmeControler {
      * @param avaliacao  Classificação do filme.
      * @param ano        Ano de lançamento do filme.
      * @param streamings IDs das streamings selecionadas.
+     * @param sinopse    Sinopse do filme. // <-- adicione aqui
      * @param model      Objeto para adicionar atributos à view.
      * @return Redireciona para a página de listagem de filmes.
      */
@@ -107,6 +108,7 @@ public class FilmeControler {
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
+            @RequestParam("sinopse") String sinopse, // <-- adicione aqui
             @RequestParam("foto") MultipartFile foto,
             Model model) {
 
@@ -178,6 +180,7 @@ public class FilmeControler {
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
         filme.setFoto(nomeArquivo);
+        filme.setSinopse(sinopse); // <-- adicione aqui
         filmeRepository.save(filme);
 
         return "redirect:/filmes";
@@ -224,6 +227,7 @@ public class FilmeControler {
             @RequestParam Double avaliacao,
             @RequestParam Integer ano,
             @RequestParam List<Integer> streamings,
+            @RequestParam("sinopse") String sinopse, // <-- adicione aqui
             @RequestParam(value = "foto", required = false) MultipartFile foto,
             Model model) {
 
@@ -234,6 +238,7 @@ public class FilmeControler {
         filme.setDuracao(duracao);
         filme.setAvaliacao(avaliacao);
         filme.setAno(ano);
+        filme.setSinopse(sinopse);
 
         // Associa o tipo
         Tipo tipoObj = tipoRepository.findById(tipo)
