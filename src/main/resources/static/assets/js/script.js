@@ -282,16 +282,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
- document.addEventListener('DOMContentLoaded', function () {
-      function carregarStreamings() {
-        fetch('/api/streamings')
-          .then(res => res.json())
-          .then(streamings => {
-            const tbody = document.getElementById('streamings-tbody');
-            if (tbody) {
-              tbody.innerHTML = '';
-              streamings.forEach(streaming => {
-                tbody.innerHTML += `
+document.addEventListener('DOMContentLoaded', function () {
+  function carregarStreamings() {
+    fetch('/api/streamings')
+      .then(res => res.json())
+      .then(streamings => {
+        const tbody = document.getElementById('streamings-tbody');
+        if (tbody) {
+          tbody.innerHTML = '';
+          streamings.forEach(streaming => {
+            tbody.innerHTML += `
               <tr>
                 <td class="text-start">${streaming.nome}</td>
                 <td class="text-center">
@@ -311,25 +311,46 @@ document.addEventListener('DOMContentLoaded', function () {
                 </td>
               </tr>
             `;
-              });
-            }
           });
-      }
+        }
+      });
+  }
 
-      carregarStreamings();
+  carregarStreamings();
 
-      // Atualiza o modal de exclusão igual já está no seu HTML
-      const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-      const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-      const streamingNome = document.getElementById('streamingNome');
+  // Atualiza o modal de exclusão igual já está no seu HTML
+  const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+  const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+  const streamingNome = document.getElementById('streamingNome');
 
-      if (confirmDeleteModal) {
-        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-          const button = event.relatedTarget;
-          const streamingId = button.getAttribute('data-id');
-          const streamingNomeTexto = button.getAttribute('data-nome');
-          streamingNome.textContent = streamingNomeTexto;
-          confirmDeleteButton.href = `/streamings/excluir/${streamingId}`;
-        });
-      }
+  if (confirmDeleteModal) {
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const streamingId = button.getAttribute('data-id');
+      const streamingNomeTexto = button.getAttribute('data-nome');
+      streamingNome.textContent = streamingNomeTexto;
+      confirmDeleteButton.href = `/streamings/excluir/${streamingId}`;
     });
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('lang-btn');
+  const dropdown = document.getElementById('lang-dropdown');
+  const flag = document.getElementById('current-flag');
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', function () {
+    dropdown.style.display = 'none';
+  });
+  document.querySelectorAll('.lang-option').forEach(function (el) {
+    el.addEventListener('click', function () {
+      flag.src = `https://flagcdn.com/24x18/${el.dataset.flag}.png`;
+      // Aqui você pode trocar o idioma da página, recarregar, etc.
+      dropdown.style.display = 'none';
+    });
+  });
+});

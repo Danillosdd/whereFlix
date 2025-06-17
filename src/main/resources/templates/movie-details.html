@@ -88,30 +88,7 @@
 
           </div>
         </div>
-        <script>
-          // filepath: src/main/resources/static/assets/js/lang-dropdown.js
-          document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('lang-btn');
-            const dropdown = document.getElementById('lang-dropdown');
-            const flag = document.getElementById('current-flag');
-            btn.addEventListener('click', function (e) {
-              e.stopPropagation();
-              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            });
-            document.addEventListener('click', function () {
-              dropdown.style.display = 'none';
-            });
-            document.querySelectorAll('.lang-option').forEach(function (el) {
-              el.addEventListener('click', function () {
-                flag.src = `https://flagcdn.com/24x18/${el.dataset.flag}.png`;
-                // Aqui você pode trocar o idioma da página, recarregar, etc.
-                dropdown.style.display = 'none';
-              });
-            });
-          });
-        </script>
-
-
+        
         <button class="btn btn-primary">Entrar</button>
 
       </div>
@@ -219,37 +196,39 @@
 
           <div class="movie-detail-content">
 
-            <p class="detail-subtitle" th:text="${filme.tipo.nome}">Tipo do Filme</p>
+            <p class="detail-subtitle" th:text="${filme.tipo.nome}">Tipo</p>
 
             <h1 class="h1 detail-title">
-              <span th:text="${filme.titulo}">Título do Filme</span>
+              <span th:text="${filme.titulo}">Título</span>
             </h1>
             <img th:src="@{${filme.foto != null} ? '/upload/' + ${filme.foto} : '/assets/img/sem-foto.png'}"
               th:alt="${filme.titulo}" />
-            <!-- e assim por diante -->
 
             <div class="meta-wrapper">
 
               <div class="badge-wrapper">
-                <div class="badge badge-outline" th:text="${filme.qualidade.nome}">HD</div>
+                <div class="badge badge-outline" th:text="${filme.qualidade.nome}">Qualidade</div>
               </div>
 
               <div class="ganre-wrapper">
-                <a href="#">Comedy,</a>
+                <a href="#" th:text="${filme.categoria.nome}">Categoria</a>
               </div>
 
               <div class="date-time">
 
                 <div>
                   <ion-icon name="calendar-outline"></ion-icon>
-
-                  <time datetime="2021">2021</time>
+                  <time th:text="${filme.ano}">Ano</time>
                 </div>
 
                 <div>
                   <ion-icon name="time-outline"></ion-icon>
+                  <time th:text="${filme.duracao}">Duração</time>
+                </div>
 
-                  <time datetime="PT115M">115 min</time>
+                <div>
+                  <ion-icon name="star"></ion-icon>
+                  <time th:text="${filme.avaliacao}">Avaliação</time>
                 </div>
 
               </div>

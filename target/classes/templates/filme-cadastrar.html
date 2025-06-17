@@ -85,29 +85,6 @@
 
           </div>
         </div>
-        <script>
-          // filepath: src/main/resources/static/assets/js/lang-dropdown.js
-          document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('lang-btn');
-            const dropdown = document.getElementById('lang-dropdown');
-            const flag = document.getElementById('current-flag');
-            btn.addEventListener('click', function (e) {
-              e.stopPropagation();
-              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            });
-            document.addEventListener('click', function () {
-              dropdown.style.display = 'none';
-            });
-            document.querySelectorAll('.lang-option').forEach(function (el) {
-              el.addEventListener('click', function () {
-                flag.src = `https://flagcdn.com/24x18/${el.dataset.flag}.png`;
-                // Aqui você pode trocar o idioma da página, recarregar, etc.
-                dropdown.style.display = 'none';
-              });
-            });
-          });
-        </script>
-
 
         <button class="btn btn-primary">Entrar</button>
 
@@ -290,7 +267,8 @@
               <!-- Upload da Foto -->
               <div class="form-group mb-3">
                 <label for="foto" class="form-label">Banner do Filme:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" class="form-control" onchange="previewImage(event)" required>
+                <input type="file" id="foto" name="foto" accept="image/*" class="form-control"
+                  onchange="previewImage(event)" required>
                 <div class="invalid-feedback">Por favor, envie uma imagem do filme.</div>
 
               </div>
