@@ -222,8 +222,11 @@
             <p class="detail-subtitle">New Episodes</p>
 
             <h1 class="h1 detail-title">
-              Free <strong>Guy</strong>
+              <span th:text="${filme.titulo}">Título do Filme</span>
             </h1>
+            <img th:src="@{${filme.foto != null} ? '/upload/' + ${filme.foto} : '/assets/img/sem-foto.png'}"
+              th:alt="${filme.titulo}" />
+            <!-- e assim por diante -->
 
             <div class="meta-wrapper">
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
@@ -18,6 +19,9 @@ public class IndexControler {
 
     @Autowired
     private IndexRepository indexRepository;
+
+    @Autowired
+    private FilmeRepository filmeRepository;
 
     /**
      * Página inicial do sistema.
@@ -40,6 +44,13 @@ public class IndexControler {
     public String index2(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
         return "index";
+    }
+
+    @GetMapping("/movie-details/{id}")
+    public String detalhesFilme(@PathVariable Integer id, Model model) {
+        Filme filme = filmeRepository.findById(id).orElse(null);
+        model.addAttribute("filme", filme);
+        return "movie-details";
     }
 
 }
