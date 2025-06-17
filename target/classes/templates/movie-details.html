@@ -88,7 +88,7 @@
 
           </div>
         </div>
-        
+
         <button class="btn btn-primary">Entrar</button>
 
       </div>
@@ -203,36 +203,38 @@
             </h1>
             <img th:src="@{${filme.foto != null} ? '/upload/' + ${filme.foto} : '/assets/img/sem-foto.png'}"
               th:alt="${filme.titulo}" />
+            <br>
+            <div class="d-flex justify-content-center">
+              <div class="meta-wrapper">
 
-            <div class="meta-wrapper">
-
-              <div class="badge-wrapper">
-                <div class="badge badge-outline" th:text="${filme.qualidade.nome}">Qualidade</div>
-              </div>
-
-              <div class="ganre-wrapper">
-                <a href="#" th:text="${filme.categoria.nome}">Categoria</a>
-              </div>
-
-              <div class="date-time">
-
-                <div>
-                  <ion-icon name="calendar-outline"></ion-icon>
-                  <time th:text="${filme.ano}">Ano</time>
+                <div class="badge-wrapper">
+                  <div class="badge badge-outline" th:text="${filme.qualidade.nome}">Qualidade</div>
                 </div>
 
-                <div>
-                  <ion-icon name="time-outline"></ion-icon>
-                  <time th:text="${filme.duracao}">Duração</time>
+                <div class="ganre-wrapper">
+                  <a href="#" th:text="${filme.categoria.nome}">Categoria</a>
                 </div>
 
-                <div>
-                  <ion-icon name="star"></ion-icon>
-                  <time th:text="${filme.avaliacao}">Avaliação</time>
+                <div class="date-time">
+
+                  <div>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <time th:text="${filme.ano}">Ano</time>
+                  </div>
+
+                  <div>
+                    <ion-icon name="time-outline"></ion-icon>
+                    <time th:text="${filme.duracao}">Duração</time>
+                  </div>
+
+                  <div>
+                    <ion-icon name="star"></ion-icon>
+                    <time th:text="${filme.avaliacao}">Avaliação</time>
+                  </div>
+
                 </div>
 
               </div>
-
             </div>
 
             <p class="storyline">
