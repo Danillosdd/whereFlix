@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -197,6 +198,12 @@ public class StreamingController {
             streamingRepository.deleteById(id);
         }
         return "redirect:/streamings";
+    }
+
+    @GetMapping("/api/streamings")
+    @ResponseBody
+    public List<Streaming> listarStreamings() {
+        return streamingRepository.findAllByOrderByNomeAsc();
     }
 
 }

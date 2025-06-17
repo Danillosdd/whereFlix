@@ -281,3 +281,55 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+ document.addEventListener('DOMContentLoaded', function () {
+      function carregarStreamings() {
+        fetch('/api/streamings')
+          .then(res => res.json())
+          .then(streamings => {
+            const tbody = document.getElementById('streamings-tbody');
+            if (tbody) {
+              tbody.innerHTML = '';
+              streamings.forEach(streaming => {
+                tbody.innerHTML += `
+              <tr>
+                <td class="text-start">${streaming.nome}</td>
+                <td class="text-center">
+                  <img src="${streaming.foto ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
+                       alt="Foto da streaming"
+                       style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px;">
+                </td>
+                <td class="text-center">
+                  <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/streamings/atualizar/${streaming.id}" title="Editar">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <button class="btn btn-danger btn-sm d-inline-block" data-bs-toggle="modal"
+                    data-bs-target="#confirmDeleteModal"
+                    data-id="${streaming.id}" data-nome="${streaming.nome}" title="Deletar">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            `;
+              });
+            }
+          });
+      }
+
+      carregarStreamings();
+
+      // Atualiza o modal de exclusão igual já está no seu HTML
+      const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+      const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+      const streamingNome = document.getElementById('streamingNome');
+
+      if (confirmDeleteModal) {
+        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+          const button = event.relatedTarget;
+          const streamingId = button.getAttribute('data-id');
+          const streamingNomeTexto = button.getAttribute('data-nome');
+          streamingNome.textContent = streamingNomeTexto;
+          confirmDeleteButton.href = `/streamings/excluir/${streamingId}`;
+        });
+      }
+    });
