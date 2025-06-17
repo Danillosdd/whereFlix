@@ -109,6 +109,11 @@ function carregarFilmes(page = 0) {
               <td>${filme.qualidade ? filme.qualidade.nome : ''}</td>
               <td>${filme.duracao}</td>
               <td class="text-center">
+                <img src="${filme.foto ? '/upload/' + filme.foto : '/assets/img/sem-foto.png'}"
+                     alt="Foto do filme"
+                     style="width: 48px; height: 72px; object-fit: cover; border-radius: 4px;">
+              </td>
+              <td>
                 <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/filmes/atualizar/${filme.id}" title="Atualizar">
                   <i class="bi bi-pencil-square"></i>
                 </a>

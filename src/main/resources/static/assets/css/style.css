@@ -1842,7 +1842,8 @@ body.active {
   border-color: #ffc107;
 }
 
-.pagination .page-link:hover, .pagination .page-item:not(.active) .page-link:focus {
+.pagination .page-link:hover,
+.pagination .page-item:not(.active) .page-link:focus {
   background: #212529;
   color: #ffc107;
   border-color: #212529;
@@ -1857,18 +1858,27 @@ body.active {
 /* Bandeiras lado a lado */
 .gtranslate_wrapper {
   display: flex;
-  gap: 8px; /* Espaço entre as bandeiras */
+  gap: 8px;
   align-items: center;
 }
+
 .gtranslate_wrapper img {
   display: inline-block;
 }
 
 ion-icon {
-       color: var(--white);
-        font-size: var(--fs-9);
-        font-weight: var(--fw-700);
+  color: var(--white);
+  font-size: var(--fs-9);
+  font-weight: var(--fw-700);
 }
 
- 
-    
+
+/* Alinhar foto da grid ao centro */
+td.text-center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.text-center img {
+  display: inline;
+}
