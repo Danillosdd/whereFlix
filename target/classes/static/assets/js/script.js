@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function carregarFilmes(page = 0) {
   const inputBusca = document.querySelector('input[name="titulo"]');
   const titulo = inputBusca ? inputBusca.value : '';
-  let url = `/api/filmes-paginados?page=${page}&size=10`;
+  let url = `/api/filmes-paginados?page=${page}&size=5`;
   if (titulo) {
     url += `&titulo=${encodeURIComponent(titulo)}`;
   }
