@@ -47,13 +47,67 @@
             <ion-icon name="globe-outline"></ion-icon>
           </label>
 
-          <select name="language" id="language">
-            <option value="en">EN</option>
-            <option value="au">AU</option>
-            <option value="ar">AR</option>
-            <option value="tu">TU</option>
-          </select>
+          <div class="lang-wrapper" style="position: relative;">
+            <button id="lang-btn" class="lang-btn"
+              style="display: flex; align-items: center; background: none; border: none; cursor: pointer;">
+              <img id="current-flag" src="https://flagcdn.com/24x18/br.png" alt="PT"
+                style="margin: 0 6px; width: 24px; height: 18px; border-radius: 2px;">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+            <div id="lang-dropdown" class="lang-dropdown"
+              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 120px;">
+              <button class="lang-option" data-lang="en" data-flag="gb"
+                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
+                <img src="https://flagcdn.com/24x18/gb.png" alt="EN"
+                  style="width: 24px; height: 18px; margin-right: 8px;"> EN
+              </button>
+              <button class="lang-option" data-lang="fr" data-flag="fr"
+                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
+                <img src="https://flagcdn.com/24x18/fr.png" alt="FR"
+                  style="width: 24px; height: 18px; margin-right: 8px;"> FR
+              </button>
+              <button class="lang-option" data-lang="it" data-flag="it"
+                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
+                <img src="https://flagcdn.com/24x18/it.png" alt="IT"
+                  style="width: 24px; height: 18px; margin-right: 8px;"> IT
+              </button>
+              <button class="lang-option" data-lang="es" data-flag="es"
+                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
+                <img src="https://flagcdn.com/24x18/es.png" alt="ES"
+                  style="width: 24px; height: 18px; margin-right: 8px;"> ES
+              </button>
+              <button class="lang-option" data-lang="pt" data-flag="br"
+                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
+                <img src="https://flagcdn.com/24x18/br.png" alt="PT"
+                  style="width: 24px; height: 18px; margin-right: 8px;"> PT
+              </button>
+            </div>
+
+          </div>
         </div>
+        <script>
+          // filepath: src/main/resources/static/assets/js/lang-dropdown.js
+          document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('lang-btn');
+            const dropdown = document.getElementById('lang-dropdown');
+            const flag = document.getElementById('current-flag');
+            btn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+            document.addEventListener('click', function () {
+              dropdown.style.display = 'none';
+            });
+            document.querySelectorAll('.lang-option').forEach(function (el) {
+              el.addEventListener('click', function () {
+                flag.src = `https://flagcdn.com/24x18/${el.dataset.flag}.png`;
+                // Aqui você pode trocar o idioma da página, recarregar, etc.
+                dropdown.style.display = 'none';
+              });
+            });
+          });
+        </script>
+
 
         <button class="btn btn-primary">Entrar</button>
 

@@ -1851,3 +1851,22 @@ body.active {
   color: #bdbdbd;
   border-color: #dee2e6;
 }
+
+/* Bandeiras lado a lado */
+.gtranslate_wrapper {
+  display: flex;
+  gap: 8px; /* Espaço entre as bandeiras */
+  align-items: center;
+}
+.gtranslate_wrapper img {
+  display: inline-block;
+}
+
+ion-icon {
+       color: var(--white);
+        font-size: var(--fs-9);
+        font-weight: var(--fw-700);
+}
+
+ 
+    
