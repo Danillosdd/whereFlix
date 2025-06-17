@@ -1042,9 +1042,10 @@ body.active {
   justify-content: center;
 }
 
-.movie-detail > .container {
+.movie-detail>.container {
   width: 100%;
-  max-width: 700px; /* ajuste conforme necessário */
+  max-width: 700px;
+  /* ajuste conforme necessário */
 }
 
 .movie-detail-banner {
@@ -1115,6 +1116,8 @@ body.active {
   border: 1px solid var(--jet);
   border-radius: 4px;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .details-actions .share ion-icon {
@@ -1678,7 +1681,10 @@ body.active {
 
   .movie-detail-banner,
   .details-actions {
-    margin: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+
   }
 
   .download-btn {
@@ -1810,6 +1816,9 @@ body.active {
 
   .movie-detail-content {
     max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+
   }
 
   .detail-title {
