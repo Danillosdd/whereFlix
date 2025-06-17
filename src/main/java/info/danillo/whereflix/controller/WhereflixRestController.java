@@ -45,9 +45,14 @@ public class WhereflixRestController {
     @GetMapping("/filmes-paginados")
     public Page<Filme> getFilmesPaginados(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(required = false) String titulo
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("titulo").ascending());
-        return filmeRepository.findAll(pageable);
+        if (titulo != null && !titulo.isEmpty()) {
+            return filmeRepository.findByTituloContainingIgnoreCase(titulo, pageable);
+        } else {
+            return filmeRepository.findAll(pageable);
+        }
     }
 }

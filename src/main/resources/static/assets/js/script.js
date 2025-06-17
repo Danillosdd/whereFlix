@@ -87,7 +87,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function carregarFilmes(page = 0) {
-  fetch(`/api/filmes-paginados?page=${page}&size=10`)
+  const inputBusca = document.querySelector('input[name="titulo"]');
+  const titulo = inputBusca ? inputBusca.value : '';
+  let url = `/api/filmes-paginados?page=${page}&size=10`;
+  if (titulo) {
+    url += `&titulo=${encodeURIComponent(titulo)}`;
+  }
+  fetch(url)
     .then(res => res.json())
     .then(data => {
       // Monta a tabela
@@ -153,8 +159,15 @@ function carregarFilmes(page = 0) {
     });
 }
 
-// Carrega a primeira página ao abrir, se existir a tabela de filmes
+// Ao submeter o formulário de busca, previne o submit e chama o JS
 document.addEventListener('DOMContentLoaded', function () {
+  const formBusca = document.querySelector('form[action="/filmes/busca"]');
+  if (formBusca) {
+    formBusca.addEventListener('submit', function (e) {
+      e.preventDefault();
+      carregarFilmes(0);
+    });
+  }
   if (document.getElementById('filmes-tbody')) {
     carregarFilmes();
   }
