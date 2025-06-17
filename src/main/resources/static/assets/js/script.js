@@ -109,9 +109,6 @@ function carregarFilmes(page = 0) {
               <td>${filme.qualidade ? filme.qualidade.nome : ''}</td>
               <td>${filme.duracao}</td>
               <td class="text-center">
-                <a class="btn btn-info btn-sm me-1 d-inline-block" href="/filmes/atualizar/telefone/${filme.id}" title="Telefones">
-                  <i class="bi bi-telephone"></i>
-                </a>
                 <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/filmes/atualizar/${filme.id}" title="Atualizar">
                   <i class="bi bi-pencil-square"></i>
                 </a>
