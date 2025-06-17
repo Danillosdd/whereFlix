@@ -253,6 +253,15 @@ public class FilmeControler {
                 .orElseThrow(() -> new IllegalArgumentException("Qualidade não encontrada: " + qualidade));
         filme.setQualidade(qualidadeObj);
 
+        // ATUALIZA AS STREAMINGS
+        List<Streaming> streamingsSelecionadas = new ArrayList<>();
+        for (Integer idStreaming : streamings) {
+            Streaming streaming = streamingRepository.findById(idStreaming)
+                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
+            streamingsSelecionadas.add(streaming);
+        }
+        filme.setStreamings(streamingsSelecionadas);
+
         // Atualiza a imagem se foi enviada uma nova
         if (foto != null && !foto.isEmpty()) {
             String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
