@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -133,18 +132,47 @@ public class StreamingController {
      * @return Redireciona para a página de lista de streamings.
      */
     @PostMapping("/streamings/atualizar/{id}")
-    public String atualizarStreaming(@PathVariable Integer id, @ModelAttribute Streaming streaming, Model model) {
-        // Verifica se já existe outra streaming com o mesmo nome
-        if (streamingRepository.existsByNome(streaming.getNome()) &&
-                !streamingRepository.findById(id).map(Streaming::getNome).orElse("").equals(streaming.getNome())) {
-            model.addAttribute("errorMessage", "Já existe uma streaming com este nome.");
-            model.addAttribute("streaming", streaming);
-            return "streaming-atualizar"; // Retorna à página de edição com a mensagem de erro
-        }
+    public String atualizarStreaming(
+        @PathVariable Integer id,
+        @RequestParam String nome,
+        @RequestParam(value = "foto", required = false) MultipartFile foto,
+        Model model
+    ) {
+        Streaming streaming = streamingRepository.findById(id).orElse(null);
+        if (streaming != null) {
+            streaming.setNome(nome);
 
-        // Atualiza a streaming
-        streaming.setId(id);
-        streamingRepository.save(streaming);
+            // Atualiza a imagem se foi enviada uma nova
+            if (foto != null && !foto.isEmpty()) {
+                String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+                File pasta = new File(uploadDir);
+                if (!pasta.exists()) {
+                    pasta.mkdirs();
+                }
+                // Deleta a foto antiga, se existir
+                if (streaming.getFoto() != null) {
+                    File fotoAntiga = new File(uploadDir + streaming.getFoto());
+                    if (fotoAntiga.exists()) {
+                        fotoAntiga.delete();
+                    }
+                }
+                // Salva a nova foto
+                String nomeArquivo = foto.getOriginalFilename();
+                Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
+
+                try {
+                    foto.transferTo(caminhoFoto.toFile());
+                    streaming.setFoto(nomeArquivo); // Atualiza o nome da imagem no objeto Streaming
+                } catch (Exception e) {
+                    model.addAttribute("errorMessage", "Erro ao salvar a imagem: " + e.getMessage());
+                    model.addAttribute("streaming", streaming);
+                    return "streaming-atualizar";
+                }
+            }
+            // Se não enviou nova imagem, mantém a imagem antiga
+
+            streamingRepository.save(streaming);
+        }
         return "redirect:/streamings";
     }
 
@@ -155,16 +183,20 @@ public class StreamingController {
      * @return Redireciona para a página de lista de streamings.
      */
     @GetMapping("/streamings/excluir/{id}")
-    public String excluirStreaming(@PathVariable Integer id, Model model) {
-        try {
+    public String excluirStreaming(@PathVariable Integer id) {
+        Streaming streaming = streamingRepository.findById(id).orElse(null);
+        if (streaming != null) {
+            // Deleta a imagem do disco, se existir
+            if (streaming.getFoto() != null) {
+                String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+                File foto = new File(uploadDir + streaming.getFoto());
+                if (foto.exists()) {
+                    foto.delete();
+                }
+            }
             streamingRepository.deleteById(id);
-            return "redirect:/streamings";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage",
-                    "Não é possível excluir a streaming, pois ela está vinculada a um ou mais filmes.");
-            model.addAttribute("streamings", streamingRepository.findAll());
-            return "streamings";
         }
+        return "redirect:/streamings";
     }
 
 }

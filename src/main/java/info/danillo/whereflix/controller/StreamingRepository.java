@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
 
 /**
  * Repositório responsável por realizar operações de acesso a dados para a entidade Streaming.
  * Extende JpaRepository para fornecer métodos padrão de CRUD e permite a definição de consultas personalizadas.
  */
-public interface StreamingRepository extends JpaRepository<Streaming, Integer> {
+public interface StreamingRepository extends JpaRepository<Streaming, Integer>, CrudRepository<Streaming, Integer> {
 
     /**
      * Verifica se existe alguma relação entre filmes e a streaming informada.
@@ -46,4 +48,6 @@ public interface StreamingRepository extends JpaRepository<Streaming, Integer> {
      */
     @Query("SELECT d FROM Streaming d WHERE LOWER(d.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
     List<Streaming> buscarPorNome(@Param("nome") String nome);
+
+    Streaming findByNome(String nome);
 }
