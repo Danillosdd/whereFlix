@@ -297,92 +297,23 @@
 
     </footer>
 
-    
-  <!-- #GO TO TOP -->
-  <a href="#top" class="go-top" data-go-top>
-    <ion-icon name="chevron-up"></ion-icon>
-  </a>
 
-  <!-- custom js link  -->
-  <script src="/assets/js/script.js"></script>
+    <!-- #GO TO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+      <ion-icon name="chevron-up"></ion-icon>
+    </a>
 
-  <!-- ionicon link -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- custom js link  -->
+    <script src="/assets/js/script.js"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/ionicons/ionicons.js"></script>
-  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-
-    <script>
-      function carregarFilmes(page = 0) {
-        fetch(`/api/filmes-paginados?page=${page}&size=10`)
-          .then(res => res.json())
-          .then(data => {
-            // Monta a tabela
-            const tbody = document.getElementById('filmes-tbody');
-            tbody.innerHTML = '';
-            data.content.forEach(filme => {
-              tbody.innerHTML += `
-          <tr>
-            <td class="text-start">${filme.titulo}</td>
-            <td>${filme.tipo ? filme.tipo.nome : ''}</td>
-            <td>${filme.categoria ? filme.categoria.nome : ''}</td>
-            <td>${filme.qualidade ? filme.qualidade.nome : ''}</td>
-            <td>${filme.duracao}</td>
-            <td class="text-center">
-              <a class="btn btn-info btn-sm me-1 d-inline-block" href="/filmes/atualizar/telefone/${filme.id}" title="Telefones">
-                <i class="bi bi-telephone"></i>
-              </a>
-              <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/filmes/atualizar/${filme.id}" title="Atualizar">
-                <i class="bi bi-pencil-square"></i>
-              </a>
-              <a class="btn btn-danger btn-sm d-inline-block" href="/filmes/excluir/${filme.id}" title="Excluir">
-                <i class="bi bi-trash"></i>
-              </a>
-            </td>
-          </tr>
-        `;
-            });
-
-            // Monta a paginação
-            const paginacao = document.getElementById('filmes-paginacao');
-            paginacao.innerHTML = '';
-
-            // Botão anterior
-            paginacao.innerHTML += `
-        <li class="page-item${data.first ? ' disabled' : ''}">
-          <a class="page-link" href="#" onclick="carregarFilmes(${data.number - 1});return false;" aria-label="Anterior">
-            <i class="bi bi-chevron-left"></i>
-          </a>
-        </li>
-      `;
-
-            // Botões de página
-            for (let i = 0; i < data.totalPages; i++) {
-              paginacao.innerHTML += `
-          <li class="page-item${i === data.number ? ' active' : ''}">
-            <a class="page-link" href="#" onclick="carregarFilmes(${i});return false;">${i + 1}</a>
-          </li>
-        `;
-            }
-
-            // Botão próximo
-            paginacao.innerHTML += `
-        <li class="page-item${data.last ? ' disabled' : ''}">
-          <a class="page-link" href="#" onclick="carregarFilmes(${data.number + 1});return false;" aria-label="Próximo">
-            <i class="bi bi-chevron-right"></i>
-          </a>
-        </li>
-      `;
-          });
-      }
-
-      // Carrega a primeira página ao abrir
-      carregarFilmes();
-    </script>
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 
 </body>
 
