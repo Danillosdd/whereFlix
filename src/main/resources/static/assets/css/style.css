@@ -1038,6 +1038,13 @@ body.active {
   background-position: center;
   padding-top: 160px;
   padding-bottom: var(--section-padding);
+  display: flex;
+  justify-content: center;
+}
+
+.movie-detail > .container {
+  width: 100%;
+  max-width: 700px; /* ajuste conforme necessário */
 }
 
 .movie-detail-banner {
