@@ -55,7 +55,7 @@
               <ion-icon name="chevron-down-outline"></ion-icon>
             </button>
             <div id="lang-dropdown" class="lang-dropdown"
-              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 120px;">
+              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 200px;">
               <button class="lang-option" data-lang="en" data-flag="gb"
                 style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
                 <img src="https://flagcdn.com/24x18/gb.png" alt="EN"
@@ -202,11 +202,35 @@
           <div class="card-body">
             <h1 class="mb-4 text-center">Atualizar Streaming</h1>
             <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-            <form th:action="@{/streamings/atualizar/{id}(id=${streaming.id})}" method="post">
+            <form th:action="@{/streamings/atualizar/{id}(id=${streaming.id})}" method="post" enctype="multipart/form-data">
               <div class="form-group mb-3">
                 <label for="nome" class="form-label">Nome da Streaming:</label>
                 <input type="text" id="nome" name="nome" class="form-control" th:value="${streaming.nome}"
                   placeholder="Digite o nome da streaming" required>
+              </div>
+              <!-- Upload da Foto -->
+              <div class="form-group mb-3">
+                <label for="foto" class="form-label">Logo da Streaming:</label>
+                <input type="file" id="foto" name="foto" accept="image/*" class="form-control"
+                  onchange="previewImage(event)">
+                <div class="invalid-feedback">Por favor, envie uma imagem da streaming.</div>
+              </div>
+              <!-- Visualização da Foto -->
+              <div class="d-flex justify-content-center align-items-center mb-3" style="height: 180px;">
+                <div id="preview-container"
+                  style="width: 200px; height: 200px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
+                  <img id="preview"
+                    th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
+                    th:attr="data-original=${streaming.foto != null ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
+                    src="/assets/img/sem-foto.png" alt="Pré-visualização"
+                    style="max-width: 100%; max-height: 100%;">
+                </div>
+              </div>
+              <div class="text-center mb-3">
+                <small style="color: #888; font-size: 0.9em;">
+                  <i class="bi bi-info-circle"></i>
+                  Tamanho sugerido: <b>200x200px</b>
+                </small>
               </div>
               <div class="text-center">
                 <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
