@@ -32,12 +32,6 @@ public class Streaming {
     private String curso;
 
     /**
-     * Foto da streaming.
-     */
-    @Basic
-    private String foto;
-
-    /**
      * Construtor padrão necessário para o JPA.
      */
     public Streaming() {
@@ -111,24 +105,6 @@ public class Streaming {
     }
 
     /**
-     * Obtém a foto da streaming.
-     *
-     * @return Foto da streaming.
-     */
-    public String getFoto() {
-        return foto;
-    }
-
-    /**
-     * Define a foto da streaming.
-     *
-     * @param foto Foto da streaming.
-     */
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    /**
      * Retorna uma representação textual da streaming.
      *
      * @return String representando a streaming.
@@ -139,7 +115,6 @@ public class Streaming {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", curso='" + curso + '\'' +
-                ", foto='" + foto + '\'' +
                 '}';
     }
 }
