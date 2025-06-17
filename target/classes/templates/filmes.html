@@ -356,7 +356,9 @@ function carregarFilmes(page = 0) {
       // Botão anterior
       paginacao.innerHTML += `
         <li class="page-item${data.first ? ' disabled' : ''}">
-          <a class="page-link" href="#" onclick="carregarFilmes(${data.number - 1});return false;">Anterior</a>
+          <a class="page-link" href="#" onclick="carregarFilmes(${data.number - 1});return false;" aria-label="Anterior">
+            <i class="bi bi-chevron-left"></i>
+          </a>
         </li>
       `;
 
@@ -372,7 +374,9 @@ function carregarFilmes(page = 0) {
       // Botão próximo
       paginacao.innerHTML += `
         <li class="page-item${data.last ? ' disabled' : ''}">
-          <a class="page-link" href="#" onclick="carregarFilmes(${data.number + 1});return false;">Próximo</a>
+          <a class="page-link" href="#" onclick="carregarFilmes(${data.number + 1});return false;" aria-label="Próximo">
+            <i class="bi bi-chevron-right"></i>
+          </a>
         </li>
       `;
     });
