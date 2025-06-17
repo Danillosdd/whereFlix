@@ -27,7 +27,12 @@ public class IndexControler {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
-        List<Filme> lancamentos = indexRepository.findTop4ByOrderByAnoDesc();
+        List<Filme> lancamentos = null;
+        if (tipo == null || tipo.isEmpty()) {
+            lancamentos = indexRepository.findTop4ByOrderByAnoDesc(); // todos os tipos
+        } else {
+            lancamentos = indexRepository.findTop4ByTipoNomeOrderByAnoDesc(tipo);
+        }
         model.addAttribute("lancamentos", lancamentos);
         List<Filme> bemAvaliados = indexRepository.findTop8ByOrderByAvaliacaoDesc();
         model.addAttribute("bemAvaliados", bemAvaliados);

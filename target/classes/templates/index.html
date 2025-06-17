@@ -190,7 +190,7 @@
                 <button class="filter-btn" data-tipo="Filme">Filmes</button>
               </li>
               <li>
-                <button class="filter-btn" data-tipo="Serie">Séries</button>
+                <button class="filter-btn" data-tipo="Série">Séries</button>
               </li>
               <li>
                 <button class="filter-btn" data-tipo="Show">Shows</button>
@@ -586,7 +586,11 @@
         this.classList.add('active');
 
         const tipo = this.getAttribute('data-tipo');
-        fetch(`/api/lancamentos?tipo=${tipo}`)
+        let url = '/api/lancamentos';
+        if (tipo) {
+          url += `?tipo=${encodeURIComponent(tipo)}`;
+        }
+        fetch(url)
           .then(res => res.json())
           .then(filmes => {
             const ul = document.querySelector('.movies-list.has-scrollbar.lancamentos');
