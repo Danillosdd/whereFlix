@@ -28,14 +28,5 @@ public interface FilmeRepository extends JpaRepository<Filme, Integer> {
     boolean existsByTituloIgnoreCase(String titulo);
 
     List<Filme> findAllByOrderByTituloAsc();
-
-    // Lançamentos
-    List<Filme> findTop4ByOrderByAnoDesc();
-
-    // Bem avaliados
-    List<Filme> findTop8ByOrderByAvaliacaoDesc();
-
-    // 4 filmes aleatórios (usando JPQL)
-    @Query(value = "SELECT * FROM filme ORDER BY RANDOM() LIMIT 4", nativeQuery = true)
-    List<Filme> buscar4Aleatorios();
+   
 }

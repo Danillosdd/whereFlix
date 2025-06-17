@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
- * Filme. Inclui funcionalidades de CRUD para filmes, telefones e streamings.
  */
 @Controller
 public class IndexControler {
@@ -18,7 +17,7 @@ public class IndexControler {
     private TipoRepository tipoRepository;
 
     @Autowired
-    private FilmeRepository filmeRepository;
+    private IndexRepository indexRepository;
 
     /**
      * Página inicial do sistema.
@@ -28,11 +27,11 @@ public class IndexControler {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
-        List<Filme> lancamentos = filmeRepository.findTop4ByOrderByAnoDesc();
+        List<Filme> lancamentos = indexRepository.findTop4ByOrderByAnoDesc();
         model.addAttribute("lancamentos", lancamentos);
-        List<Filme> bemAvaliados = filmeRepository.findTop8ByOrderByAvaliacaoDesc();
+        List<Filme> bemAvaliados = indexRepository.findTop8ByOrderByAvaliacaoDesc();
         model.addAttribute("bemAvaliados", bemAvaliados);
-        List<Filme> aleatorios = filmeRepository.buscar4Aleatorios();
+        List<Filme> aleatorios = indexRepository.buscar4Aleatorios();
         model.addAttribute("aleatorios", aleatorios);
         return "index"; // Isso renderiza o template src/main/resources/templates/index.html
     }
