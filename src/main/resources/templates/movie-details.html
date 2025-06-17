@@ -219,7 +219,7 @@
 
           <div class="movie-detail-content">
 
-            <p class="detail-subtitle">New Episodes</p>
+            <p class="detail-subtitle" th:text="${filme.tipo.nome}">Tipo do Filme</p>
 
             <h1 class="h1 detail-title">
               <span th:text="${filme.titulo}">Título do Filme</span>
@@ -231,19 +231,11 @@
             <div class="meta-wrapper">
 
               <div class="badge-wrapper">
-                <div class="badge badge-fill">PG 13</div>
-
-                <div class="badge badge-outline">HD</div>
+                <div class="badge badge-outline" th:text="${filme.qualidade.nome}">HD</div>
               </div>
 
               <div class="ganre-wrapper">
                 <a href="#">Comedy,</a>
-
-                <a href="#">Action,</a>
-
-                <a href="#">Adventure,</a>
-
-                <a href="#">Science Fiction</a>
               </div>
 
               <div class="date-time">

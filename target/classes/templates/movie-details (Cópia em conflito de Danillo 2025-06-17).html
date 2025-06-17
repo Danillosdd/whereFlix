@@ -5,23 +5,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Whereflix</title>
+  <title>Free Guy 2021</title>
 
-  <!-- favicon -->
+  <!-- 
+    - favicon
+  -->
   <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 
-  <!-- google font link -->
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- custom css link -->
-  <link rel="stylesheet" href="/assets/css/style.css">
-
 </head>
 
 <body id="#top">
@@ -35,8 +36,8 @@
 
       <div class="overlay" data-overlay></div>
 
-      <a href="/" class="logo">
-        <img src="/assets/img/logo.png" alt="Whereflix logo">
+      <a href="./index.html" class="logo">
+        <img src="/assets/img/logo.svg" alt="Filmlane logo">
       </a>
 
       <div class="header-actions">
@@ -50,69 +51,15 @@
             <ion-icon name="globe-outline"></ion-icon>
           </label>
 
-          <div class="lang-wrapper" style="position: relative;">
-            <button id="lang-btn" class="lang-btn"
-              style="display: flex; align-items: center; background: none; border: none; cursor: pointer;">
-              <img id="current-flag" src="https://flagcdn.com/24x18/br.png" alt="PT"
-                style="margin: 0 6px; width: 24px; height: 18px; border-radius: 2px;">
-              <ion-icon name="chevron-down-outline"></ion-icon>
-            </button>
-            <div id="lang-dropdown" class="lang-dropdown"
-              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 120px;">
-              <button class="lang-option" data-lang="en" data-flag="gb"
-                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
-                <img src="https://flagcdn.com/24x18/gb.png" alt="EN"
-                  style="width: 24px; height: 18px; margin-right: 8px;"> EN
-              </button>
-              <button class="lang-option" data-lang="fr" data-flag="fr"
-                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
-                <img src="https://flagcdn.com/24x18/fr.png" alt="FR"
-                  style="width: 24px; height: 18px; margin-right: 8px;"> FR
-              </button>
-              <button class="lang-option" data-lang="it" data-flag="it"
-                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
-                <img src="https://flagcdn.com/24x18/it.png" alt="IT"
-                  style="width: 24px; height: 18px; margin-right: 8px;"> IT
-              </button>
-              <button class="lang-option" data-lang="es" data-flag="es"
-                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
-                <img src="https://flagcdn.com/24x18/es.png" alt="ES"
-                  style="width: 24px; height: 18px; margin-right: 8px;"> ES
-              </button>
-              <button class="lang-option" data-lang="pt" data-flag="br"
-                style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
-                <img src="https://flagcdn.com/24x18/br.png" alt="PT"
-                  style="width: 24px; height: 18px; margin-right: 8px;"> PT
-              </button>
-            </div>
-
-          </div>
+          <select name="language" id="language">
+            <option value="en">EN</option>
+            <option value="au">AU</option>
+            <option value="ar">AR</option>
+            <option value="tu">TU</option>
+          </select>
         </div>
-        <script>
-          // filepath: src/main/resources/static/assets/js/lang-dropdown.js
-          document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('lang-btn');
-            const dropdown = document.getElementById('lang-dropdown');
-            const flag = document.getElementById('current-flag');
-            btn.addEventListener('click', function (e) {
-              e.stopPropagation();
-              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            });
-            document.addEventListener('click', function () {
-              dropdown.style.display = 'none';
-            });
-            document.querySelectorAll('.lang-option').forEach(function (el) {
-              el.addEventListener('click', function () {
-                flag.src = `https://flagcdn.com/24x18/${el.dataset.flag}.png`;
-                // Aqui você pode trocar o idioma da página, recarregar, etc.
-                dropdown.style.display = 'none';
-              });
-            });
-          });
-        </script>
 
-
-        <button class="btn btn-primary">Entrar</button>
+        <button class="btn btn-primary">Sign in</button>
 
       </div>
 
@@ -124,8 +71,8 @@
 
         <div class="navbar-top">
 
-          <a href="/" class="logo">
-            <img src="/assets/img/logo.png" alt="Whereflix logo">
+          <a href="./index.html" class="logo">
+            <img src="/assets/img/logo.svg" alt="Filmlane logo">
           </a>
 
           <button class="menu-close-btn" data-menu-close-btn>
@@ -137,24 +84,24 @@
         <ul class="navbar-list">
 
           <li>
-            <a href="/" class="navbar-link">Home</a>
+            <a href="./index.html" class="navbar-link">Home</a>
           </li>
 
           <li>
-            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+            <a href="#" class="navbar-link">Movie</a>
           </li>
 
           <li>
-            <a href="/#app" class="navbar-link">App</a>
+            <a href="#" class="navbar-link">Tv Show</a>
           </li>
 
           <li>
-            <a href="/#bem-avaliados" class="navbar-link">Bem Avaliados</a>
+            <a href="#" class="navbar-link">Web Series</a>
           </li>
 
-          <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
-
-          <li><a href="/streamings" class="navbar-link">Lista de Streamings</a></li>
+          <li>
+            <a href="#" class="navbar-link">Pricing</a>
+          </li>
 
         </ul>
 
@@ -197,6 +144,10 @@
     </div>
   </header>
 
+
+
+
+
   <main>
     <article>
 
@@ -219,23 +170,28 @@
 
           <div class="movie-detail-content">
 
-            <p class="detail-subtitle" th:text="${filme.tipo.nome}">Tipo do Filme</p>
+            <p class="detail-subtitle">New Episodes</p>
 
             <h1 class="h1 detail-title">
-              <span th:text="${filme.titulo}">Título do Filme</span>
+              Free <strong>Guy</strong>
             </h1>
-            <img th:src="@{${filme.foto != null} ? '/upload/' + ${filme.foto} : '/assets/img/sem-foto.png'}"
-              th:alt="${filme.titulo}" />
-            <!-- e assim por diante -->
 
             <div class="meta-wrapper">
 
               <div class="badge-wrapper">
-                <div class="badge badge-outline" th:text="${filme.qualidade.nome}">HD</div>
+                <div class="badge badge-fill">PG 13</div>
+
+                <div class="badge badge-outline">HD</div>
               </div>
 
               <div class="ganre-wrapper">
                 <a href="#">Comedy,</a>
+
+                <a href="#">Action,</a>
+
+                <a href="#">Adventure,</a>
+
+                <a href="#">Science Fiction</a>
               </div>
 
               <div class="date-time">
@@ -479,26 +435,30 @@
 
         <div class="footer-brand-wrapper">
 
-          <a href="/" class="logo">
-            <img src="/assets/img/logo.png" alt="Whereflix logo">
+          <a href="./index.html" class="logo">
+            <img src="/assets/img/logo.svg" alt="Filmlane logo">
           </a>
 
           <ul class="footer-list">
 
             <li>
-              <a href="/" class="footer-link">Home</a>
+              <a href="./index.html" class="footer-link">Home</a>
             </li>
 
             <li>
-              <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+              <a href="#" class="footer-link">Movie</a>
             </li>
 
             <li>
-              <a href="/#app" class="footer-link">App</a>
+              <a href="#" class="footer-link">TV Show</a>
             </li>
 
             <li>
-              <a href="/#bem-avaliados" class="footer-link">Bem Avaliados</a>
+              <a href="#" class="footer-link">Web Series</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Pricing</a>
             </li>
 
           </ul>
@@ -516,16 +476,15 @@
             </li>
 
             <li>
-              <a href="#" class="quicklink-link">Central de ajuda
-              </a>
+              <a href="#" class="quicklink-link">Help center</a>
             </li>
 
             <li>
-              <a href="#" class="quicklink-link">Termos de uso</a>
+              <a href="#" class="quicklink-link">Terms of use</a>
             </li>
 
             <li>
-              <a href="#" class="quicklink-link">Privacidade</a>
+              <a href="#" class="quicklink-link">Privacy</a>
             </li>
 
           </ul>
@@ -567,8 +526,10 @@
       <div class="container">
 
         <p class="copyright">
-          &copy; 2025 <a href="https://danillo.info" target="_blank">danillo.info</a>. All Rights Reserved
+          &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
         </p>
+
+        <img src="/assets/img/footer-bottom-img.png" alt="Online banking companies logo" class="footer-bottom-img">
 
       </div>
     </div>
@@ -576,23 +537,31 @@
   </footer>
 
 
-  <!-- #GO TO TOP -->
+
+
+
+  <!-- 
+    - #GO TO TOP
+  -->
+
   <a href="#top" class="go-top" data-go-top>
     <ion-icon name="chevron-up"></ion-icon>
   </a>
 
-  <!-- custom js link  -->
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
   <script src="/assets/js/script.js"></script>
 
-  <!-- ionicon link -->
+  <!-- 
+    - ionicon link
+  -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/ionicons/ionicons.js"></script>
-  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-
 
 </body>
 
