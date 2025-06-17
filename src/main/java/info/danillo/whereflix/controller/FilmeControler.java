@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade
- * Filme. Inclui funcionalidades de CRUD para filmes, telefones e streamings.
+ * Filme. Inclui funcionalidades de CRUD para filmes, e streamings.
  */
 @Controller
 public class FilmeControler {
@@ -28,9 +28,6 @@ public class FilmeControler {
 
     @Autowired
     private StreamingRepository streamingRepository;
-
-    @Autowired
-    private TelefoneFilmeRepository telefoneFilmeRepository;
 
     @Autowired
     private TipoRepository tipoRepository;
@@ -330,82 +327,5 @@ public class FilmeControler {
         return "redirect:/filmes";
     }
 
-    /**
-     * Exibe o formulário para atualizar os telefones de um filme.
-     *
-     * @param id    ID do filme.
-     * @param model Objeto para adicionar atributos à view.
-     * @return Título da página de atualização de telefones.
-     */
-    @GetMapping("/filmes/atualizar/telefone/{id}")
-    public String updateTelefone(@PathVariable Integer id, Model model) {
-        Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
-        model.addAttribute("filme", filme);
-        return "filme-telefone";
-    }
 
-    /**
-     * Processa a adição de um novo telefone para o filme.
-     *
-     * @param id           ID do filme.
-     * @param novoTelefone Número do telefone.
-     * @param whatsapp     Indica se o telefone é WhatsApp.
-     * @return Redireciona para a página de atualização de telefones.
-     */
-    @PostMapping("/filmes/atualizar/telefone")
-    public String postUpdateTelefone(
-            @RequestParam int id,
-            @RequestParam(required = false) String novoTelefone,
-            @RequestParam String whatsapp,
-            Model model) {
-        // Validação do número de telefone
-        if (novoTelefone == null || novoTelefone.trim().isEmpty()) {
-            model.addAttribute("erro", "O número de telefone não pode estar vazio.");
-            Filme filme = filmeRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
-            model.addAttribute("filme", filme); // Adiciona o objeto filme ao modelo
-            return "filme-telefone";
-        }
-
-        String telefoneSomenteNumeros = novoTelefone.replaceAll("[^0-9]", "");
-        boolean isWhatsapp = Boolean.parseBoolean(whatsapp);
-
-        Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
-
-        TelefoneFilme telefone = new TelefoneFilme();
-        telefone.setNumero(telefoneSomenteNumeros);
-        telefone.setWhatsapp(isWhatsapp);
-        telefone.setFilme(filme);
-
-        telefoneFilmeRepository.save(telefone); // Salva o telefone com ID gerado automaticamente
-
-        return "redirect:/filmes/atualizar/telefone/" + id;
-    }
-
-    /**
-     * Processa a exclusão de um telefone do filme.
-     *
-     * @param id         ID do filme.
-     * @param idTelefone ID do telefone.
-     * @return Redireciona para a página de atualização de telefones.
-     */
-    @PostMapping("/filmes/excluir/telefone")
-    public String excluirTelefone(@RequestParam int id, @RequestParam int idTelefone, Model model) {
-        // Busca o filme pelo ID
-        Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
-
-        // Busca e remove o telefone
-        TelefoneFilme telefone = telefoneFilmeRepository.findById(idTelefone)
-                .orElseThrow(() -> new IllegalArgumentException("Telefone não encontrado: " + idTelefone));
-        telefoneFilmeRepository.delete(telefone);
-
-        // Atualiza o modelo com o filme e seus telefones
-        filme.setTelefones(telefoneFilmeRepository.findByFilmeId(id)); // Atualiza a lista de telefones
-        model.addAttribute("filme", filme);
-
-        return "filme-telefone";
-    }
 }
