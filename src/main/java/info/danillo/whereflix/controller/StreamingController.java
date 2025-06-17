@@ -1,5 +1,9 @@
 package info.danillo.whereflix.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class StreamingController {
@@ -52,20 +57,55 @@ public class StreamingController {
     }
 
     @PostMapping("/streamings/cadastrar")
-    public String salvarStreaming(@ModelAttribute Streaming streaming, Model model) {
+    public String salvarStreaming(
+            @RequestParam String nome,
+            @RequestParam("foto") MultipartFile foto,
+            Model model) {
+
         // Validação: Campo "nome" vazio
-        if (streaming.getNome() == null || streaming.getNome().trim().isEmpty()) {
+        if (nome == null || nome.trim().isEmpty()) {
             model.addAttribute("errorMessage", "O nome da streaming é obrigatório.");
+            model.addAttribute("streaming", new Streaming());
             return "streaming-cadastrar";
         }
 
         // Validação: Nome duplicado
-        if (streamingRepository.existsByNome(streaming.getNome())) {
+        if (streamingRepository.existsByNome(nome)) {
             model.addAttribute("errorMessage", "Já existe uma streaming com este nome.");
+            model.addAttribute("streaming", new Streaming());
             return "streaming-cadastrar";
         }
 
-        // Salvar streaming
+        // Upload da foto
+        String nomeArquivo = null;
+        if (foto != null && !foto.isEmpty()) {
+            String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+            File pasta = new File(uploadDir);
+            if (!pasta.exists()) {
+                pasta.mkdirs();
+            }
+            nomeArquivo = foto.getOriginalFilename();
+            Path caminhoFoto = Paths.get(uploadDir + nomeArquivo);
+
+            // Verifica se já existe uma imagem com o mesmo nome
+            if (Files.exists(caminhoFoto)) {
+                model.addAttribute("errorMessage", "Já existe uma imagem com esse nome. Renomeie o arquivo e tente novamente.");
+                model.addAttribute("streaming", new Streaming());
+                return "streaming-cadastrar";
+            }
+            try {
+                foto.transferTo(caminhoFoto.toFile());
+            } catch (Exception e) {
+                model.addAttribute("errorMessage", "Erro ao salvar a imagem: " + e.getMessage());
+                model.addAttribute("streaming", new Streaming());
+                return "streaming-cadastrar";
+            }
+        }
+
+        Streaming streaming = new Streaming();
+        streaming.setNome(nome);
+        streaming.setFoto(nomeArquivo);
+
         streamingRepository.save(streaming);
         return "redirect:/streamings";
     }

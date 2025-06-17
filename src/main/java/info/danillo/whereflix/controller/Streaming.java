@@ -31,6 +31,9 @@ public class Streaming {
     @Basic
     private String curso;
 
+    @Basic
+    private String foto;
+
     /**
      * Construtor padrão necessário para o JPA.
      */
@@ -102,6 +105,14 @@ public class Streaming {
      */
     public void setCurso(String curso) {
         this.curso = curso;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     /**

@@ -203,11 +203,22 @@
             <h1 class="mb-4 text-center">Cadastro de Streaming</h1>
             <!-- Exibição de Mensagem de Erro -->
             <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-            <form th:action="@{/streamings/cadastrar}" method="post">
+            <form th:action="@{/streamings/cadastrar}" method="post" enctype="multipart/form-data">
               <div class="form-group mb-3">
                 <label for="nome" class="form-label">Nome da Streaming:</label>
-                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da streaming"
-                  required>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da streaming" required
+                       th:value="${streaming != null} ? ${streaming.nome} : ''">
+              </div>
+              <div class="form-group mb-3">
+                <label for="foto" class="form-label">Banner da Streaming:</label>
+                <input type="file" id="foto" name="foto" accept="image/*" class="form-control" required>
+              </div>
+              <!-- Exibe a imagem se já existir uma associada à streaming -->
+              <div class="mb-3 text-center">
+                <img th:if="${streaming != null and streaming.foto != null}" 
+                     th:src="@{'/upload/' + ${streaming.foto}}" 
+                     alt="Banner da Streaming" 
+                     style="max-width: 200px; max-height: 200px;" />
               </div>
               <div class="text-center">
                 <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
