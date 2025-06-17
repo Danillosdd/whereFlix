@@ -2,31 +2,31 @@
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmlane - Lista de Filmes</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmlane - Lista de Filmes</title>
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 
-    <!-- google font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- custom css link -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- custom css link -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body id="top">
 
-    <!-- Cabeçalho -->
-    <header class="header" data-header>
+  <!-- Cabeçalho -->
+  <header class="header" data-header>
     <div class="container">
 
       <div class="overlay" data-overlay></div>
@@ -83,15 +83,15 @@
           </li>
 
           <li>
-          <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
           </li>
 
           <li>
-            <a href="/#servicos" class="navbar-link">Serviços</a>
+            <a href="/#app" class="navbar-link">App</a>
           </li>
 
           <li>
-            <a href="/#avaliados" class="navbar-link">Bem Avaliados</a>
+            <a href="/#bem-avaliados" class="navbar-link">Bem Avaliados</a>
           </li>
 
           <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -139,195 +139,195 @@
     </div>
   </header>
 
-    <!-- Conteúdo Principal -->
-    <main>
-        <article>
-            <section class="hero">
-                <div class="container mt-5">
-                    <div class="card shadow-lg">
-                        <div class="card-body">
-                            <h1 class="mb-4 text-center">Lista de Filmes</h1>
+  <!-- Conteúdo Principal -->
+  <main>
+    <article>
+      <section class="hero">
+        <div class="container mt-5">
+          <div class="card shadow-lg">
+            <div class="card-body">
+              <h1 class="mb-4 text-center">Lista de Filmes</h1>
 
-                            <form action="/filmes/busca" method="get" class="d-flex mb-4">
-                                <input type="text" name="titulo" class="form-control me-2" placeholder="Título do Filme"
-                                    th:value="${tituloPesquisado}" />
-                                <button type="submit" class="btn btn-primary">Buscar</button>
-                            </form>
+              <form action="/filmes/busca" method="get" class="d-flex mb-4">
+                <input type="text" name="titulo" class="form-control me-2" placeholder="Título do Filme"
+                  th:value="${tituloPesquisado}" />
+                <button type="submit" class="btn btn-primary">Buscar</button>
+              </form>
 
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover align-middle text-center">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col" style="width: 40%;">Título</th>
-                                            <th scope="col" style="width: 10%;">Tipo</th>
-                                            <th scope="col" style="width: 15%;">Categoria</th>
-                                            <th scope="col" style="width: 5%;">Qualidade</th>
-                                            <th scope="col" style="width: 5%;">Duração</th>
-                                            <th scope="col" style="width: 25%;">Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="filmes-tbody">
-                                        <!-- Os filmes serão inseridos aqui via JS -->
-                                    </tbody>
-                                </table>
-                                <!-- Botão para Cadastrar Novo Filme -->
-                                <div class="text-center mb-3">
-                                    <a href="/filmes/cadastrar" class="btn btn-primary d-inline-block">
-                                        <i class="bi bi-plus"></i> Cadastrar Novo Filme
-                                    </a>
-                                </div>
-
-                                <!-- Paginação -->
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center" id="filmes-paginacao">
-                                        <!-- Os botões de paginação serão inseridos aqui pelo JavaScript -->
-                                    </ul>
-                                </nav>
-
-                            </div>
-                        </div>
-                    </div>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle text-center">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col" style="width: 40%;">Título</th>
+                      <th scope="col" style="width: 10%;">Tipo</th>
+                      <th scope="col" style="width: 15%;">Categoria</th>
+                      <th scope="col" style="width: 5%;">Qualidade</th>
+                      <th scope="col" style="width: 5%;">Duração</th>
+                      <th scope="col" style="width: 25%;">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="filmes-tbody">
+                    <!-- Os filmes serão inseridos aqui via JS -->
+                  </tbody>
+                </table>
+                <!-- Botão para Cadastrar Novo Filme -->
+                <div class="text-center mb-3">
+                  <a href="/filmes/cadastrar" class="btn btn-primary d-inline-block">
+                    <i class="bi bi-plus"></i> Cadastrar Novo Filme
+                  </a>
                 </div>
-            </section>
-        </article>
-        </pan>
 
-        <!-- Rodapé -->
-         <footer class="footer">
+                <!-- Paginação -->
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center" id="filmes-paginacao">
+                    <!-- Os botões de paginação serão inseridos aqui pelo JavaScript -->
+                  </ul>
+                </nav>
 
-    <div class="footer-top">
-      <div class="container">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+    </pan>
 
-        <div class="footer-brand-wrapper">
+    <!-- Rodapé -->
+    <footer class="footer">
 
-          <a href="./index.html" class="logo">
-            <img src="/assets/img/logo.svg" alt="Filmlane logo">
-          </a>
+      <div class="footer-top">
+        <div class="container">
 
-          <ul class="footer-list">
+          <div class="footer-brand-wrapper">
 
-            <li>
-              <a href="/" class="footer-link">Home</a>
-            </li>
+            <a href="./index.html" class="logo">
+              <img src="/assets/img/logo.svg" alt="Filmlane logo">
+            </a>
 
-            <li>
-            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
-            </li>
+            <ul class="footer-list">
 
-            <li>
-              <a href="/#servicos" class="footer-link">Serviços</a>
-            </li>
+              <li>
+                <a href="/" class="footer-link">Home</a>
+              </li>
 
-            <li>
-              <a href="/#avaliados" class="footer-link">Bem Avaliados</a>
-            </li>
+              <li>
+                <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+              </li>
 
-          </ul>
+              <li>
+                <a href="/#app" class="footer-link">App</a>
+              </li>
+
+              <li>
+                <a href="/#bem-avaliados" class="footer-link">Bem Avaliados</a>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="quicklink-wrapper">
+
+            <ul class="quicklink-list">
+
+              <li>
+                <a href="#" class="quicklink-link">Faq</a>
+              </li>
+
+              <li>
+                <a href="#" class="quicklink-link">Central de ajuda
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="quicklink-link">Termos de uso</a>
+              </li>
+
+              <li>
+                <a href="#" class="quicklink-link">Privacidade</a>
+              </li>
+
+            </ul>
+
+            <ul class="social-list">
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-pinterest"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
 
         </div>
+      </div>
 
-        <div class="divider"></div>
+      <div class="footer-bottom">
+        <div class="container">
 
-        <div class="quicklink-wrapper">
-
-          <ul class="quicklink-list">
-
-            <li>
-              <a href="#" class="quicklink-link">Faq</a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Central de ajuda
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Termos de uso</a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Privacidade</a>
-            </li>
-
-          </ul>
-
-          <ul class="social-list">
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-pinterest"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-
-          </ul>
+          <p class="copyright">
+            &copy; 2025 <a href="https://danillo.info" target="_blank">danillo.info</a>. All Rights Reserved
+          </p>
 
         </div>
-
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      <div class="container">
+    </footer>
 
-        <p class="copyright">
-          &copy; 2025 <a href="https://danillo.info" target="_blank">danillo.info</a>. All Rights Reserved
-        </p>
+    <!-- back to top button -->
+    <a href="#" class="back-to-top-btn" data-back-to-top>
+      <ion-icon name="arrow-up"></ion-icon>
+    </a>
 
-      </div>
-    </div>
+    <!-- GO TO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+      <ion-icon name="chevron-up"></ion-icon>
+    </a>
 
-  </footer>
+    <!-- custom js link -->
+    <script src="/assets/js/script.js"></script>
 
-        <!-- back to top button -->
-        <a href="#" class="back-to-top-btn" data-back-to-top>
-            <ion-icon name="arrow-up"></ion-icon>
-        </a>
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        <!-- GO TO TOP -->
-        <a href="#top" class="go-top" data-go-top>
-            <ion-icon name="chevron-up"></ion-icon>
-        </a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/ionicons/ionicons.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 
-        <!-- custom js link -->
-        <script src="/assets/js/script.js"></script>
-
-        <!-- ionicon link -->
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-        <!-- Vendor JS Files -->
-        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/vendor/ionicons/ionicons.js"></script>
-        <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-
-        <script>
-function carregarFilmes(page = 0) {
-  fetch(`/api/filmes-paginados?page=${page}&size=10`)
-    .then(res => res.json())
-    .then(data => {
-      // Monta a tabela
-      const tbody = document.getElementById('filmes-tbody');
-      tbody.innerHTML = '';
-      data.content.forEach(filme => {
-        tbody.innerHTML += `
+    <script>
+      function carregarFilmes(page = 0) {
+        fetch(`/api/filmes-paginados?page=${page}&size=10`)
+          .then(res => res.json())
+          .then(data => {
+            // Monta a tabela
+            const tbody = document.getElementById('filmes-tbody');
+            tbody.innerHTML = '';
+            data.content.forEach(filme => {
+              tbody.innerHTML += `
           <tr>
             <td class="text-start">${filme.titulo}</td>
             <td>${filme.tipo ? filme.tipo.nome : ''}</td>
@@ -347,14 +347,14 @@ function carregarFilmes(page = 0) {
             </td>
           </tr>
         `;
-      });
+            });
 
-      // Monta a paginação
-      const paginacao = document.getElementById('filmes-paginacao');
-      paginacao.innerHTML = '';
+            // Monta a paginação
+            const paginacao = document.getElementById('filmes-paginacao');
+            paginacao.innerHTML = '';
 
-      // Botão anterior
-      paginacao.innerHTML += `
+            // Botão anterior
+            paginacao.innerHTML += `
         <li class="page-item${data.first ? ' disabled' : ''}">
           <a class="page-link" href="#" onclick="carregarFilmes(${data.number - 1});return false;" aria-label="Anterior">
             <i class="bi bi-chevron-left"></i>
@@ -362,29 +362,29 @@ function carregarFilmes(page = 0) {
         </li>
       `;
 
-      // Botões de página
-      for (let i = 0; i < data.totalPages; i++) {
-        paginacao.innerHTML += `
+            // Botões de página
+            for (let i = 0; i < data.totalPages; i++) {
+              paginacao.innerHTML += `
           <li class="page-item${i === data.number ? ' active' : ''}">
             <a class="page-link" href="#" onclick="carregarFilmes(${i});return false;">${i + 1}</a>
           </li>
         `;
-      }
+            }
 
-      // Botão próximo
-      paginacao.innerHTML += `
+            // Botão próximo
+            paginacao.innerHTML += `
         <li class="page-item${data.last ? ' disabled' : ''}">
           <a class="page-link" href="#" onclick="carregarFilmes(${data.number + 1});return false;" aria-label="Próximo">
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
       `;
-    });
-}
+          });
+      }
 
-// Carrega a primeira página ao abrir
-carregarFilmes();
-</script>
+      // Carrega a primeira página ao abrir
+      carregarFilmes();
+    </script>
 
 </body>
 

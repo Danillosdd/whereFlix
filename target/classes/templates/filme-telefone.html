@@ -2,32 +2,32 @@
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmlane - Lista de Filmes</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmlane - Lista de Filmes</title>
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 
-    <!-- google font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Antigo -->
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Antigo -->
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- custom css link -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- custom css link -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body id="top">
 
-    <!-- Cabeçalho -->
-    <header class="header" data-header>
+  <!-- Cabeçalho -->
+  <header class="header" data-header>
     <div class="container">
 
       <div class="overlay" data-overlay></div>
@@ -84,15 +84,15 @@
           </li>
 
           <li>
-          <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
           </li>
 
           <li>
-            <a href="/#servicos" class="navbar-link">Serviços</a>
+            <a href="/#app" class="navbar-link">App</a>
           </li>
 
           <li>
-            <a href="/#avaliados" class="navbar-link">Bem Avaliados</a>
+            <a href="/#bem-avaliados" class="navbar-link">Bem Avaliados</a>
           </li>
 
           <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -140,123 +140,116 @@
     </div>
   </header>
 
-    <!-- Conteúdo Principal -->
-    <main>
-        <section class="hero">
-            <div class="container mt-5">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h1 class="mb-4 text-center">Gerenciar Telefones</h1>
+  <!-- Conteúdo Principal -->
+  <main>
+    <section class="hero">
+      <div class="container mt-5">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <h1 class="mb-4 text-center">Gerenciar Telefones</h1>
 
-                        <!-- Exibição de Erros -->
-                        <div th:if="${erro}" class="alert alert-danger">
-                            <p th:text="${erro}"></p>
-                        </div>
+            <!-- Exibição de Erros -->
+            <div th:if="${erro}" class="alert alert-danger">
+              <p th:text="${erro}"></p>
+            </div>
 
-                        <!-- Formulário para Gerenciar Telefones -->
-                        <form action="/filmes/atualizar/telefone" method="post" class="needs-validation" novalidate>
-                            <!-- Campo Oculto para o ID do Filme -->
+            <!-- Formulário para Gerenciar Telefones -->
+            <form action="/filmes/atualizar/telefone" method="post" class="needs-validation" novalidate>
+              <!-- Campo Oculto para o ID do Filme -->
+              <input type="hidden" name="id" th:value="${filme.id}">
+
+              <!-- Campo Título -->
+              <div class="mb-3">
+                <label for="titulo" class="form-label">Título do Filme:</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}" disabled>
+              </div>
+
+              <!-- Tabela de Telefones -->
+              <div class="mb-4">
+                <label for="telefones" class="form-label">Telefones:</label>
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">WhatsApp</th>
+                        <th scope="col">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Verifica se há telefones -->
+                      <tr th:if="${filme.telefones == null or #lists.isEmpty(filme.telefones)}">
+                        <td colspan="3" class="text-center">Nenhum telefone cadastrado.</td>
+                      </tr>
+
+                      <!-- Telefones Existentes -->
+                      <tr th:each="telefone : ${filme.telefones}">
+                        <td th:text="${telefone.numero}"></td>
+                        <td>
+                          <span th:text="${telefone.whatsapp != null && telefone.whatsapp ? 'Sim' : 'Não'}"></span>
+                        </td>
+                        <td>
+                          <!-- Botão para Excluir Telefone -->
+                          <form action="/filmes/excluir/telefone" method="post" class="d-inline">
                             <input type="hidden" name="id" th:value="${filme.id}">
+                            <input type="hidden" name="idTelefone" th:value="${telefone.id}">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                              <i class="bi bi-trash"></i> Excluir
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
 
-                            <!-- Campo Título -->
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Título do Filme:</label>
-                                <input type="text" id="titulo" name="titulo" class="form-control"
-                                    th:value="${filme.titulo}" disabled>
+                      <!-- Linha para Adicionar Novo Telefone -->
+                      <tr>
+                        <td>
+                          <input type="text" id="novoTelefone" name="novoTelefone" class="form-control"
+                            placeholder="Digite o telefone" required>
+                          <div class="invalid-feedback">Por favor, insira um número de
+                            telefone
+                            válido.</div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="form-check me-3">
+                              <input class="form-check-input" type="radio" id="whatsappSim" name="whatsapp" value="true"
+                                required checked>
+                              <label class="form-check-label" for="whatsappSim">Sim</label>
                             </div>
-
-                            <!-- Tabela de Telefones -->
-                            <div class="mb-4">
-                                <label for="telefones" class="form-label">Telefones:</label>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered align-middle">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th scope="col">Telefone</th>
-                                                <th scope="col">WhatsApp</th>
-                                                <th scope="col">Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Verifica se há telefones -->
-                                            <tr th:if="${filme.telefones == null or #lists.isEmpty(filme.telefones)}">
-                                                <td colspan="3" class="text-center">Nenhum telefone cadastrado.</td>
-                                            </tr>
-
-                                            <!-- Telefones Existentes -->
-                                            <tr th:each="telefone : ${filme.telefones}">
-                                                <td th:text="${telefone.numero}"></td>
-                                                <td>
-                                                    <span
-                                                        th:text="${telefone.whatsapp != null && telefone.whatsapp ? 'Sim' : 'Não'}"></span>
-                                                </td>
-                                                <td>
-                                                    <!-- Botão para Excluir Telefone -->
-                                                    <form action="/filmes/excluir/telefone" method="post"
-                                                        class="d-inline">
-                                                        <input type="hidden" name="id" th:value="${filme.id}">
-                                                        <input type="hidden" name="idTelefone"
-                                                            th:value="${telefone.id}">
-                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                            <i class="bi bi-trash"></i> Excluir
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-
-                                            <!-- Linha para Adicionar Novo Telefone -->
-                                            <tr>
-                                                <td>
-                                                    <input type="text" id="novoTelefone" name="novoTelefone"
-                                                        class="form-control" placeholder="Digite o telefone" required>
-                                                    <div class="invalid-feedback">Por favor, insira um número de
-                                                        telefone
-                                                        válido.</div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="form-check me-3">
-                                                            <input class="form-check-input" type="radio"
-                                                                id="whatsappSim" name="whatsapp" value="true" required
-                                                                checked>
-                                                            <label class="form-check-label"
-                                                                for="whatsappSim">Sim</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                id="whatsappNao" name="whatsapp" value="false" required>
-                                                            <label class="form-check-label"
-                                                                for="whatsappNao">Não</label>
-                                                        </div>
-                                                    </div>
-
-                                </div>
-                                </td>
-                                <td>
-                                    <!-- Botão para Adicionar Telefone -->
-                                    <button type="submit" class="btn btn-success btn-sm">
-                                        <i class="bi bi-plus-circle"></i> Adicionar
-                                    </button>
-                                </td>
-                                </tr>
-                                </tbody>
-                                </table>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" id="whatsappNao" name="whatsapp"
+                                value="false" required>
+                              <label class="form-check-label" for="whatsappNao">Não</label>
                             </div>
-                    </div>
+                          </div>
 
-                    <!-- Botões -->
-                    <div class="text-center mt-4">
-                        <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
-                    </div>
-                    </form>
                 </div>
-            </div>
-            </div>
-        </section>
-    </main>
+                </td>
+                <td>
+                  <!-- Botão para Adicionar Telefone -->
+                  <button type="submit" class="btn btn-success btn-sm">
+                    <i class="bi bi-plus-circle"></i> Adicionar
+                  </button>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+              </div>
+          </div>
 
-    <!-- Rodapé -->
-   <footer class="footer">
+          <!-- Botões -->
+          <div class="text-center mt-4">
+            <a class="btn btn-secondary me-2 d-inline-block w-auto" th:href="@{/filmes}">Voltar</a>
+          </div>
+          </form>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
 
     <div class="footer-top">
       <div class="container">
@@ -274,15 +267,15 @@
             </li>
 
             <li>
-            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+              <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
             </li>
 
             <li>
-              <a href="/#servicos" class="footer-link">Serviços</a>
+              <a href="/#app" class="footer-link">App</a>
             </li>
 
             <li>
-              <a href="/#avaliados" class="footer-link">Bem Avaliados</a>
+              <a href="/#bem-avaliados" class="footer-link">Bem Avaliados</a>
             </li>
 
           </ul>
@@ -359,21 +352,21 @@
 
   </footer>
 
-    <!-- GO TO TOP -->
-    <a href="#top" class="go-top" data-go-top>
-        <ion-icon name="chevron-up"></ion-icon>
-    </a>
+  <!-- GO TO TOP -->
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
 
-    <!-- custom js link -->
-    <script src="/assets/js/script.js"></script>
+  <!-- custom js link -->
+  <script src="/assets/js/script.js"></script>
 
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- ionicon link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Antigo -->
-    <!-- Vendor JS Files -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Antigo -->
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

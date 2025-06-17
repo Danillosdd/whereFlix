@@ -2,32 +2,32 @@
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmlane - Lista de Filmes</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmlane - Lista de Filmes</title>
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 
-    <!-- google font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Antigo -->
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Antigo -->
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- custom css link -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- custom css link -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body id="top">
 
-    <!-- Cabeçalho -->
-   <header class="header" data-header>
+  <!-- Cabeçalho -->
+  <header class="header" data-header>
     <div class="container">
 
       <div class="overlay" data-overlay></div>
@@ -84,15 +84,15 @@
           </li>
 
           <li>
-          <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
           </li>
 
           <li>
-            <a href="/#servicos" class="navbar-link">Serviços</a>
+            <a href="/#app" class="navbar-link">App</a>
           </li>
 
           <li>
-            <a href="/#avaliados" class="navbar-link">Bem Avaliados</a>
+            <a href="/#bem-avaliados" class="navbar-link">Bem Avaliados</a>
           </li>
 
           <li><a href="/filmes" class="navbar-link">Lista de Filmes</a></li>
@@ -140,33 +140,33 @@
     </div>
   </header>
 
-    <!-- Conteúdo Principal -->
-    <main>
-        <section class="hero">
-            <div class="container mt-5">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h1 class="mb-4 text-center">Cadastro de Streaming</h1>
-                        <!-- Exibição de Mensagem de Erro -->
-                        <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-                        <form th:action="@{/streamings/cadastrar}" method="post">
-                            <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Nome da Streaming:</label>
-                                <input type="text" id="nome" name="nome" class="form-control"
-                                    placeholder="Digite o nome da streaming" required>
-                            </div>
-                            <div class="text-center">
-                                <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
-                                <button type="submit" class="btn btn-primary d-inline-block">Cadastrar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <!-- Rodapé -->
-    <footer class="footer">
+  <!-- Conteúdo Principal -->
+  <main>
+    <section class="hero">
+      <div class="container mt-5">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <h1 class="mb-4 text-center">Cadastro de Streaming</h1>
+            <!-- Exibição de Mensagem de Erro -->
+            <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+            <form th:action="@{/streamings/cadastrar}" method="post">
+              <div class="form-group mb-3">
+                <label for="nome" class="form-label">Nome da Streaming:</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da streaming"
+                  required>
+              </div>
+              <div class="text-center">
+                <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
+                <button type="submit" class="btn btn-primary d-inline-block">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Rodapé -->
+  <footer class="footer">
 
     <div class="footer-top">
       <div class="container">
@@ -184,15 +184,15 @@
             </li>
 
             <li>
-            <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
+              <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
             </li>
 
             <li>
-              <a href="/#servicos" class="footer-link">Serviços</a>
+              <a href="/#app" class="footer-link">App</a>
             </li>
 
             <li>
-              <a href="/#avaliados" class="footer-link">Bem Avaliados</a>
+              <a href="/#bem-avaliados" class="footer-link">Bem Avaliados</a>
             </li>
 
           </ul>
@@ -269,27 +269,27 @@
 
   </footer>
 
-    <!-- back to top button -->
-    <a href="#" class="back-to-top-btn" data-back-to-top>
-        <ion-icon name="arrow-up"></ion-icon>
-    </a>
+  <!-- back to top button -->
+  <a href="#" class="back-to-top-btn" data-back-to-top>
+    <ion-icon name="arrow-up"></ion-icon>
+  </a>
 
-    <!-- GO TO TOP -->
-    <a href="#top" class="go-top" data-go-top>
-        <ion-icon name="chevron-up"></ion-icon>
-    </a>
+  <!-- GO TO TOP -->
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
 
-    <!-- custom js link -->
-    <script src="/assets/js/script.js"></script>
+  <!-- custom js link -->
+  <script src="/assets/js/script.js"></script>
 
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- ionicon link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Vendor JS Files -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendor/ionicons/ionicons.js"></script>
-    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/ionicons/ionicons.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 
 
 
