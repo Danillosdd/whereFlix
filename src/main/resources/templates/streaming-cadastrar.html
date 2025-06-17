@@ -209,17 +209,32 @@
                 <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da streaming" required
                        th:value="${streaming != null} ? ${streaming.nome} : ''">
               </div>
+
+              <!-- Upload da Foto -->
               <div class="form-group mb-3">
                 <label for="foto" class="form-label">Banner da Streaming:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" class="form-control" required>
+                <input type="file" id="foto" name="foto" accept="image/*" class="form-control" onchange="previewImage(event)" required>
+                <div class="invalid-feedback">Por favor, envie uma imagem do streaming.</div>
+
               </div>
-              <!-- Exibe a imagem se já existir uma associada à streaming -->
-              <div class="mb-3 text-center">
-                <img th:if="${streaming != null and streaming.foto != null}" 
-                     th:src="@{'/upload/' + ${streaming.foto}}" 
-                     alt="Banner da Streaming" 
-                     style="max-width: 200px; max-height: 200px;" />
+
+              <!-- Visualização da Foto -->
+              <div class="d-flex justify-content-center align-items-center mb-3" style="height: 320px;">
+                <div id="preview-container"
+                  style="width: 200px; height: 300px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
+                  <img id="preview"
+                    th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
+                    th:attr="data-original=${streaming.foto != null ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
+                    src="/assets/img/sem-foto.png" alt="Pré-visualização" style="max-width: 100%; max-height: 100%;">
+                </div>
               </div>
+              <div class="text-center mb-3">
+                <small style="color: #888; font-size: 0.9em;">
+                  <i class="bi bi-info-circle"></i>
+                  Largura <b>600px</b> e Altura <b>900px</b>
+                </small>
+              </div>
+
               <div class="text-center">
                 <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
                 <button type="submit" class="btn btn-primary d-inline-block">Cadastrar</button>
