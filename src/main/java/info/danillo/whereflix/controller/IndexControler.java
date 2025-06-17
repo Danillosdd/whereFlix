@@ -30,6 +30,10 @@ public class IndexControler {
         model.addAttribute("tipos", tipoRepository.findAll());
         List<Filme> lancamentos = filmeRepository.findTop4ByOrderByAnoDesc();
         model.addAttribute("lancamentos", lancamentos);
+        List<Filme> bemAvaliados = filmeRepository.findTop8ByOrderByAvaliacaoDesc();
+        model.addAttribute("bemAvaliados", bemAvaliados);
+        List<Filme> aleatorios = filmeRepository.buscar4Aleatorios();
+        model.addAttribute("aleatorios", aleatorios);
         return "index"; // Isso renderiza o template src/main/resources/templates/index.html
     }
 
