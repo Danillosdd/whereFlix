@@ -92,7 +92,7 @@
           </li>
 
           <li>
-            <a href="/#servicos" class="navbar-link">Serviços</a>
+            <a href="/#app" class="navbar-link">App</a>
           </li>
 
           <li>
@@ -171,7 +171,7 @@
         - #LANÇAMENTOS RECENTES
       -->
 
-      <section class="upcoming">
+      <section class="upcoming"  id="lancamentos">
         <div class="container">
 
           <div class="flex-wrapper">
@@ -200,7 +200,7 @@
 
           </div>
 
-          <ul class="movies-list has-scrollbar" id="lancamentos">
+          <ul class="movies-list has-scrollbar">
             <li th:each="filme : ${lancamentos}">
               <div class="movie-card">
                 <a th:href="@{'/movie-details/' + ${filme.id}}">
@@ -233,15 +233,11 @@
         </div>
       </section>
 
-
-
-
-
       <!-- 
-        - #SERVIÇOS
+        - #APP
       -->
 
-      <section class="service" id="servicos">
+      <section class="service" id="app">
         <div class="container">
 
           <div class="service-banner">
@@ -304,10 +300,6 @@
 
         </div>
       </section>
-
-
-
-
 
       <!-- 
         - #BEM AVALIADOS
@@ -480,7 +472,7 @@
             </li>
 
             <li>
-              <a href="/#servicos" class="footer-link">Serviços</a>
+              <a href="/#app" class="footer-link">App</a>
             </li>
 
             <li>
