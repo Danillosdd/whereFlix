@@ -28,4 +28,7 @@ public interface FilmeRepository extends JpaRepository<Filme, Integer> {
     boolean existsByTituloIgnoreCase(String titulo);
 
     List<Filme> findAllByOrderByTituloAsc();
+
+    // Lançamentos
+    List<Filme> findTop4ByOrderByAnoDesc();
 }

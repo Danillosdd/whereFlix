@@ -1,5 +1,7 @@
 package info.danillo.whereflix.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ public class IndexControler {
     @Autowired
     private TipoRepository tipoRepository;
 
+    @Autowired
+    private FilmeRepository filmeRepository;
+
     /**
      * Página inicial do sistema.
      *
@@ -23,6 +28,8 @@ public class IndexControler {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("tipos", tipoRepository.findAll());
+        List<Filme> lancamentos = filmeRepository.findTop4ByOrderByAnoDesc();
+        model.addAttribute("lancamentos", lancamentos);
         return "index"; // Isso renderiza o template src/main/resources/templates/index.html
     }
 

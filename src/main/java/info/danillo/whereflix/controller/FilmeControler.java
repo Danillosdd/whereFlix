@@ -58,8 +58,8 @@ public class FilmeControler {
     /**
      * Busca filmes pelo título.
      *
-     * @param titulo  Título a ser pesquisado.
-     * @param model Objeto para adicionar atributos à view.
+     * @param titulo Título a ser pesquisado.
+     * @param model  Objeto para adicionar atributos à view.
      * @return Título da página de listagem de filmes.
      */
     @GetMapping("/filmes/busca")
@@ -196,7 +196,7 @@ public class FilmeControler {
     @GetMapping("/filmes/atualizar/{id}")
     public String getAtualizarFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado: " + id));
         model.addAttribute("filme", filme);
         model.addAttribute("tipos", tipoRepository.findAll());
         model.addAttribute("categorias", categoriaRepository.findAllByOrderByNomeAsc()); // <-- aqui
