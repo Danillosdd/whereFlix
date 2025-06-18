@@ -245,14 +245,15 @@
                   <time th:text="${filme.ano}"></time>
                 </div>
                 <div class="card-meta">
-                  <div class="badge badge-outline">HD</div>
+                  <div class="badge badge-outline" th:text="${filme.qualidade != null ? filme.qualidade.nome : 'HD'}">
+                  </div>
                   <div class="duration">
                     <ion-icon name="time-outline"></ion-icon>
-                    <time datetime="PT137M">137 min</time>
+                    <time th:text="${filme.duracao + ' min'}"></time>
                   </div>
                   <div class="rating">
                     <ion-icon name="star"></ion-icon>
-                    <data>8.5</data>
+                    <data th:text="${filme.avaliacao}"></data>
                   </div>
                 </div>
               </div>
