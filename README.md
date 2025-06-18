@@ -63,7 +63,7 @@ Passo-a-passo que informam o que você deve executar para ter um ambiente de des
 
 * As imagens inseridas por Upload no Site, nas telas de cadastro do Filme e Streaming: [Acessar pasta upload](./upload)
 
-### 🖴Banco de Dados
+### 🖴 Banco de Dados
 
 * O backup do Banco e Dados em .sql ou .backup: [Acessar pasta data-base](./data-base)
 
