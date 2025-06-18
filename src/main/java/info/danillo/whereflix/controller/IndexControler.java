@@ -50,7 +50,14 @@ public class IndexControler {
     public String detalhesFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeRepository.findById(id).orElse(null);
         model.addAttribute("filme", filme);
-        
+
+        List<Streaming> streamingsOrdenados = new java.util.ArrayList<>();
+        if (filme != null && filme.getStreamings() != null) {
+            streamingsOrdenados = new java.util.ArrayList<>(filme.getStreamings());
+            streamingsOrdenados.sort(java.util.Comparator.comparing(Streaming::getNome));
+        }
+        model.addAttribute("streamingsOrdenados", streamingsOrdenados);
+
         List<Filme> aleatorios = indexRepository.buscar4Aleatorios();
         model.addAttribute("aleatorios", aleatorios);
 
