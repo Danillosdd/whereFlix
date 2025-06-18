@@ -26,7 +26,10 @@
 
 <body id="top">
 
-  <!-- Cabeçalho -->
+  <!-- 
+    - #HEADER
+  -->
+
   <header class="header" data-header>
     <div class="container">
 
@@ -55,7 +58,7 @@
               <ion-icon name="chevron-down-outline"></ion-icon>
             </button>
             <div id="lang-dropdown" class="lang-dropdown"
-              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 200px;">
+              style="display: none; position: absolute; top: 120%; left: 0; background: #222; border-radius: 6px; box-shadow: 0 2px 8px #0002; z-index: 100; min-width: 120px;">
               <button class="lang-option" data-lang="en" data-flag="gb"
                 style="display: flex; align-items: center; width: 100%; background: none; border: none; color: #fff; padding: 8px 12px; cursor: pointer;">
                 <img src="https://flagcdn.com/24x18/gb.png" alt="EN"
@@ -85,6 +88,7 @@
 
           </div>
         </div>
+
 
         <a href="/login" class="btn btn-primary"> Entrar </a>
 
@@ -171,54 +175,37 @@
     </div>
   </header>
 
-  <!-- Conteúdo Principal -->
+  <!-- Conteúdo principal -->
   <main>
-    <section class="hero">
-      <div class="container mt-5">
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <h1 class="mb-4 text-center">Atualizar Streaming</h1>
-            <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-            <form th:action="@{'/streamings/atualizar/' + ${streaming.id}}" method="post" enctype="multipart/form-data">
-              <div class="form-group mb-3">
-                <label for="nome" class="form-label">Nome da Streaming:</label>
-                <input type="text" id="nome" name="nome" class="form-control" th:value="${streaming.nome}"
-                  placeholder="Digite o nome da streaming" required>
+    <section class="hero" style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding-top: 200px;">
+      <div class="container" style="max-width: 400px; margin: 0 auto;">
+        <div class="card shadow-lg" style="background: var(--gunmetal-2); border-radius: 16px;">
+          <div class="card-body p-5">
+            <h2 class="h2 text-center mb-4" style="color: var(--citrine);">Entrar</h2>
+            <form th:action="@{/login}" method="post" autocomplete="off">
+              <div th:if="${param.error}" class="alert alert-danger text-center py-2 mb-3" style="font-size: 1rem;">
+                Usuário ou senha inválidos!
               </div>
-
-              <!-- Upload da Streaming -->
-              <div class="form-group mb-3">
-                <label for="foto" class="form-label">Banner do Streaming:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" class="form-control"
-                  onchange="previewImage(event)">
-                <div class="invalid-feedback">Por favor, envie uma imagem do streaming.</div>
-
+              <div th:if="${param.logout}" class="alert alert-success text-center py-2 mb-3" style="font-size: 1rem;">
+                Logout realizado com sucesso!
               </div>
-
-              <!-- Visualização da Streaming -->
-              <div class="d-flex justify-content-center align-items-center mb-3" style="height: 220px;">
-                <div id="preview-container"
-                  style="width: 200px; height: 200px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
-                  <img id="preview"
-                    th:src="@{${streaming.foto != null} ? '/upload/' + ${streaming.foto} : '/assets/img/sem-foto.png'}"
-                    th:attr="data-original=${streaming.foto != null ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
-                    src="/assets/img/sem-foto.png" alt="Pré-visualização" style="max-width: 100%; max-height: 100%;">
-                </div>
+              <div class="mb-3">
+                <label for="username" class="form-label" style="color: var(--white);">Usuário</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu usuário"
+                  required autofocus
+                  style="background: var(--gunmetal-1); color: var(--white); border: 1px solid var(--jet); border-radius: 8px;">
               </div>
-              <div class="text-center mb-3">
-                <small style="color: #888; font-size: 0.9em;">
-                  <i class="bi bi-info-circle"></i>
-                  Largura <b>200px</b> e Altura <b>200px</b>
-                </small>
+              <div class="mb-4">
+                <label for="password" class="form-label" style="color: var(--white);">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha"
+                  required
+                  style="background: var(--gunmetal-1); color: var(--white); border: 1px solid var(--jet); border-radius: 8px;">
               </div>
-
-
-              <div class="text-center">
-                <a href="/streamings" class="btn btn-secondary d-inline-block me-2">Voltar</a>
-                <button type="submit" class="btn btn-primary d-inline-block">Atualizar</button>
-              </div>
+              <button type="submit" class="btn btn-primary w-100"
+                style="background: var(--citrine); color: var(--eerie-black); border-radius: 50px; font-weight: 700; font-size: 1.1rem;">
+                Entrar
+              </button>
             </form>
-
           </div>
         </div>
       </div>
@@ -227,129 +214,54 @@
 
   <!-- Rodapé -->
   <footer class="footer">
-
     <div class="footer-top">
       <div class="container">
-
         <div class="footer-brand-wrapper">
-
           <a href="/" class="logo">
             <img src="/assets/img/logo.png" alt="Whereflix logo">
           </a>
-
           <ul class="footer-list">
-
-            <li>
-              <a href="/" class="footer-link">Home</a>
-            </li>
-
-            <li>
-              <a href="/#lancamentos" class="navbar-link">Lançamentos</a>
-            </li>
-
-            <li>
-              <a href="/#app" class="footer-link">App</a>
-            </li>
-
-            <li>
-              <a href="/#bem-avaliados" class="footer-link">Ranking</a>
-            </li>
-
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="/#lancamentos" class="navbar-link">Lançamentos</a></li>
+            <li><a href="/#app" class="footer-link">App</a></li>
+            <li><a href="/#bem-avaliados" class="footer-link">Ranking</a></li>
           </ul>
-
         </div>
-
         <div class="divider"></div>
-
         <div class="quicklink-wrapper">
-
           <ul class="quicklink-list">
-
-            <li>
-              <a href="#" class="quicklink-link">Faq</a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Central de ajuda
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Termos de uso</a>
-            </li>
-
-            <li>
-              <a href="#" class="quicklink-link">Privacidade</a>
-            </li>
-
+            <li><a href="#" class="quicklink-link">Faq</a></li>
+            <li><a href="#" class="quicklink-link">Central de ajuda</a></li>
+            <li><a href="#" class="quicklink-link">Termos de uso</a></li>
+            <li><a href="#" class="quicklink-link">Privacidade</a></li>
           </ul>
-
           <ul class="social-list">
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-pinterest"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-
+            <li><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-pinterest"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
           </ul>
-
         </div>
-
       </div>
     </div>
-
     <div class="footer-bottom">
       <div class="container">
-
         <p class="copyright">
           &copy; 2025 <a href="https://danillo.info" target="_blank">danillo.info</a>. All Rights Reserved
         </p>
-
       </div>
     </div>
-
   </footer>
 
-
-  <!-- #GO TO TOP -->
   <a href="#top" class="go-top" data-go-top>
     <ion-icon name="chevron-up"></ion-icon>
   </a>
 
-  <!-- custom js link  -->
   <script src="/assets/js/script.js"></script>
-
-  <!-- ionicon link -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <!-- Vendor JS Files -->
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/vendor/ionicons/ionicons.js"></script>
-  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-
-
-
-
 </body>
 
 </html>

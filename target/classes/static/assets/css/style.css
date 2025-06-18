@@ -265,6 +265,7 @@ body.active {
   letter-spacing: 2px;
   display: flex;
   align-items: center;
+  justify-content: center; /* <-- Adicione esta linha */
   gap: 10px;
   padding: 16px 30px;
   border: 2px solid var(--citrine);
@@ -1045,7 +1046,7 @@ body.active {
 .movie-detail>.container {
   width: 100%;
   max-width: 700px;
-  /* ajuste conforme necessário */
+  
 }
 
 .movie-detail-banner {
