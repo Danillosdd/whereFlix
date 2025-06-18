@@ -9,7 +9,7 @@
 
 <img src="./readme-images/favicon.svg" />
 
-<h2 Whereflix</h2>
+<h2>Whereflix</h2>
 
 </div>
 
