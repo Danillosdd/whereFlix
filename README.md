@@ -68,11 +68,11 @@ Ferramentas usadas para criar o projeto:
 
 ## ✒️ Professor
 
-* **Professor** - *Apoio* - [Braully](https://github.com/braully)
+* **Professor**  - [Braully](https://github.com/braully)
 
 ## 📄 Licença
 
-Este projeto está sob a licença (MIT License) - veja o arquivo [LICENSE.md](https://github.com/Danillosdd/disciplina-web-projeto-danillo/blob/main/LICENSE) para detalhes.
+Este projeto está sob a licença (MIT License) - veja o arquivo [LICENSE.md](https://github.com/Danillosdd/whereFlix/blob/main/LICENSE) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
@@ -83,6 +83,5 @@ Este projeto está sob a licença (MIT License) - veja o arquivo [LICENSE.md](ht
 
 ## ✒️ Autores
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-* **Desenvolvedor** - *Aluno* - ⌨️ com ❤️ por [Danillosdd](https://github.com/Danillosdd) 😊
+* **Desenvolvedor** - com ❤️ por [Danillosdd](https://github.com/Danillosdd) 😊
