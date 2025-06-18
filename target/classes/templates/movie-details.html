@@ -230,18 +230,18 @@
             <p class="storyline text-center" th:text="${filme.sinopse}"> Sinopse </p>
 
             <div class="details-actions">
-              <th:block th:each="streaming : ${filme.streamings}">
-                <div class="streaming-card">
-                  <img th:src="@{'/upload/' + ${streaming.foto}}" th:alt="${streaming.nome}" class="streaming-logo">
-                  <div class="title-wrapper">
-                    <p class="title" th:text="${streaming.nome}">Nome do Streaming</p>
+              <div class="streamings-list">
+                <th:block th:each="streaming : ${streamingsOrdenados}">
+                  <div class="streaming-row">
+                    <img th:src="@{'/upload/' + ${streaming.foto}}" th:alt="${streaming.nome}" class="streaming-logo">
+                    <span class="streaming-nome" th:text="${streaming.nome}">Nome do Streaming</span>
+                    <button class="btn btn-primary">
+                      <ion-icon name="play"></ion-icon>
+                      <span>ASSISTA AGORA</span>
+                    </button>
                   </div>
-                  <button class="btn btn-primary">
-                    <ion-icon name="play"></ion-icon>
-                    <span>Assista Agora</span>
-                  </button>
-                </div>
-              </th:block>
+                </th:block>
+              </div>
             </div>
 
           </div>
