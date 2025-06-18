@@ -1,7 +1,5 @@
 package info.danillo.whereflix.controller;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +49,11 @@ public class IndexControler {
     @GetMapping("/movie-details/{id}")
     public String detalhesFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeRepository.findById(id).orElse(null);
-        
-        List<Streaming> streamingsOrdenados = new ArrayList<>(filme.getStreamings());
-        streamingsOrdenados.sort(Comparator.comparing(Streaming::getNome));
         model.addAttribute("filme", filme);
-        model.addAttribute("streamingsOrdenados", streamingsOrdenados);
+        
+        List<Filme> aleatorios = indexRepository.buscar4Aleatorios();
+        model.addAttribute("aleatorios", aleatorios);
+
         return "movie-details";
     }
 
