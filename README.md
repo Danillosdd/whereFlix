@@ -24,11 +24,11 @@
 
 ### Demo Screeshots
 
-![Filmlane Desktop Demo](./readme-images/screeshot.png "Screeshot")
-![Filmlane Desktop Demo](./readme-images/screeshot_2.png "Screeshot_2")
-![Filmlane Desktop Demo](./readme-images/screeshot_3.png "Screeshot_3")
-![Filmlane Desktop Demo](./readme-images/screeshot_4.png "Screeshot_4")
-![Filmlane Desktop Demo](./readme-images/screeshot_5.png "Screeshot_5")
+![Filmlane Desktop Demo](./readme-images/screeshot.png "Screeshot") <br />
+![Filmlane Desktop Demo](./readme-images/screeshot_2.png "Screeshot_2") <br />
+![Filmlane Desktop Demo](./readme-images/screeshot_3.png "Screeshot_3") <br />
+![Filmlane Desktop Demo](./readme-images/screeshot_4.png "Screeshot_4") <br />
+![Filmlane Desktop Demo](./readme-images/screeshot_5.png "Screeshot_5") <br />
 
 ################################################################################
 
