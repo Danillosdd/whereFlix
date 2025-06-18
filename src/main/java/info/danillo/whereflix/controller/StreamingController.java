@@ -187,8 +187,10 @@ public class StreamingController {
      */
     @GetMapping("/streamings/excluir/{id}")
     public String excluirStreaming(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Streaming streaming = streamingRepository.findById(id).orElse(null);
         try {
-            Streaming streaming = streamingRepository.findById(id).orElse(null);
+            streamingRepository.deleteById(id);
+            // Só deleta a foto se a exclusão no banco foi bem-sucedida
             if (streaming != null && streaming.getFoto() != null) {
                 String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
                 File foto = new File(uploadDir + streaming.getFoto());
@@ -196,7 +198,6 @@ public class StreamingController {
                     foto.delete();
                 }
             }
-            streamingRepository.deleteById(id);
             redirectAttributes.addFlashAttribute("mensagemSucesso", "Streaming excluído com sucesso!");
         } catch (DataIntegrityViolationException e) {
             redirectAttributes.addFlashAttribute("mensagemErro", "Não é possível excluir este streaming pois ele está vinculado a um ou mais filmes.");
