@@ -5,7 +5,7 @@
 -- Dumped from database version 15.13 (Ubuntu 15.13-1.pgdg24.04+1)
 -- Dumped by pg_dump version 15.13 (Ubuntu 15.13-1.pgdg24.04+1)
 
--- Started on 2025-06-17 23:25:09 -03
+-- Started on 2025-06-18 09:43:51 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -177,7 +177,6 @@ ALTER TABLE public.qualidade_seq OWNER TO postgres;
 
 CREATE TABLE public.streaming (
     id integer NOT NULL,
-    curso character varying(255),
     foto character varying(255),
     nome character varying(255)
 );
@@ -355,15 +354,15 @@ INSERT INTO public.qualidade (id, nome) VALUES (3, '4K');
 -- Data for Name: streaming; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (1, NULL, 'apple-tv.png', 'Apple TV');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (2, NULL, 'crunchyroll.png', 'Crunchyroll');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (3, NULL, 'disney+.png', 'Disney +');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (4, NULL, 'globoplay.png', 'Globoplay');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (5, NULL, 'hbo-max.jpg', 'Hbo Max');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (6, NULL, 'hulu.png', 'Hulu');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (7, NULL, 'netflix.png', 'Netflix');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (8, NULL, 'paramount +.png', 'Paramount+');
-INSERT INTO public.streaming (id, curso, foto, nome) VALUES (9, NULL, 'prime-video.png', 'Prime Video');
+INSERT INTO public.streaming (id, foto, nome) VALUES (1, 'apple-tv.png', 'Apple TV');
+INSERT INTO public.streaming (id, foto, nome) VALUES (2, 'crunchyroll.png', 'Crunchyroll');
+INSERT INTO public.streaming (id, foto, nome) VALUES (3, 'disney+.png', 'Disney +');
+INSERT INTO public.streaming (id, foto, nome) VALUES (4, 'globoplay.png', 'Globoplay');
+INSERT INTO public.streaming (id, foto, nome) VALUES (5, 'hbo-max.jpg', 'Hbo Max');
+INSERT INTO public.streaming (id, foto, nome) VALUES (6, 'hulu.png', 'Hulu');
+INSERT INTO public.streaming (id, foto, nome) VALUES (7, 'netflix.png', 'Netflix');
+INSERT INTO public.streaming (id, foto, nome) VALUES (8, 'paramount +.png', 'Paramount+');
+INSERT INTO public.streaming (id, foto, nome) VALUES (9, 'prime-video.png', 'Prime Video');
 
 
 --
@@ -392,7 +391,7 @@ SELECT pg_catalog.setval('public.categoria_seq', 51, true);
 -- Name: filme_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.filme_seq', 51, true);
+SELECT pg_catalog.setval('public.filme_seq', 151, true);
 
 
 --
@@ -410,7 +409,7 @@ SELECT pg_catalog.setval('public.qualidade_seq', 51, true);
 -- Name: streaming_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.streaming_seq', 51, true);
+SELECT pg_catalog.setval('public.streaming_seq', 301, true);
 
 
 --
@@ -522,7 +521,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2025-06-17 23:25:09 -03
+-- Completed on 2025-06-18 09:43:51 -03
 
 --
 -- PostgreSQL database dump complete
