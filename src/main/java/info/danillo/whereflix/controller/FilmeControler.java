@@ -288,6 +288,15 @@ public class FilmeControler {
         }
         // Se não enviou nova imagem, mantém a imagem antiga
 
+        // Atualiza as streamings selecionadas
+        List<Streaming> streamingsSelecionadas = new ArrayList<>();
+        for (Integer idStreaming : streamings) {
+            Streaming streaming = streamingRepository.findById(idStreaming)
+                    .orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada: " + idStreaming));
+            streamingsSelecionadas.add(streaming);
+        }
+        filme.setStreamings(streamingsSelecionadas);
+
         filmeRepository.save(filme);
         return "redirect:/filmes";
     }
