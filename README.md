@@ -19,6 +19,7 @@
 
 * E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
+* Para o Login o usuário é 'admin' e a senha é '1234'
 
 <br />
 
