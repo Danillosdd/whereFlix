@@ -5,6 +5,7 @@
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/FilmeRepository.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/IndexControler.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/IndexRepository.java
+/home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/LoginController.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/Qualidade.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/QualidadeRepository.java
 /home/danillo/Dropbox/UEG/Matérias/2025/2025-01/Programação Web I/Trabalho N2/whereFlix/src/main/java/info/danillo/whereflix/controller/SecurityConfig.java

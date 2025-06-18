@@ -13,14 +13,10 @@
 
 </div>
 
-* Whereflix é uma página de site de filmes, séries e shows totalmente responsiva.
-* Foi utilizado o WebSite estático: [filmlane](https://github.com/codewithsadee/filmlane).
-* E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
-* Na Lista de Filmes pode-se cadastrar, alterar ou excluir um filme, série ou show. E também será vinculado a um streaming.
-* Na Lista de Streaming será cadastrado as plataformas.
-* Os Menus de Lista de Filmes e Lista de Streamings são acessados apenas após o Login.
-* Para o Login o usuário é `admin` e a senha é `1234.`
-* No Index irá mostrar os cards dos filmes em varias categorias e filtros, sendo que ao clicar no banner do filme, irá para o detalhamento com mais informações e as plataformas que ele está disponível.
+* Whereflix é um site de filmes, séries e shows totalmente responsivo. Foi utilizado o website estático [Filmlane](https://github.com/codewithsadee/filmlane), com aplicação de geração de páginas dinâmicas, ajustando e implementando tecnologias como HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf e PostgreSQL.
+* Na Lista de Filmes, é possível cadastrar, alterar ou excluir um filme, série ou show, além de vinculá-los a uma plataforma de streaming. Na Lista de Streamings, serão cadastradas as plataformas disponíveis.
+* Os menus Lista de Filmes e Lista de Streamings só podem ser acessados após o login. Para o login, o usuário é admin e a senha é 1234.
+* Na página inicial (Index), serão exibidos os cards dos filmes organizados em várias categorias e filtros. Ao clicar no banner de um filme, o usuário será direcionado para a página de detalhes, onde encontrará mais informações e a lista das plataformas em que o filme está disponível.
 
 <br />
 
