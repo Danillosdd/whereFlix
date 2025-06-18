@@ -9,7 +9,9 @@
 
 <img src="./readme-images/favicon.svg" />
 
+<h2 Whereflix</h2>
 
+</div>
 
 * Whereflix é uma página de site de filmes, séries e shows totalmente responsiva.
 
@@ -18,7 +20,7 @@
 * E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
 
-</div>
+
 
 <br />
 
