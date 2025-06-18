@@ -261,7 +261,7 @@
               <!-- Campo Streamings -->
               <div class="form-group mb-3">
                 <label for="streamings" class="form-label">Streamings:</label>
-                <select id="streamings" name="streamings" class="form-control select2" multiple required>
+                <select id="streamings" name="streamings" class="form-control select2" multiple required size="6">
                   <option th:each="streaming : ${todasStreamings}" th:value="${streaming.id}"
                     th:text="${streaming.nome}" th:selected="${filme.streamings.contains(streaming)}"></option>
                 </select>
