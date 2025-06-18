@@ -188,6 +188,14 @@ public class StreamingController {
     @GetMapping("/streamings/excluir/{id}")
     public String excluirStreaming(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
+            Streaming streaming = streamingRepository.findById(id).orElse(null);
+            if (streaming != null && streaming.getFoto() != null) {
+                String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+                File foto = new File(uploadDir + streaming.getFoto());
+                if (foto.exists()) {
+                    foto.delete();
+                }
+            }
             streamingRepository.deleteById(id);
             redirectAttributes.addFlashAttribute("mensagemSucesso", "Streaming excluído com sucesso!");
         } catch (DataIntegrityViolationException e) {
