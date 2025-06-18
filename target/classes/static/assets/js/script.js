@@ -308,12 +308,29 @@ document.addEventListener('DOMContentLoaded', function () {
                   <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/streamings/atualizar/${streaming.id}" title="Atualizar">
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a class="btn btn-danger btn-sm d-inline-block" href="/streamings/excluir/${streaming.id}" title="Excluir">
+                  <a class="btn btn-danger btn-sm d-inline-block btn-excluir-streaming" 
+                     href="#" 
+                     data-id="${streaming.id}" 
+                     data-nome="${streaming.nome}" 
+                     title="Excluir">
                     <i class="bi bi-trash"></i>
                   </a>
                 </td>
               </tr>
             `;
+          });
+
+          // Adiciona evento aos botões de excluir para abrir a modal
+          document.querySelectorAll('.btn-excluir-streaming').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+              e.preventDefault();
+              const id = this.getAttribute('data-id');
+              const nome = this.getAttribute('data-nome');
+              document.getElementById('streamingNome').textContent = nome;
+              document.getElementById('confirmDeleteButton').href = `/streamings/excluir/${id}`;
+              const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+              modal.show();
+            });
           });
         }
       });
