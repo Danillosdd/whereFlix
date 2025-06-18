@@ -11,8 +11,11 @@
 
 <h2 align="center">Whereflix</h2>
 
-  Whereflix é uma página de site de filmes, séries e shows totalmente responsiva. <br />  Responsivo para todos os dispositivos, criado usando HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
+	Whereflix é uma página de site de filmes, séries e shows totalmente responsiva. <br /> 
 
+	Foi utilizado o WebSite estático: [filmlane](https://github.com/codewithsadee/filmlane)  <br /> 
+	
+	E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
 
 </div>
