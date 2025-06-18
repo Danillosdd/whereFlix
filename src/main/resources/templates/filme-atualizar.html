@@ -235,7 +235,7 @@
               <div class="form-group mb-3">
                 <label for="duracao" class="form-label">Duração (min):</label>
                 <input type="number" id="duracao" name="duracao" class="form-control" min="1" max="999"
-                  th:value="${filme.duracao}" required>
+                  th:value="${filme.duracao}" required placeholder="0">
                 <div class="invalid-feedback">Informe a duração (até 999 minutos).</div>
               </div>
 
@@ -243,7 +243,7 @@
               <div class="form-group mb-3">
                 <label for="ano" class="form-label">Ano:</label>
                 <input type="number" id="ano" name="ano" class="form-control" min="1900" max="2100"
-                  th:value="${filme.ano}" required>
+                  th:value="${filme.ano}" required placeholder="aaaa">
                 <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
               </div>
 
