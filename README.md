@@ -57,6 +57,7 @@ Passo-a-passo que informam o que você deve executar para ter um ambiente de des
 * Execute o Projeto
 * Restaure o banco de dados utilizando o arquivo `banco.sql` que está na raiz do projeto. Ou altere no application.properties o spring.jpa.hibernate.ddl-auto para create
 * Acessar pelo navegador: http://localhost:8080
+* As imagens inseridas por upload no cadastro do Filme e Streaming: [LICENSE.md](https://github.com/Danillosdd/whereFlix/blob/main/LICENSE)
 ```
 
 ## 🛠️ Construído com
