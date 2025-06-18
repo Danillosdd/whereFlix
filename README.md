@@ -19,6 +19,8 @@
 
 * E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
+* Os Menus de Lista de Filmes e Lista de Streamings são acessados apenas após o Login
+
 * Para o Login o usuário é `admin` e a senha é `1234`
 
 <br />
