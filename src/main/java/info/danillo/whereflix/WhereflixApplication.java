@@ -1,5 +1,7 @@
 package info.danillo.whereflix;
 
+import java.io.File;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -86,6 +88,19 @@ public class WhereflixApplication {
             qualidade = new Qualidade();
             qualidade.setNome(nome);
             qualidadeRepository.save(qualidade);
+        }
+    }
+
+    public class StartupCheck {
+        public void checkUploadFolder() {
+            File folder = new File("upload");
+            if (folder.exists() && folder.isDirectory()) {
+                for (File file : folder.listFiles()) {
+                    System.out.println("Arquivo encontrado: " + file.getName());
+                }
+            } else {
+                System.out.println("Pasta 'upload' não encontrada.");
+            }
         }
     }
 }
