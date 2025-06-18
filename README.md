@@ -11,9 +11,10 @@
 
 <img src="./readme-images/favicon.svg" />
 
-<h2 align="center">Filmlane - Movie website</h2>
+<h2 align="center">Whereflix</h2>
 
-  Filmlane is a fully responsive movie website page, `<br />`Responsive for all devices, built using HTML, CSS, and JavaScript.
+  Whereflix é uma página de site de filmes, séries e shows totalmente responsiva, `<br />`Responsivo para todos os dispositivos, criado usando HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
+
 
   `<a href="https://codewithsadee.github.io/filmlane/"><strong>`➥ Live Demo `</strong></a>`
 
