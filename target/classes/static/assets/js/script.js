@@ -283,31 +283,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  function carregarStreamings() {
+  // Busca e exibe streamings
+  function carregarStreamings(filtroNome = '') {
     fetch('/api/streamings')
-      .then(res => res.json())
+      .then(response => response.json())
       .then(streamings => {
         const tbody = document.getElementById('streamings-tbody');
-        if (tbody) {
-          tbody.innerHTML = '';
-          streamings.forEach(streaming => {
+        tbody.innerHTML = '';
+        let filtrados = streamings;
+        if (filtroNome) {
+          filtrados = streamings.filter(s => s.nome.toLowerCase().includes(filtroNome.toLowerCase()));
+        }
+        if (filtrados.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3">Nenhuma streaming encontrada.</td></tr>';
+        } else {
+          filtrados.forEach(streaming => {
             tbody.innerHTML += `
               <tr>
                 <td class="text-start">${streaming.nome}</td>
                 <td class="text-center">
-                  <img src="${streaming.foto ? '/upload/' + streaming.foto : '/assets/img/sem-foto.png'}"
-                       alt="Foto da streaming"
-                       style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px;">
+                  ${streaming.foto ? `<img src="/upload/${streaming.foto}" alt="${streaming.nome}" style="max-width:60px;max-height:40px;">` : ''}
                 </td>
-                <td class="text-center">
-                  <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/streamings/atualizar/${streaming.id}" title="Editar">
-                    <i class="bi bi-pencil"></i>
+                <td>
+                  <a class="btn btn-warning btn-sm me-1 d-inline-block" href="/streamings/atualizar/${streaming.id}" title="Atualizar">
+                    <i class="bi bi-pencil-square"></i>
                   </a>
-                  <button class="btn btn-danger btn-sm d-inline-block" data-bs-toggle="modal"
-                    data-bs-target="#confirmDeleteModal"
-                    data-id="${streaming.id}" data-nome="${streaming.nome}" title="Deletar">
+                  <a class="btn btn-danger btn-sm d-inline-block" href="/streamings/excluir/${streaming.id}" title="Excluir">
                     <i class="bi bi-trash"></i>
-                  </button>
+                  </a>
                 </td>
               </tr>
             `;
@@ -316,24 +319,19 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
+  // Inicializa a tabela ao carregar a página
   carregarStreamings();
 
-  // Atualiza o modal de exclusão igual já está no seu HTML
-  const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-  const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-  const streamingNome = document.getElementById('streamingNome');
-
-  if (confirmDeleteModal) {
-    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-      const button = event.relatedTarget;
-      const streamingId = button.getAttribute('data-id');
-      const streamingNomeTexto = button.getAttribute('data-nome');
-      streamingNome.textContent = streamingNomeTexto;
-      confirmDeleteButton.href = `/streamings/excluir/${streamingId}`;
+  // Filtro pelo formulário
+  const formBusca = document.getElementById('form-busca-streaming');
+  if (formBusca) {
+    formBusca.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const valor = document.getElementById('input-busca-streaming').value;
+      carregarStreamings(valor);
     });
   }
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
   const btn = document.getElementById('lang-btn');
