@@ -1,5 +1,5 @@
+info/danillo/whereflix/WhereflixApplication.class
 info/danillo/whereflix/controller/FilmeControler.class
-info/danillo/whereflix/controller/WhereflixApplication.class
 info/danillo/whereflix/controller/StreamingRepository.class
 info/danillo/whereflix/controller/TipoRepository.class
 info/danillo/whereflix/controller/QualidadeRepository.class
@@ -12,6 +12,7 @@ info/danillo/whereflix/controller/Tipo.class
 info/danillo/whereflix/controller/IndexRepository.class
 info/danillo/whereflix/controller/Categoria.class
 info/danillo/whereflix/controller/Qualidade.class
+info/danillo/whereflix/controller/StreamingController.class
 info/danillo/whereflix/controller/SecurityConfig.class
 info/danillo/whereflix/controller/CategoriaRepository.class
 info/danillo/whereflix/controller/FilmeRepository.class
