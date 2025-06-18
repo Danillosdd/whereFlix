@@ -20,6 +20,11 @@
 
 <br />
 
+### Demo Deploy
+
+* A aplicação está rodando em um ambiente de teste no Render. Ao acessar o link caso apresente um erro 502 ou qualquer outra mensagem, é porque o servidor fica inativo após 15 minutos sem requisição. Basta atualizar a página e aguardar um pouco pois a aplicação está saindo da Hibernação.
+* Link: https://whereflix.onrender.com
+
 ### Demo Screeshots
 
 ![Filmlane Desktop Demo](./readme-images/screeshot.png "Screeshot") `<br />`
