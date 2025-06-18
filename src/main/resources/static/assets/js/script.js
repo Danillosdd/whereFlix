@@ -400,4 +400,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Limita o campo Nome da Streaming a 80 caracteres
+  const campoNomeStreaming = document.getElementById('nome');
+  if (campoNomeStreaming) {
+    campoNomeStreaming.addEventListener('input', function () {
+      if (this.value.length > 80) {
+        this.value = this.value.slice(0, 80);
+      }
+    });
+  }
 });
