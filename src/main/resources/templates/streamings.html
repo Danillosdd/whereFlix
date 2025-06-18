@@ -190,6 +190,13 @@
             <div th:if="${errorMessage}" class="alert alert-danger text-center">
               <span th:text="${errorMessage}"></span>
             </div>
+            <div th:if="${mensagemErro}" class="alert alert-danger text-center">
+              <span th:text="${mensagemErro}"></span>
+            </div>
+            <!-- Exibição de Mensagem de Sucesso -->
+            <div th:if="${mensagemSucesso}" class="alert alert-success text-center">
+              <span th:text="${mensagemSucesso}"></span>
+            </div>
 
             <!-- Tabela de Streamings -->
             <div class="table-responsive">

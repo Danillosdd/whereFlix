@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 /**
  * Classe que representa a entidade Streaming no sistema.
- * Contém informações básicas sobre a streaming, como nome e curso.
+ * Contém informações básicas sobre a streaming, como nome.
  */
 @Entity
 public class Streaming {
@@ -25,11 +25,7 @@ public class Streaming {
     @Basic
     private String nome;
 
-    /**
-     * Curso ao qual a streaming pertence.
-     */
-    @Basic
-    private String curso;
+
 
     @Basic
     private String foto;
@@ -40,16 +36,6 @@ public class Streaming {
     public Streaming() {
     }
 
-    /**
-     * Construtor para inicializar uma streaming com nome e curso.
-     *
-     * @param nome Nome da streaming.
-     * @param curso Curso ao qual a streaming pertence.
-     */
-    public Streaming(String nome, String curso) {
-        this.nome = nome;
-        this.curso = curso;
-    }
 
     // Getters e Setters
 
@@ -89,24 +75,6 @@ public class Streaming {
         this.nome = nome;
     }
 
-    /**
-     * Obtém o curso ao qual a streaming pertence.
-     *
-     * @return Curso da streaming.
-     */
-    public String getCurso() {
-        return curso;
-    }
-
-    /**
-     * Define o curso ao qual a streaming pertence.
-     *
-     * @param curso Curso da streaming.
-     */
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-
     public String getFoto() {
         return foto;
     }
@@ -125,7 +93,6 @@ public class Streaming {
         return "Streaming{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", curso='" + curso + '\'' +
                 '}';
     }
 }

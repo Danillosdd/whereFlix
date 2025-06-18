@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class StreamingController {
@@ -184,18 +186,12 @@ public class StreamingController {
      * @return Redireciona para a página de lista de streamings.
      */
     @GetMapping("/streamings/excluir/{id}")
-    public String excluirStreaming(@PathVariable Integer id) {
-        Streaming streaming = streamingRepository.findById(id).orElse(null);
-        if (streaming != null) {
-            // Deleta a imagem do disco, se existir
-            if (streaming.getFoto() != null) {
-                String uploadDir = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
-                File foto = new File(uploadDir + streaming.getFoto());
-                if (foto.exists()) {
-                    foto.delete();
-                }
-            }
+    public String excluirStreaming(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
             streamingRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Streaming excluído com sucesso!");
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("mensagemErro", "Não é possível excluir este streaming pois ele está vinculado a um ou mais filmes.");
         }
         return "redirect:/streamings";
     }
