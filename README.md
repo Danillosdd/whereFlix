@@ -23,7 +23,7 @@
 
 ![Filmlane Desktop Demo](./readme-images/desktop.png "Desktop Demo")
 
-#######################################################################
+################################################################################
 
 # disciplina-programacao-web-I-projeto-danillo
 
