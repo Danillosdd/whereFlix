@@ -16,7 +16,6 @@
   Whereflix é uma página de site de filmes, séries e shows totalmente responsiva. <br />  Responsivo para todos os dispositivos, criado usando HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
 
-  
 
 </div>
 
