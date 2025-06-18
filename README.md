@@ -23,32 +23,66 @@
 
 ![Filmlane Desktop Demo](./readme-images/desktop.png "Desktop Demo")
 
-### Prerequisites
+###########################################################
 
-Before you begin, ensure you have met the following requirements:
+# disciplina-programacao-web-I-projeto-danillo
 
-* [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
+Projeto da Discplina de Programação Web I da UEG - Tridade - Professor: Braully Rocha
 
-### Run Locally
+## 🚀 Começando
 
-To run **Filmlane** locally, run this command on your git bash:
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Linux and macOS:
+### 📋 Pré-requisitos
 
-```bash
-sudo git clone https://github.com/codewithsadee/filmlane.git
+De que coisas você precisa para instalar o software e como instalá-lo?
+
+```
+* Visual Studio Code
+* Java 17
+* Maven
+* Spring Boot 3.4.2
+* Git
+* Postgres 15.12
 ```
 
-Windows:
+### 🔧 Instalação
 
-```bash
-git clone https://github.com/codewithsadee/filmlane.git
+Passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução:
+
+```
+* Baixe o Projeto do GitHub
+* Abra o Projeto no Visual Studio Code
+* Faça a Compilação com o Maven
+* Execute o Projeto
+* Restaure o banco de dados utilizando o arquivo `banco.sql` que está na raiz do projeto. Ou altere no application.properties o spring.jpa.hibernate.ddl-auto para create
+* Acessar pelo navegador: http://localhost:8080
 ```
 
-### Contact
+## 🛠️ Construído com
 
-If you want to contact with me you can reach me at [Twitter](https://www.twitter.com/codewithsadee).
+Ferramentas usadas para criar o projeto:
 
-### License
+* [Spring Boot](https://start.spring.io) - O framework web usado
+* [Maven](https://maven.apache.org/) - Gerente de Dependência
 
-This project is **free to use** and does not contains any license.
+## ✒️ Professor
+
+* **Professor** - *Apoio* - [Braully](https://github.com/braully)
+
+## 📄 Licença
+
+Este projeto está sob a licença (MIT License) - veja o arquivo [LICENSE.md](https://github.com/Danillosdd/disciplina-web-projeto-danillo/blob/main/LICENSE) para detalhes.
+
+## 🎁 Expressões de gratidão
+
+* God 🙏;
+* Karizi 🫂;
+
+---
+
+## ✒️ Autores
+
+Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
+
+* **Desenvolvedor** - *Aluno* - ⌨️ com ❤️ por [Danillosdd](https://github.com/Danillosdd) 😊
