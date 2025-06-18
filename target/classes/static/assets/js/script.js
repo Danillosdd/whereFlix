@@ -369,3 +369,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Limita o campo Ano a 4 dígitos
+  const campoAno = document.getElementById('ano');
+  if (campoAno) {
+    campoAno.addEventListener('input', function () {
+      if (this.value.length > 4) {
+        this.value = this.value.slice(0, 4);
+      }
+    });
+  }
+
+  // Limita o campo Duração a 3 dígitos
+  const campoDuracao = document.getElementById('duracao');
+  if (campoDuracao) {
+    campoDuracao.addEventListener('input', function () {
+      if (this.value.length > 3) {
+        this.value = this.value.slice(0, 3);
+      }
+    });
+  }
+
+  // Limita o campo Título a 80 caracteres
+  const campoTitulo = document.getElementById('titulo');
+  if (campoTitulo) {
+    campoTitulo.addEventListener('input', function () {
+      if (this.value.length > 80) {
+        this.value = this.value.slice(0, 80);
+      }
+    });
+  }
+});

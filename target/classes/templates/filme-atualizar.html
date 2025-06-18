@@ -194,7 +194,7 @@
               <div class="form-group mb-3">
                 <label for="titulo" class="form-label">Título:</label>
                 <input type="text" id="titulo" name="titulo" class="form-control" th:value="${filme.titulo}"
-                  placeholder="Digite o título completo do filme" required />
+                  placeholder="Digite o título completo do filme" required maxlength="80" />
                 <div class="invalid-feedback">Por favor, insira o título completo.</div>
               </div>
 

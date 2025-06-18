@@ -190,7 +190,7 @@
               <div class="form-group mb-3">
                 <label for="titulo" class="form-label">Título:</label>
                 <input type="text" id="titulo" name="titulo" class="form-control" th:value="${titulo}"
-                  placeholder="Digite o título completo do filme" required />
+                  placeholder="Digite o título completo do filme" required maxlength="80" />
                 <div class="invalid-feedback">Por favor, insira o título completo.</div>
               </div>
 
@@ -237,7 +237,7 @@
               <!-- Campo Ano -->
               <div class="form-group mb-3">
                 <label for="ano" class="form-label">Ano:</label>
-                <input type="number" id="ano" name="ano" class="form-control" min="1900" max="2100" required>
+                <input type="number" id="ano" name="ano" class="form-control" min="1000" max="9999" required>
                 <div class="invalid-feedback">Informe o ano com 4 dígitos.</div>
               </div>
 
