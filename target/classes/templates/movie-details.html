@@ -231,16 +231,16 @@
 
             <div class="details-actions">
               <th:block th:each="streaming : ${filme.streamings}">
-                <button class="share" style="margin-bottom: 10px;">
-                  <img th:src="@{'/upload/' + ${streaming.foto}}" th:alt="${streaming.nome}" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 4px;">
-                </button>
-                <div class="title-wrapper">
-                  <p class="title" th:text="${streaming.nome}">Nome do Streaming</p>
+                <div class="streaming-card">
+                  <img th:src="@{'/upload/' + ${streaming.foto}}" th:alt="${streaming.nome}" class="streaming-logo">
+                  <div class="title-wrapper">
+                    <p class="title" th:text="${streaming.nome}">Nome do Streaming</p>
+                  </div>
+                  <button class="btn btn-primary">
+                    <ion-icon name="play"></ion-icon>
+                    <span>Assista Agora</span>
+                  </button>
                 </div>
-                <button class="btn btn-primary">
-                  <ion-icon name="play"></ion-icon>
-                  <span>Assista Agora</span>
-                </button>
               </th:block>
             </div>
 
