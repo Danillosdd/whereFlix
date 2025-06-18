@@ -9,7 +9,7 @@
 <br />
   <br />
 
-<img src="./readme-images/project-logo.png" />
+<img src="./readme-images/favicon.svg" />
 
 <h2 align="center">Filmlane - Movie website</h2>
 
