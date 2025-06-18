@@ -25,9 +25,9 @@
 
 ################################################################################
 
-# Projeto: Disciplina Programação Web I - UEG
+# Programação Web I
 
-Projeto da Discplina de Programação Web I da UEG - Tridade - Professor: Braully Rocha
+Projeto da Discplina de Programação Web I da UEG - Trindade - Professor: Braully Rocha
 
 ## 🚀 Começando
 
