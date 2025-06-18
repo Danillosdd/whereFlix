@@ -17,3 +17,4 @@ info/danillo/whereflix/controller/SecurityConfig.class
 info/danillo/whereflix/controller/CategoriaRepository.class
 info/danillo/whereflix/controller/FilmeRepository.class
 info/danillo/whereflix/controller/Streaming.class
+info/danillo/whereflix/WhereflixApplication$StartupCheck.class

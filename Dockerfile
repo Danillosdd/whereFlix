@@ -12,7 +12,7 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8080
 
 COPY --from=build /target/whereflix-0.0.1-SNAPSHOT.jar app.jar
-
+COPY upload upload
 RUN ls -l upload
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
