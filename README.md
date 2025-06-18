@@ -19,9 +19,15 @@
 
 * E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
 
+* Na Lista de Filmes pode-se cadastrar, alterar ou excluir um filme, série ou show. E também será vinculado a um streaming
+
+* Na Lista de Streaming será cadastrado as plataformas 
+
 * Os Menus de Lista de Filmes e Lista de Streamings são acessados apenas após o Login
 
 * Para o Login o usuário é `admin` e a senha é `1234`
+
+* No Index irá mostrar oa cards dos filmes em varias categorias e filtros, sendo que ao clicar no banner irá para o detalhamento com mais informações do filme e as plataformas que ele está disponível 
 
 <br />
 
