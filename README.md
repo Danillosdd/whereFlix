@@ -14,30 +14,23 @@
 </div>
 
 * Whereflix é uma página de site de filmes, séries e shows totalmente responsiva.
-
-* Foi utilizado o WebSite estático: [filmlane](https://github.com/codewithsadee/filmlane)
-
+* Foi utilizado o WebSite estático: [filmlane](https://github.com/codewithsadee/filmlane).
 * E Aplicado a geração de páginas dinâmicas, ajustando e aplicando: HTML, CSS, JavaScript, Bootstrap, Spring Boot, Thymeleaf, PostgreSQL.
-
-* Na Lista de Filmes pode-se cadastrar, alterar ou excluir um filme, série ou show. E também será vinculado a um streaming
-
-* Na Lista de Streaming será cadastrado as plataformas 
-
-* Os Menus de Lista de Filmes e Lista de Streamings são acessados apenas após o Login
-
-* Para o Login o usuário é `admin` e a senha é `1234`
-
-* No Index irá mostrar oa cards dos filmes em varias categorias e filtros, sendo que ao clicar no banner irá para o detalhamento com mais informações do filme e as plataformas que ele está disponível 
+* Na Lista de Filmes pode-se cadastrar, alterar ou excluir um filme, série ou show. E também será vinculado a um streaming.
+* Na Lista de Streaming será cadastrado as plataformas.
+* Os Menus de Lista de Filmes e Lista de Streamings são acessados apenas após o Login.
+* Para o Login o usuário é `admin` e a senha é `1234.`
+* No Index irá mostrar os cards dos filmes em varias categorias e filtros, sendo que ao clicar no banner do filme, irá para o detalhamento com mais informações e as plataformas que ele está disponível.
 
 <br />
 
 ### Demo Screeshots
 
-![Filmlane Desktop Demo](./readme-images/screeshot.png "Screeshot") <br />
-![Filmlane Desktop Demo](./readme-images/screeshot_2.png "Screeshot_2") <br />
-![Filmlane Desktop Demo](./readme-images/screeshot_3.png "Screeshot_3") <br />
-![Filmlane Desktop Demo](./readme-images/screeshot_4.png "Screeshot_4") <br />
-![Filmlane Desktop Demo](./readme-images/screeshot_5.png "Screeshot_5") <br />
+![Filmlane Desktop Demo](./readme-images/screeshot.png "Screeshot") `<br />`
+![Filmlane Desktop Demo](./readme-images/screeshot_2.png "Screeshot_2") `<br />`
+![Filmlane Desktop Demo](./readme-images/screeshot_3.png "Screeshot_3") `<br />`
+![Filmlane Desktop Demo](./readme-images/screeshot_4.png "Screeshot_4") `<br />`
+![Filmlane Desktop Demo](./readme-images/screeshot_5.png "Screeshot_5") `<br />`
 
 ################################################################################
 
@@ -74,7 +67,7 @@ Passo-a-passo que informam o que você deve executar para ter um ambiente de des
 * Restaure o banco de dados utilizando o arquivo `banco.sql` que está na raiz do projeto. Ou altere no application.properties o spring.jpa.hibernate.ddl-auto para create
 * Acessar pelo navegador: http://localhost:8080
 ```
-	
+
 ### 📁 Upload
 
 * As imagens inseridas por Upload no Site, nas telas de cadastro do Filme e Streaming: [Acessar pasta upload](./upload)
@@ -106,6 +99,5 @@ Este projeto está sob a licença (MIT License) - veja o arquivo [LICENSE.md](ht
 ---
 
 ## ✒️ Autores
-
 
 * **Desenvolvedor** - com ❤️ por [Danillosdd](https://github.com/Danillosdd) 😊
