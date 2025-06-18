@@ -411,3 +411,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Validação obrigatória para o campo Avaliação
+  const formFilme = document.querySelector('form.needs-validation');
+  if (formFilme) {
+    formFilme.addEventListener('submit', function (e) {
+      const avaliacaoInput = document.getElementById('avaliacaoRange');
+      if (avaliacaoInput && (!avaliacaoInput.value || Number(avaliacaoInput.value) === 0)) {
+        avaliacaoInput.classList.add('is-invalid');
+        e.preventDefault();
+        e.stopPropagation();
+      } else if (avaliacaoInput) {
+        avaliacaoInput.classList.remove('is-invalid');
+      }
+    });
+  }
+});
