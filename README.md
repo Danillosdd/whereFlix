@@ -25,7 +25,7 @@
 
 ################################################################################
 
-# disciplina-programacao-web-I-projeto-danillo
+# Projeto: Disciplina Programação Web I - UEG
 
 Projeto da Discplina de Programação Web I da UEG - Tridade - Professor: Braully Rocha
 
